@@ -1,0 +1,12 @@
+^{getHeader "aboutme"}
+
+<div class="container">
+  <div .page-header>
+    <h1>About Me
+  <p>めるぽんについて。
+  <h2>GitHub
+  <div .description>
+    <p><a href="https://github.com/melpon">melpon</a>
+  <h2>Twitter
+  <div .description>
+    <p><a href="https://twitter.com/melponn">@melponn</a>

@@ -1,10 +1,43 @@
-<h1>melpon.org 建設予定地
+^{getHeader "home"}
 
-<ul>
-  <li><a href="http://melpon.org/wandbox">Wandbox</a>
-  <li><a href="http://melpon.org/yesodbookjp">Yesodbookjp</a>
-  <li><a href="http://melpon.org/mpidl">MessagePack IDL Code Generator</a>
-  <li><a href="http://melpon.org/munin">Munin for melpon.org</a>
-  <ul>プレゼンテーション資料
-    <li><a href="http://melpon.org/pub/wandbox">Wandbox を支える技術（Boost.勉強会 at 仙台）</a>
-    <li><a href="http://melpon.org/pub/kabukiza-wandbox-lt">Wandbox の紹介（歌舞伎座.tech#2）</a>
+<div class="container">
+  <div .page-header>
+    <h1>melpon's Homepage
+  <p><a href=@{AboutmeR}>めるぽん</a>の個人ページです。
+
+  <div .page-header>
+    <h1>公開しているサイト
+
+  <h3><a href="http://melpon.org/wandbox">Wandbox</a>
+    <small> ( <a href="https://github.com/melpon/wandbox">source</a> )
+  <div .description>
+    <p>オンラインコンパイラみたいなやつ。C++ の充実度が高い。
+    <p><a href="https://twitter.com/kikairoya">@kikairoya</a> と２人で作ってます。コントリビュート歓迎。
+    <p>中身については以下のプレゼン資料を参照。
+    <ul>
+      <li><a href="http://melpon.org/pub/wandbox">Wandbox を支える技術（Boost.勉強会 at 仙台）</a>
+      <li><a href="http://melpon.org/pub/kabukiza-wandbox-lt">Wandbox の紹介（歌舞伎座.tech#2）</a>
+
+  <h3>ブログ
+  <div .description>
+    <p>そのうち作る。
+
+  <h3><a href="http://d.hatena.ne.jp/melpon">旧ブログ</a>
+  <div .description>
+    <p>旧ブログ。
+
+  <h3><a href="http://melpon.org/yesodbookjp">Yesodbookjp</a>
+    <small> ( <a href="https://github.com/melpon/yesodbookjp">source</a> )
+  <div .description>
+    <p>Yesod の説明を日本語で書いたもの。未完成。内容が大分古くなっている。
+
+  <h3><a href="http://melpon.org/mpidl">MessagePack IDL Code Generator</a>
+    <small> ( <a href="https://github.com/melpon/mpidl-web">source</a> )
+  <div .description>
+    <p>MessagePack 用の IDL を作ってくれるサイト。
+    <p>単に <a href="https://github.com/msgpack/msgpack-haskell/tree/master/msgpack-idl">msgpack-idl</a> をサイトに組み込んだだけ。
+
+  <h3><a href="http://melpon.org/munin">Munin for melpon.org</a>
+  <div .description>
+    <p>melpon.org の負荷を確認するだけ。
+

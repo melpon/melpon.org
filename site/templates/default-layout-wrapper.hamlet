@@ -19,16 +19,10 @@ $newline never
         \<!--[if lt IE 9]>
         \<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         \<![endif]-->
-
         <script>
           document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
     <body>
-        <div class="container">
-            <header>
-            <div id="main" role="main">
-              ^{Y.pageBody pc}
-            <footer>
-                #{extraCopyright $ YDConfig.appExtra $ settings master}
+        ^{Y.pageBody pc}
 
         \<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started -->
         \<!--[if lt IE 7 ]>
