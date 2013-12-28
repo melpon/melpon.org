@@ -12,9 +12,9 @@ import qualified Yesod                                  as Y
 import qualified Yesod.Static                           as YStatic
 import qualified Yesod.Default.Config                   as YDConfig
 import qualified Yesod.Default.Util                     as YDUtil
+import qualified Yesod.Core.Types                       as YCoreTypes
 import qualified Text.Jasmine                           as Jasmine
 import qualified Text.Hamlet                            as Hamlet
-import qualified System.Log.FastLogger                  as FastLogger
 
 import Yesod.Static (Static)
 
@@ -28,7 +28,7 @@ import Settings.Development (development)
 data App = App
     { settings :: YDConfig.AppConfig YDConfig.DefaultEnv Extra
     , getStatic :: Static -- ^ Settings for static file serving.
-    , appLogger :: FastLogger.Logger
+    , appLogger :: YCoreTypes.Logger
     }
 
 -- This is where we define all of the routes in our application. For a full

@@ -27,10 +27,13 @@ import qualified Data.Text.Encoding                     as TE
 import qualified Data.Word                              as Word
 import qualified Data.Yaml                              as Yaml
 
+import qualified GHC.IO.FD
+
 import qualified Language.Haskell.TH                    as TH
 import qualified Language.Haskell.TH.Syntax             as THS
 
 import qualified Network.HTTP.Conduit                   as HConduit
+import qualified Network.Wai.Logger                     as WaiLogger
 import qualified Network.Wai.Middleware.RequestLogger   as RequestLogger
 import qualified Network.Wai.Handler.Warp               as Warp
 
@@ -46,6 +49,7 @@ import qualified Text.Jasmine                           as Jasmine
 import qualified Text.Shakespeare.Text                  as Text
 
 import qualified Yesod                                  as Y
+import qualified Yesod.Core.Types                       as YCoreTypes
 import qualified Yesod.Default.Config                   as YDConfig
 import qualified Yesod.Default.Handlers                 as YDHandlers
 import qualified Yesod.Default.Main                     as YDMain

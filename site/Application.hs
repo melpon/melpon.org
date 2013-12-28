@@ -7,12 +7,14 @@ module Application
 
 import Import
 import qualified Yesod                                  as Y
+import qualified Yesod.Core.Types                       as YCoreTypes
 import qualified Yesod.Default.Config                   as YDConfig
 import qualified Yesod.Default.Main                     as YDMain
 import qualified Network.Wai.Middleware.RequestLogger   as RequestLogger
-import qualified Network.HTTP.Conduit                   as HConduit
-import qualified System.IO                              as I
+import qualified Network.Wai.Logger                     as WaiLogger
+import qualified Data.Default                           as Default
 import qualified System.Log.FastLogger                  as FastLogger
+import qualified GHC.IO.FD
 
 import Yesod.Default.Handlers (getFaviconR, getRobotsR)
 import Network.Wai.Middleware.Autohead (autohead)
@@ -41,12 +43,12 @@ makeApplication conf = do
     foundation <- makeFoundation conf
 
     -- Initialize the logging middleware
-    logWare <- RequestLogger.mkRequestLogger HConduit.def
+    logWare <- RequestLogger.mkRequestLogger Default.def
         { RequestLogger.outputFormat =
             if development
                 then RequestLogger.Detailed True
                 else RequestLogger.Apache RequestLogger.FromSocket
-        , RequestLogger.destination = RequestLogger.Logger $ appLogger foundation
+        , RequestLogger.destination = RequestLogger.Logger $ YCoreTypes.loggerSet $ appLogger foundation
         }
 
     -- Create the WAI application and apply middlewares
@@ -58,7 +60,11 @@ makeApplication conf = do
 makeFoundation :: YDConfig.AppConfig YDConfig.DefaultEnv Extra -> IO App
 makeFoundation conf = do
     s <- staticSite
-    logger <- FastLogger.mkLogger True I.stdout
+
+    loggerSet' <- FastLogger.newLoggerSet FastLogger.defaultBufSize GHC.IO.FD.stdout
+    (getter, _) <- WaiLogger.clockDateCacher
+    let logger = YCoreTypes.Logger loggerSet' getter
+
     let foundation = App conf s logger
 
     return foundation
