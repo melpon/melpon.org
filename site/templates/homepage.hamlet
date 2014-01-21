@@ -27,11 +27,6 @@
     <div .description>
       <p>旧ブログ。
 
-    <h3><a href="http://melpon.org/yesodbookjp">Yesodbookjp</a>
-      <small> ( <a href="https://github.com/melpon/yesodbookjp">source</a> )
-    <div .description>
-      <p>Yesod の説明を日本語で書いたもの。未完成。内容が大分古くなっている。
-
     <h3><a href="http://melpon.org/mpidl">MessagePack IDL Code Generator</a>
       <small> ( <a href="https://github.com/melpon/mpidl-web">source</a> )
     <div .description>
