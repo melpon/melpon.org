@@ -5,6 +5,9 @@
 
 / HomeR GET
 /aboutme AboutmeR GET
+/pub PRootR GET
+/pub/wandbox PWandboxR GET
+/pub/kabukiza-wandbox-lt PKabukizaWandboxLtR GET
 /yesodbookjp YRootR GET
 /yesodbookjp/introduction YIntroductionR GET
 /yesodbookjp/shakespeare YShakespeareR GET

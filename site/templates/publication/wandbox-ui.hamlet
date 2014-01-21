@@ -1,0 +1,112 @@
+<slide .segue .dark>
+  <hgroup>
+    <h2>Wandbox とは
+
+<slide>
+  <hgroup>
+    <h2>普通の C++ 使いは日常的に仕様書を読んでいる
+  <article>
+    <h3>その際、実際にコンパイラを動かして試したくなる場合がある
+    <h3>例:
+    <ul>
+      <li>「ISO/IEC 14882:2011 における 3.4.2/2 が結果がどうなるのかよく分からないな」
+      <li>「現行の gcc/clang でどういう動作をするのか試してみたい」
+
+<slide>
+  <hgroup>
+    <h2>普通の C++ 使いは日常的に paper を読んでいる
+  <article>
+    <h3>その際、実際にコンパイラを動かして試したくなる場合がある
+    <h3>例:
+    <ul>
+      <li>「<a href="http://isocpp.org/files/papers/N3648.html">N3648</a> が gcc で実装されたのか」
+      <li>「最新の gcc でどういう動作をするのか試したい」
+
+<slide>
+  <hgroup>
+    <h2>普通の C++ 使いは日常的にコンパイラのバグを報告している
+  <article>
+    <h3>その際、実際にコンパイラを動かして試したくなる場合がある
+    <h3>例:
+    <ul>
+      <li>「<a href="http://gcc.gnu.org/bugzilla/show_bug.cgi?id=58302"><code>std::negative_binomial_distribution</code> がコンパイルエラーになるバグ</a>って直ったんだっけ？」
+      <li>「最新の gcc で直ってるかどうか試したい」
+
+<slide>
+  <article .takahashi .flexbox .vcenter>
+    <h1 .red>そこで Wandbox
+
+<slide>
+  <hgroup>
+    <h2>Wandbox とは
+  <article>
+    <ul>
+      <li><a href="http://melpon.org/wandbox/">http://melpon.org/wandbox/</a>
+      <li>オンラインコンパイラ
+      <li>要するに <a href="http://ideone.com/">ideone</a> みたいなやつ
+
+<slide>
+  <hgroup>
+    <h2>Wandbox とは
+  <article>
+    <h3>特徴
+    <ul>
+      <li>C++ 対応がすごい
+        <ul>
+          <li>gcc, clang の様々なバージョン
+          <li>gcc HEAD, clang HEAD にも対応（毎日ビルド）
+          <li><a href="http://bolero-murakami.github.io/Sprout/">Boost</a>, <a href="http://www.boost.org/">Sprout</a> ライブラリに対応
+          <li>多彩なコンパイルオプション
+      <li>他の言語にもいろいろ対応
+      <li>リアルタイム出力
+      <li>キーバインディング選択
+      <li>パーマネントリンクと Twitter への投稿
+      <li>シンタックスハイライト
+      <li .red>はやい（確信）
+
+<slide>
+  <article .takahashi .flexbox .vcenter>
+    <h1><a href="http://melpon.org/wandbox/">デモ</a>
+  <aside .note>
+    <ul>
+      <li>前ページのそれぞれの機能について話す
+      <li>はやい（確信）について話す
+        <ul>
+          <li>ideone で何か実行して、clone してちょっと修正して再実行までに掛かる時間を測る
+          <li>Wandbox で何か実行して、ちょっと修正して再実行までに掛かる時間を測る
+
+<slide>
+  <article .takahashi .flexbox .vcenter>
+    <h1 .red>【重要】普通の C++ 使い以外の方もお使い頂けます【必読】
+
+<slide>
+  <hgroup>
+    <h2>C++/Python/Haskell/etc などの言語を勉強するとき
+  <article>
+    <h3>でもコンパイラとかの入れ方が分からない/入れるのがめんどい
+    <h3 .red>そこで Wandbox
+    <ul>
+      <li>
+        <p>コード入力→実行のサイクルを繰り返しやすい
+        <p>→勉強に最適
+      <li>
+        <p>分からないことがあったら気軽に Twitter に投稿できる
+        <p>→きっと誰か答えてくれるはず
+
+<slide>
+  <hgroup>
+    <h2>誰かの質問にコードで答えるとき
+  <article>
+    <h3>例:
+    <h3>Q.「vector には push_back して clear してもメモリが解放されないバグがある！C++ はクソだ！」
+    <h3>A.「キャパシティの概念を理解しましょう。<a href="http://melpon.org/wandbox/permlink/Xm93gD3bsW2hPaet">こんな感じ</a> 」
+
+<slide>
+  <article .takahashi .flexbox .vcenter>
+    <h1 .red>Wandbox を使おう！
+
+<slide>
+  <hgroup>
+    <h2>要望やバグについて
+  <article>
+    <p><a href="https://github.com/melpon/wandbox/issues">issues</a> に登録するか <a href="https://twitter.com/melponn">@melponn</a> まで

@@ -1,0 +1,301 @@
+<slide .segue .dark>
+  <hgroup>
+    <h2>Wandbox の中身
+
+^{internalIndex Nothing}
+
+^{internalIndex (Just "relation")}
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "relation"}
+  <article>
+    <h3>Wandbox は、大きく２つのモジュールに分けられる
+    <ul .build>
+      <li>牛舎（<a href="https://github.com/melpon/wandbox/tree/master/cattleshed">cattleshed</a>）
+        <ul>
+          <li>ソースを与えるとコンパイルや実行をして結果を返してくれるモジュール
+          <li>Wandbox のコア
+          <li><a href="https://twitter.com/kikairoya">@kikairoya</a> 作
+          <li>C++ で書かれてる
+          <li>読めない
+      <li>犬小屋（<a href="https://github.com/melpon/wandbox/tree/master/kennel">kennel</a>）
+        <ul>
+          <li>普通の Web サーバ
+          <li>Wandbox の UI
+          <li><a href="https://twitter.com/melponn">@melponn</a> 作
+          <li>Haskell で書かれてる
+          <li>読めない
+
+<slide>
+  <article .flexbox .vcenter>
+    <img .reflect src=@{StaticR publication_img_wandbox_actor_png} alt="牛舎と犬小屋の関係">
+
+^{internalIndex (Just "cattleshed")}
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "cattleshed"}
+  <article>
+    <ul>
+      <li .red>よく分からない仕組みで動いてる
+      <li>基本的にはコンパイルして実行するだけ
+      <li>ほんとに何でもできてしまうと困るので、制限を掛けたりしている
+        <ul>
+          <li>chroot を使って環境を閉じ込める
+          <li>実行時間が長いなら kill
+          <li>リソース使用量が多いなら kill
+          <li>標準出力量が多いなら kill
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "cattleshed"}
+  <article .flexbox .vcenter>
+    <h2>詳しいことは <a href="https://twitter.com/kikairoya">@kikairoya</a> を問い詰めよう
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "cattleshed"}
+  <article>
+    <h3>本人曰く
+    <ul>
+      <li><a href="https://twitter.com/kikairoya/status/391142370080608256">Twitter / kikairoya: @melponn 自由でオープンなソフトウェアなので誰でも内部を理解し、応用することができます</a>
+    <h3>誰か内部を理解して教えて下さい。
+
+
+^{internalIndex (Just "yesod")}
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "yesod"}
+  <article>
+    <h3><a href="http://www.yesodweb.com/">Yesod</a> という Haskell の Web フレームワークで作ってる
+    <div .build>
+      <h3>なぜなら
+      <ul>
+        <li .build>あの頃はまだ純粋な Haskell 信者だった
+          <ul>
+            <li>型安全すごい
+            <li>関数合成楽しい
+            <li>モナドさん可愛い
+        <li .build>Haskell できますって言いたかった
+          <ul>
+            <li>Haskell できるとかっこ良さそう
+            <li>Haskell できると彼女できるという噂が
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "yesod"}
+  <article>
+    <h3><a href="http://www.yesodweb.com/">Yesod</a> という Haskell の Web フレームワークで作ってる
+    <h3>実際のところ
+    <ul>
+      <li .context>あの頃はまだ純粋な Haskell 信者だった
+      <li .build>→副作用を知ってから Haskell はただの難しい言語
+        <ul>
+          <li>あの純粋な気持ちはどこへ
+          <li>とはいえ、やはりいろいろ便利な言語ではある
+      <li .context>Haskell できますって言いたかった
+      <li .build>→この程度だと Haskell できますとか言えない
+        <ul>
+          <li>未だにモナドの作り方分からない
+          <li>未だに型の読み方が分からない
+          <li>それでもこんな Web アプリケーションぐらいなら書ける
+          <li>彼女はできませんでしたが嫁はできました
+
+^{internalIndex (Just "templates")}
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "templates"}
+  <article>
+    <h3>HTML, CSS, JavaScript
+    <ul>
+      <li>それぞれ hamlet, lucius, julius という Yesod のテンプレート言語がある
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "templates"}
+  <article>
+    <h3>hamlet
+    <pre .prettyprint .lang-html data-lang="hamlet">#{sourceHamletSample1}
+    <ul>
+      <li>インデントベースの HTML
+      <li>class と id の省略表記
+      <li>直接書いても辛くない
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "templates"}
+  <article>
+    <h3>hamlet
+    <pre .prettyprint .lang-html data-lang="html">#{sourceHamletSample1Html}
+    <ul>
+      <li>HTML はつらい
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "templates"}
+  <article>
+    <h3>hamlet
+    <pre .prettyprint .lang-html data-lang="hamlet">#{sourceHamletSample2}
+    <ul>
+      <li>Haskell コードの埋め込み
+      <li>最低限の制御構文
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "templates"}
+  <article>
+    <h3>lucius
+    <pre .prettyprint .lang-css data-lang="lucius">#{sourceLuciusSample}
+    <ul>
+      <li>大体ただの CSS
+      <li>CSS コピペでも動くレベル
+      <li>変数も宣言できる
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "templates"}
+  <article>
+    <h3>lucius
+    <pre .prettyprint .lang-css data-lang="css">#{sourceLuciusSampleCss}
+    <ul>
+      <li>こんなコードになる
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "templates"}
+  <article>
+    <h3>julius
+    <pre .prettyprint .lang-javascript data-lang="julius">#{sourceJuliusSample}
+    <ul>
+      <li>ほぼ JavaScript
+      <li>Haskell コードを埋め込める
+
+^{internalIndex (Just "eventsource")}
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "eventsource"}
+  <article>
+    <h3>リアルタイム出力
+    <pre .prettyprint .lang-haskell data-lang="haskell">#{sourceLoopSample}
+    <ul>
+      <li>コードの実行中に出力が表示される
+      <li>フィードバックが早いので手を止めずに済む
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "eventsource"}
+  <article>
+    <h3>リアルタイム出力の仕組み
+    <ul>
+      <li><a href="http://www.w3.org/TR/eventsource/">EventSource</a> を使ってる
+      <li>要するに単なるロングポーリング
+        <ul>
+          <li>普通の HTTP はサーバがレスポンスを返したら終わり
+          <li>EventSource はレスポンスを最初は途中までしか返さない
+          <li>受信が終わってないのでクライアントはデータを待ち続ける
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "eventsource"}
+  <article>
+    <h3>普通のデータの受信
+    <pre data-lang="request">
+      <code>
+        GET /wandbox HTTP/1.1
+    <pre data-lang="response">
+      <code>
+        HTTP/1.1 200 OK
+        <span .red>Content-Type: application/json
+        <span .red>Content-Length: 221<br />
+        {“hoge”: “fuga”, ...}
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "eventsource"}
+  <article>
+    <h3>ロングポーリングによる受信
+    <pre data-lang="request">
+      <code>
+        GET /wandbox/source HTTP/1.1
+    <pre data-lang="response">
+      <code .build>
+        <span>
+          HTTP/1.1 200 OK
+          <span .red>Content-Type: text/event-stream
+          <span .red>Transfer-Encoding: chunked
+        <span>
+          <span .red>001A
+          data: hogefuga_hogefuga_ho
+        <span>
+          <span .red>0018
+          gefuga_hogefuga<br />
+          data: c
+        <span>
+          <span .red>0010
+          onstexpr<br />
+        <span>
+          <span .red>0
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "eventsource"}
+  <article>
+    <h3>ロングポーリングによる受信
+    <pre data-lang="request">
+      <code>
+        GET /wandbox/source HTTP/1.1
+    <pre data-lang="response-text">
+      <code>
+        data: hogefuga_hogefuga_hogefuga_hogefuga<br />
+        data: constexpr
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "eventsource"}
+  <article>
+    <h3>Q. WebSocket 使わないの？
+    <h3>A. この型の意味を理解できる者だけが WebSocket を使いなさい
+    <pre .prettyprint .lang-haskell data-lang="haskell">
+      <code>
+        intercept :: Protocol p
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt; (Request -&gt; WebSockets p ())
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; Request
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; Maybe (Source (ResourceT IO) ByteString -&gt; Connection -&gt; ResourceT IO ())
+    <footer .source><a href="http://hackage.haskell.org/package/wai-websockets/docs/Network-Wai-Handler-WebSockets.html">Network.Wai.Handler.WebSockets</a>
+
+^{internalIndex (Just "kurou")}
+
+<slide>
+  <hgroup>
+    <h2>^{internalTitle "kurou"}
+  <article>
+    <ul .build>
+      <li>Yesod に苦労した
+        <ul>
+          <li>#yesodinstallbattle
+          <li>バージョン変わりすぎ
+      <li>HTML/CSS/JavaScript に苦労した
+        <ul>
+          <li>まともに触ったことが無いので大変
+          <li>どう組むのが一般的なのか分からなくて大変
+          <li>みんな適当にやってるっぽいと気がついたので適当に組んだ
+      <li>ドキュメントが無くて苦労した
+        <ul>
+          <li><a href="https://twitter.com/melponn/status/134903468593913856">Twitter / melponn: Haskell では ...</a>
+          <li><a href="https://twitter.com/melponn/status/171922845226643456">Twitter / melponn: Haskellerのドキュメントは、型がドキュメントになると ...</a>
+          <li><a href="http://hackage.haskell.org/package/hamlet/docs/Text-Hamlet.html">Text.Hamlet</a>
+          <li><a href="http://hackage.haskell.org/package/yesod-auth-1.2.0.2/docs/Yesod-Auth.html#v:defaultMaybeAuthId">Yesod.Auth</a>
+
+<slide>
+  <hgroup>
+    <h2>まとめ
+  <article>
+    <ul>
+      <li>Wandbox は牛舎と犬小屋が協調して動いてる
+      <li>牛舎は <a href="https://twitter.com/kikairoya">@kikairoya</a> を問い詰めよう
+      <li>犬小屋は普通の Web サーバ
+      <li>犬小屋を建てるのはなかなか大変だった

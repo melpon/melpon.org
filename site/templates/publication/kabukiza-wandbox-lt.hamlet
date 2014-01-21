@@ -1,0 +1,111 @@
+<slide .title-slide .segue .nobackground>
+  <hgroup .auto-fadein>
+    <h1 data-config-title>
+    <h2 data-config-subtitle>
+    <p data-config-presenter>
+
+^{toTakahashi "みなさん"}
+^{toTakahashi "歌舞伎座.tech#2"}
+^{toTakahashiI "お疲れ様でした"}
+
+^{toTakahashi "楽しいセッション"}
+^{toTakahashiI "沢山ありました"}
+
+^{toTakahashi "「C++11 : variadic template のご紹介」"}
+^{toTakahashiI "Variadic Template 試したい"}
+
+^{toTakahashi "「C++14の主要機能について」"}
+^{toTakahashiI "C++14 の機能を試したい"}
+
+^{toTakahashi "「C++11でのWeb開発の実情」"}
+^{toTakahashiI "C++0x の機能を試したい"}
+
+^{toTakahashi "「rvalue referenceについて」"}
+^{toTakahashiI "rvalue reference を試したい"}
+
+^{toTakahashi "つまり"}
+^{toTakahashiI "C++11/C++14 を試したい"}
+
+^{toTakahashi "しかも"}
+^{toTakahashiI "今すぐ！"}
+
+^{toTakahashi "でも"}
+^{toTakahashi "今すぐ"}
+^{toTakahashi "コンパイラを"}
+^{toTakahashi "用意するのは"}
+^{toTakahashiI "めんどい！！"}
+
+^{toTakahashi "今すぐ"}
+^{toTakahashi "C++11/C++14を"}
+^{toTakahashiI "試したい！！"}
+
+^{toTakahashi "そんな方々のために"}
+^{toTakahashi "作りました"}
+^{toTakahashiI "Wandbox"}
+
+^{toWandboxURL}
+^{toTakahashiI "今すぐアクセス！"}
+
+^{toTakahashi "gcc"}
+^{toTakahashi "4.3.6"}
+^{toTakahashi "4.4.7"}
+^{toTakahashi "4.5.4"}
+^{toTakahashi "4.6.4"}
+^{toTakahashi "4.7.3"}
+^{toTakahashi "4.8.1"}
+^{toTakahashi "4.8.2"}
+^{toTakahashi "HEAD"}
+^{toTakahashiI "使えます"}
+
+^{toTakahashi "clang"}
+^{toTakahashi "3.0"}
+^{toTakahashi "3.1"}
+^{toTakahashi "3.2"}
+^{toTakahashi "3.3"}
+^{toTakahashi "HEAD"}
+^{toTakahashiI "使えます"}
+
+^{toTakahashi "C++14"}
+^{toTakahashi "C++11"}
+^{toTakahashi "C++0x"}
+^{toTakahashiI "使えます"}
+
+^{toTakahashi "Boost"}
+^{toTakahashiI "使えます"}
+
+^{toTakahashi "キーバインド"}
+^{toTakahashi "Vim"}
+^{toTakahashi "Emacs"}
+^{toTakahashiI "使えます"}
+
+^{toTakahashi "レスポンス"}
+<slide>
+  <article .takahashi .important .flexbox .vcenter>
+    <h1 .red>爆速
+    <p>（脳内調べ）
+
+^{toTakahashi "他にも"}
+^{toTakahashi "C"}
+^{toTakahashi "D"}
+^{toTakahashi "Haskell"}
+^{toTakahashi "C#"}
+^{toTakahashi "Perl"}
+^{toTakahashi "Python"}
+^{toTakahashi "Ruby"}
+^{toTakahashi "Erlang"}
+^{toTakahashi "Bash"}
+^{toTakahashi "SQL"}
+^{toTakahashi "Lua"}
+<slide>
+  <article .takahashi .important .flexbox .vcenter>
+    <h1 .red>使えます
+    <p>（2013/11/14時点）
+
+^{toWandboxURL}
+^{toTakahashiI "今すぐアクセス！！"}
+
+<slide .thank-you-slide .segue>
+  <article .flexbox .vleft>
+    <h2>ありがとうございました！
+  <p data-config-contact>
+

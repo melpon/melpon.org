@@ -1,0 +1,3 @@
+[submodule "submodules/io-2012-slides"]
+	path = submodules/io-2012-slides
+	url = https://github.com/melpon/io-2012-slides.git

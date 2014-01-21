@@ -1,0 +1,22 @@
+<slide .title-slide .segue .nobackground>
+  <hgroup .auto-fadein>
+    <h1 data-config-title>
+    <h2 data-config-subtitle>
+    <p data-config-presenter>
+
+^{widgetUI}
+
+^{widgetInternal}
+
+^{widgetServer}
+
+<slide>
+  <article .takahashi .flexbox .vcenter>
+    <h1>質問
+
+<slide .thank-you-slide .segue>
+  <article .flexbox .vleft>
+    <h2>&lt;Thank You!&gt;
+    <p>Important contact information goes here.
+  <p data-config-contact>
+

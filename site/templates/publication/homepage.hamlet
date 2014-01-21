@@ -1,0 +1,9 @@
+^{getHeader "publicatin"}
+
+<div .container-fluid>
+  <div .span12>
+    <div .page-header>
+      <h1>公開資料
+    <ul>
+      <li><a href=@{PWandboxR}>Wandbox を支える技術（Boost.勉強会 at 仙台）</a>
+      <li><a href=@{PKabukizaWandboxLtR}>Wandbox の紹介（歌舞伎座.tech#2）</a>

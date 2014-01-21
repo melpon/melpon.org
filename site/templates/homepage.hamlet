@@ -15,9 +15,6 @@
       <p>オンラインコンパイラみたいなやつ。C++ の充実度が高い。
       <p><a href="https://twitter.com/kikairoya">@kikairoya</a> と２人で作ってます。コントリビュート歓迎。
       <p>中身については以下のプレゼン資料を参照。
-      <ul>
-        <li><a href="http://melpon.org/pub/wandbox">Wandbox を支える技術（Boost.勉強会 at 仙台）</a>
-        <li><a href="http://melpon.org/pub/kabukiza-wandbox-lt">Wandbox の紹介（歌舞伎座.tech#2）</a>
 
     <h3>ブログ
     <div .description>

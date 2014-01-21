@@ -1,0 +1,130 @@
+<slide .segue .dark>
+  <hgroup>
+    <h2>Wandbox のサーバ構成
+
+^{serverIndex Nothing}
+
+^{serverIndex (Just "all")}
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "all"}
+  <article .build>
+    <h3>ユーザが Run すると…
+    <ul>
+      <li>→<a href="http://mew.org/~kazu/proj/mighttpd/en/">Mighttpd</a>
+        <ul>
+          <li>→犬小屋
+            <ul>
+              <li>→牛舎
+                <ul>
+                  <li>→各種コンパイラ
+                  <li>←各種コンパイラ
+              <li>←牛舎
+          <li>←犬小屋
+      <li>←Mighttpd
+    <h3>Mighttpd って何？
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "mighttpd"}
+  <article>
+    <ul>
+      <li>HTTP サーバ
+      <li>Haskell 製の nginx みたいな感じ
+      <li>静的ファイルを高速転送したり
+      <li>リバースプロキシしたり
+        <ul>
+          <li .red>これ目的で使ってる
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "mighttpd"}
+  <article .flexbox .vcenter>
+    <img .reflect src=@{StaticR publication_img_mighttpd_001_png} alt=^{serverTitle "mighttpd"}>
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "mighttpd"}
+  <article .flexbox .vcenter>
+    <img .reflect src=@{StaticR publication_img_mighttpd_002_png} alt=^{serverTitle "mighttpd"}>
+
+^{serverIndex (Just "chef")}
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "chef"}
+  <article>
+    <ul>
+      <li>サーバの構成管理には <a href="http://www.opscode.com/chef/">Chef</a> を使ってる
+      <li>これを使って Mighttpd 入れたり Wandbox 入れたり各種コンパイラ入れてる
+      <li>理論的にはサーバが死んでも簡単に復元できるはず
+        <ul>
+          <li>※ただし SQLite のデータを除く
+          <li>（パーマネントリンクを作るためにコードや結果などを SQLite に入れてる）
+      <li>melpon.org の Cookbook はここ: <a href="https://github.com/melpon/chef-melpon.org">melpon/chef-melpon.org</a>
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "chef"}
+  <article>
+    <h3>Chef で入れているレシピの例
+    <ul>
+      <li>スワップファイル
+      <li>Wandbox の実行環境
+        <ul>
+          <li>ユーザ作成
+          <li>github から取得
+          <li>ビルド
+          <li>デーモンとして起動（Upstart を使ってる）
+      <li>各種コンパイラ
+        <ul>
+          <li>GCC, Clang, Python, Ruby
+            <ul>
+              <li>ソースからビルド
+          <li>GCC-HEAD, Clang-HEAD, Erlang-HEAD
+            <ul>
+              <li>最新リポジトリから取ってきてビルド
+              <li>ビルドを毎日行うように cron を設定
+
+^{serverIndex (Just "deploy")}
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "deploy"}
+  <article>
+    <ul>
+      <li>GitHub の <a href="https://help.github.com/articles/post-receive-hooks">Post-Receive Hooks</a> を使ってる
+      <li>GitHub リポジトリへの push が発生したら指定した URL を叩いてくれる
+      <li>その URL を受ける口として <a href="https://github.com/melpon/ghwebhook">melpon/ghwebhook</a> というサーバを用意
+        <ul>
+          <li>Python 製
+      <li>ghwebhook は melpon/wandbox の master ブランチに push されたら特定のスクリプトを実行する
+      <li>スクリプト内で wandbox を pull してビルドして再起動
+
+<slide>
+  <hgroup>
+    <h2>^{serverTitle "deploy"}
+  <article>
+    <h3>デプロイを試してみる
+    <ul>
+      <li>このセッション資料も ghwebhook で管理されている
+      <li>なので変更して push すると反映されるはず
+    <ul>
+      <li>この辺のテキストを弄ってみたよーん
+
+<slide>
+  <hgroup>
+    <h2>まとめ
+  <article>
+    <ul>
+      <li>melpon.org サーバのフロントには Mighttpd が居て、そこからリバースプロキシをしている
+      <li>サーバは Chef で管理されている
+        <ul>
+          <li>コンパイラも Chef を使って管理
+      <li>デプロイには GitHub の Post-Receive Hooks を使っている
+    <h3>感想
+    <ul>
+      <li>サーバ管理が一番面倒だった
+      <li>正直 Wandbox 作るより時間が掛かったと思う
+      <li>が、手間を掛けただけあって大分楽になった

@@ -8,7 +8,7 @@ import qualified Yesod                                  as Y
 import qualified Data.List                              as List
 
 import Settings (widgetFile)
-import Foundation (Widget, App, Route(HomeR, AboutmeR, YRootR))
+import Foundation (Widget, App, Route(HomeR, AboutmeR, PRootR, YRootR))
 
 type Header = (String, Y.Route App, String)
 type Headers = [Header]
@@ -17,6 +17,7 @@ headers :: Headers
 headers =
   [ ("home", HomeR, "Home")
   , ("aboutme", AboutmeR, "About Me")
+  , ("publication", PRootR, "Publications")
   , ("yesodbookjp", YRootR, "YesodBookJp")
   ]
 

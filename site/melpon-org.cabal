@@ -23,6 +23,10 @@ library
                      Handler.Home
                      Handler.Aboutme
                      Handler.Header
+                     Handler.Publication.Root
+                     Handler.Publication.Wandbox
+                     Handler.Publication.KabukizaWandboxLt
+                     Handler.Publication.Slide
                      Handler.Yesodbookjp.Root
                      Handler.Yesodbookjp.Auth
                      Handler.Yesodbookjp.Conduit
@@ -81,6 +85,9 @@ library
                  , monad-logger                  >= 0.3
                  , fast-logger                   >= 2.0
                  , wai-logger                    >= 2.0
+
+                 , blaze-html
+                 , blaze-markup
 
 executable         melpon-org
     if flag(library-only)
