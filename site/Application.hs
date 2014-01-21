@@ -28,6 +28,13 @@ import Settings.Development (development)
 -- Don't forget to add new modules to your cabal file!
 import Handler.Home (getHomeR)
 import Handler.Aboutme (getAboutmeR)
+import Handler.Yesodbookjp.Root (getYRootR)
+import Handler.Yesodbookjp.Auth (getYAuthAndAuthR)
+import Handler.Yesodbookjp.Conduit (getYConduitR)
+import Handler.Yesodbookjp.Introduction (getYIntroductionR)
+import Handler.Yesodbookjp.Session (getYSessionR)
+import Handler.Yesodbookjp.Shakespeare (getYShakespeareR)
+import Handler.Yesodbookjp.Widgets (getYWidgetsR)
 
 -- This line actually creates our YesodDispatch instance. It is the second half
 -- of the call to mkYesodData which occurs in Foundation.hs. Please see the

@@ -1,0 +1,13 @@
+<ul .nav .nav-pills .nav-stacked>
+  <li>
+    <a href=@{YIntroductionR}>導入
+  <li>
+    <a href=@{YShakespeareR}>Shakespeareテンプレート
+  <li>
+    <a href=@{YWidgetsR}>ウィジェット
+  <li>
+    <a href=@{YSessionR}>セッション
+  <li>
+    <a href=@{YAuthAndAuthR}>認証と認可
+  <li>
+    <a href=@{YConduitR}>コンジット

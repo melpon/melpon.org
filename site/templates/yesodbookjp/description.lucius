@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+  display: block;
+  border-bottom: dotted;
+}
+body {
+  color: #333333
+}
+aside {
+  padding: 0 0 0 15px;
+  margin: 0 0 18px;
+  border: 1px solid #eeeeee;
+  border-left: 5px solid #eeeeee;
+}

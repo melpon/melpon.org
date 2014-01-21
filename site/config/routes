@@ -5,3 +5,10 @@
 
 / HomeR GET
 /aboutme AboutmeR GET
+/yesodbookjp YRootR GET
+/yesodbookjp/introduction YIntroductionR GET
+/yesodbookjp/shakespeare YShakespeareR GET
+/yesodbookjp/widgets YWidgetsR GET
+/yesodbookjp/session YSessionR GET
+/yesodbookjp/conduit YConduitR GET
+/yesodbookjp/authauth YAuthAndAuthR GET

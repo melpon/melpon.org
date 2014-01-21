@@ -3,7 +3,7 @@ module Handler.Aboutme where
 import Import
 import qualified Yesod                                  as Y
 
-import Foundation (Handler, Widget)
+import Foundation (Handler)
 import Settings (widgetFile)
 import Handler.Header (getHeader)
 

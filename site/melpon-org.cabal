@@ -19,9 +19,18 @@ library
                      Settings
                      Settings.StaticFiles
                      Settings.Development
+                     Modules.RawString
                      Handler.Home
                      Handler.Aboutme
                      Handler.Header
+                     Handler.Yesodbookjp.Root
+                     Handler.Yesodbookjp.Auth
+                     Handler.Yesodbookjp.Conduit
+                     Handler.Yesodbookjp.Introduction
+                     Handler.Yesodbookjp.Layout
+                     Handler.Yesodbookjp.Session
+                     Handler.Yesodbookjp.Shakespeare
+                     Handler.Yesodbookjp.Widgets
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

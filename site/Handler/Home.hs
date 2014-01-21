@@ -4,7 +4,7 @@ module Handler.Home where
 import Import
 import qualified Yesod                                  as Y
 
-import Foundation (Handler, Widget, Route(AboutmeR))
+import Foundation (Handler, Route(AboutmeR))
 import Settings (widgetFile)
 import Handler.Header(getHeader)
 
