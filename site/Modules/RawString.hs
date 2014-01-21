@@ -15,5 +15,9 @@ convert = map conv
     conv c = c
 
 rawstring :: QuasiQuoter
-rawstring = QuasiQuoter { quoteExp = litE . StringL . convert }
-
+rawstring = QuasiQuoter
+    { quoteExp = litE . StringL . convert
+    , quotePat = undefined
+    , quoteType = undefined
+    , quoteDec = undefined
+    }
