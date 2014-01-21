@@ -54,7 +54,7 @@
   それは #
   <a href="http://hackage.haskell.org/packages/archive/yesod-core/latest/doc/html/Yesod-Core.html#v:makeSessionBackend">makeSessionBackend
   \ である。
-  デフォルトでは、ローカルファイルの暗号化キーを使って、120 秒でタイムアウトするという設定を返す。
+  デフォルトでは、ローカルファイルの暗号化キーを使って、120 分でタイムアウトするという設定を返す。
   これをオーバーライドして Nothing を返すようにした場合、セッションは無効になる。
 
 <p>
