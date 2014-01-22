@@ -22,6 +22,7 @@ import Text.Lucius (lucius)
 import Yesod (whamlet)
 
 import Foundation (Handler, Widget, Route(StaticR))
+import Settings (widgetFile)
 import Settings.StaticFiles
   ( publication_io_2012_slides_theme_css_default_css
   , publication_io_2012_slides_theme_css_phone_css
@@ -112,6 +113,7 @@ withDefaultIO widget = do
     Y.addStylesheetAttrs
         (StaticR publication_io_2012_slides_theme_css_phone_css)
         [("media", "only screen and (max-device-width: 480px)")]
+    $(widgetFile "publication/io-2012-ext")
     [whamlet|
         <slides .layout-widescreen>
           ^{widget}

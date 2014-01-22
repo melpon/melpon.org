@@ -1,0 +1,5 @@
+<slide .title-slide .segue .nobackground>
+  <hgroup .auto-fadein>
+    <h1>Cocos2d-x 3.0 と C++11
+    <p>melpon
+

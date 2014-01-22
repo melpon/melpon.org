@@ -27,6 +27,7 @@ library
                      Handler.Publication.Wandbox
                      Handler.Publication.KabukizaWandboxLt
                      Handler.Publication.Slide
+                     Handler.Publication.Cocos2dx3Lt
                      Handler.Yesodbookjp.Root
                      Handler.Yesodbookjp.Auth
                      Handler.Yesodbookjp.Conduit
