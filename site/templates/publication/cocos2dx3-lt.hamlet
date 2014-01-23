@@ -77,6 +77,7 @@
 ^{toTakahashi "C++11"}
 ^{toTakahashi "いろいろ便利"}
 
+^{toTakahashi "その１"}
 ^{toTakahashi "ラムダ式"}
 <slide>
   <article .flexbox .vcenter>
@@ -84,6 +85,7 @@
     <pre .large-font .prettyprint data-lang="c++">
       [this](Object*) { ... }
 
+^{toTakahashi "その２"}
 ^{toTakahashi "auto"}
 <slide>
   <article .flexbox .vcenter>
@@ -91,6 +93,7 @@
       auto label = MenuItemLabel::create(...);
     <p>local より auto の方が短いよね
 
+^{toTakahashi "その３"}
 ^{toTakahashi "可変長テンプレート"}
 <slide>
   <article .flexbox .vcenter>
@@ -118,13 +121,15 @@
 
 ^{toTakahashi "第2部完"}
 
-^{toTakahashi "第3部"}
+^{toTakahashi "第3部（最後）"}
 
 ^{toTakahashi "Cocos2d-x 3.0"}
 ^{toTakahashi "C++11"}
 ^{toTakahashi "混ぜて作った"}
 ^{toTakahashi "便利クラス"}
+^{toTakahashi "紹介"}
 
+^{toTakahashi "その１"}
 ^{toTakahashi "cc_ptr"}
 <slide>
   <article .flexbox .vcenter>
@@ -132,14 +137,16 @@
     <h2>C++ならライブラリで作れる
     <pre .large-font .prettyprint data-lang="c++">
       \{
+      \  cc_ptr&lt;MenuItemLabel&gt; p1(
+      \    MenuItemLabel::create());
       \  // p1->retain()
-      \  cc_ptr<MenuItemLabel> p1(MenuItemLabel::create());
-      \  // p2->retain()
       \  auto p2 = p1;
+      \  // p2->retain()
       \} // p2->release()
-      \  // p1->release();
+      \  // p1->release()
     <footer .source><a href="https://gist.github.com/melpon/7983935">cc_ptr.hpp</a>
 
+^{toTakahashi "その２"}
 ^{toTakahashi "create_func"}
 ^{toTakahashi "Cocos2d-x"}
 ^{toTakahashi "CREATE_FUNC マクロ"}
@@ -190,6 +197,7 @@
       auto test2 = TestLayer::create(100, "aa");
     <footer .source><a href="https://gist.github.com/melpon/8280545">create_func.hpp</a>
 
+^{toTakahashi "その３"}
 ^{toTakahashi "event"}
 ^{toTakahashi "イベント通知"}
 ^{toTakahashi "問題点"}
