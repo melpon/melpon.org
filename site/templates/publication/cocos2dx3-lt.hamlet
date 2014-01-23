@@ -3,3 +3,258 @@
     <h1>Cocos2d-x 3.0 と C++11
     <p>melpon
 
+^{toTakahashi "Cocos2d-x でゲーム作った"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <img .reflect src=@{StaticR publication_img_pad_png} alt="タイトル:パズル＆ドラゴンジェネシス">
+    <p>※リリース予定はありません
+
+^{toTakahashi "第1部"}
+
+^{toTakahashi "Cocos2d-x 3.0 alpha"}
+^{toTakahashi "いろいろ便利"}
+
+^{toTakahashi "その１"}
+^{toTakahashi "CC 無くなった"}
+^{toTakahashi "CCPoint"}
+^{toTakahashi "Point"}
+^{toTakahashi "CCDirector"}
+^{toTakahashi "Director"}
+
+^{toTakahashi "その２"}
+^{toTakahashi "シングルトンの名前"}
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      CC<b>Application</b>::shared<b>Application</b>()
+      CC<b>Director</b>::shared<b>Director</b>()
+      SimpleAudio<b>Engine</b>::shared<b>Engine</b>()
+    <footer .source>press 'h' to highlight
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      Application::<b>getInstance</b>()
+      Director::<b>getInstance</b>()
+      SimpleAudioEngine::<b>getInstance</b>()
+    <footer .source>press 'h' to highlight
+
+^{toTakahashi "その３"}
+^{toTakahashi "コールバックの書き方"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      class Hoge {
+      \  void handler(CCObject*);
+      };
+    <pre .large-font .prettyprint data-lang="c++">
+      void Hoge::handler(CCObject*) {
+      \  // ここに処理を書く
+      }
+    <pre .large-font .prettyprint data-lang="c++">
+      CCMenuItemLabel::create(...,
+      \  this,
+      \  menu_selector(handler));
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      MenuItemLabel::create(...,
+      \<b>  [this](Object*) {
+      \    // ここに処理を書く
+      \  }</b>);
+    <footer .source>press 'h' to highlight
+
+^{toTakahashi "Cocos2d-x 3.0 alpha"}
+^{toTakahashi "いろいろ便利"}
+
+^{toTakahashi "第1部完"}
+
+^{toTakahashi "第2部"}
+
+^{toTakahashi "C++11"}
+^{toTakahashi "いろいろ便利"}
+
+^{toTakahashi "ラムダ式"}
+<slide>
+  <article .flexbox .vcenter>
+    <h2>Python の lambda と大体同じ
+    <pre .large-font .prettyprint data-lang="c++">
+      [this](Object*) { ... }
+
+^{toTakahashi "auto"}
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      auto label = MenuItemLabel::create(...);
+    <p>local より auto の方が短いよね
+
+^{toTakahashi "可変長テンプレート"}
+<slide>
+  <article .flexbox .vcenter>
+    <h2>Python の <code>*args</code> みたいなもの
+    <pre .large-font .prettyprint data-lang="c++">
+      template&lt;class... Args&gt;
+      void f(Args... args) {
+      \  // ここに処理を書く
+      }
+    <pre .large-font .prettyprint data-lang="c++">
+      f(10, "hoge-");
+      f(true, 3.14, 'c');
+
+^{toTakahashi "他にも"}
+^{toTakahashi "初期化リスト"}
+^{toTakahashi "member 初期化"}
+^{toTakahashi "std::shared_ptr"}
+^{toTakahashi "std::weak_ptr"}
+^{toTakahashi "std::function"}
+^{toTakahashi "enum class"}
+^{toTakahashi "などなど"}
+
+^{toTakahashi "C++11"}
+^{toTakahashi "いろいろ便利"}
+
+^{toTakahashi "第2部完"}
+
+^{toTakahashi "第3部"}
+
+^{toTakahashi "Cocos2d-x 3.0"}
+^{toTakahashi "C++11"}
+^{toTakahashi "混ぜて作った"}
+^{toTakahashi "便利クラス"}
+
+^{toTakahashi "cc_ptr"}
+<slide>
+  <article .flexbox .vcenter>
+    <h2>要するに Objective-C の ARC
+    <h2>C++ならライブラリで作れる
+    <pre .large-font .prettyprint data-lang="c++">
+      \{
+      \  // p1->retain()
+      \  cc_ptr<MenuItemLabel> p1(MenuItemLabel::create());
+      \  // p2->retain()
+      \  auto p2 = p1;
+      \} // p2->release()
+      \  // p1->release();
+    <footer .source><a href="https://gist.github.com/melpon/7983935">cc_ptr.hpp</a>
+
+^{toTakahashi "create_func"}
+^{toTakahashi "Cocos2d-x"}
+^{toTakahashi "CREATE_FUNC マクロ"}
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      \class TestLayer
+      \  : public cocos2d::Layer {
+      \public:
+      \  bool init();
+      \  CREATE_FUNC(TestLayer);
+      \};
+    <h2>init() しか呼ばない
+^{toTakahashi "引数渡したい"}
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      \class TestLayer
+      \  : public cocos2d::Layer {
+      \public:
+      \  bool init(int v, std::strint str);
+      \  static TestLayer* create(int v, std::string str) {
+      \    auto p = new TestLayer();
+      \    if (p->init(v, str)) {
+      \      p->autorelease();
+      \      return p;
+      \    } else {
+      \      delete p;
+      \      return nullptr;
+      \    }
+      \  }
+      \};
+^{toTakahashi "めんどい"}
+^{toTakahashi "create_func"}
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      \class TestLayer
+      \  : public cocos2d::Layer
+      \  <b>, create_func&lt;TestLayer&gt;</b> {
+      \public:
+      \  bool init(int v);
+      \  bool init(int v, std::string str);
+      \  <b>using create_func::create;</b>
+      \};
+    <pre .large-font .prettyprint data-lang="c++">
+      auto test1 = TestLayer::create(100);
+      auto test2 = TestLayer::create(100, "aa");
+    <footer .source><a href="https://gist.github.com/melpon/8280545">create_func.hpp</a>
+
+^{toTakahashi "event"}
+^{toTakahashi "イベント通知"}
+^{toTakahashi "問題点"}
+^{toTakahashi "死んでる"}
+^{toTakahashi "オブジェクトに"}
+^{toTakahashi "通知"}
+^{toTakahashi "すると"}
+^{toTakahashiI "！！！突然の死！！！"}
+^{toTakahashi "event"}
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+      \event e;
+      \{
+      \  // イベント登録
+      \  auto p = Test::create(&e);
+      \  <b>e(); // イベント呼ぶ</b>
+      \}
+      \<b>e(); // イベント呼ばない</b>
+    <footer .source><a href="https://gist.github.com/melpon/8579444">event.hpp</a>
+
+^{toTakahashi "仕組み"}
+^{toTakahashi "weak_ptr 使ってる"}
+^{toTakahashi "以上"}
+
+^{toTakahashi "第3部完"}
+
+^{toTakahashi "まとめ"}
+^{toTakahashi "Cocos2d-x 3.0"}
+^{toTakahashi "と"}
+^{toTakahashi "C++11"}
+^{toTakahashi "で"}
+^{toTakahashiI "かなり楽"}
+
+^{toTakahashi "Cocos2d-x 3.0"}
+^{toTakahashi "と"}
+^{toTakahashi "C++11"}
+^{toTakahashi "を"}
+^{toTakahashiI "使おう！"}
+
+<slide .thank-you-slide .segue>
+  <article .flexbox .vleft>
+    <h2>&lt;Thank You!&gt;
+    <p>Important contact information goes here.
+  <p data-config-contact>
+
+<!--
+- cocos2d-x 3.0
+  - CC 無くなった
+  - sharedDirector() とかが getInstance() になった
+  - イベントやコールバック類で std::function 使うようになった
+    - C++11 の機能を使い始めた！！！
+    - 自分のプログラムでも C++11 が使える！！！
+
+- 横道 {
+  - #ifndef __HELLO_WORLD__
+  - new Hoge(); if (p &&
+- }
+
+- おかげでこんなことができました
+  - auto とか
+  - ラムダ式とか
+  - 可変長テンプレートとか
+  - shared_ptr/weak_ptr とか
+  - cc_ptr
+  - create_func
+  - event
+-->

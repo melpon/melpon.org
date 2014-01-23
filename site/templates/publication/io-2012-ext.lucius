@@ -14,3 +14,7 @@ slides > slide {
 slides h3 {
   color: #515151;
 }
+.large-font {
+  font-size: 40px;
+  line-height: 48px;
+}

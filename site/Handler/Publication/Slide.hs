@@ -6,6 +6,8 @@ module Handler.Publication.Slide
   , getTitleWidget
   , defaultLayout
   , withDefaultIO
+  , toTakahashi
+  , toTakahashiI
   ) where
 
 import Import
@@ -19,7 +21,7 @@ import qualified Text.Hamlet                            as Hamlet
 import qualified Yesod.Core.Widget                      as YWidget
 
 import Text.Lucius (lucius)
-import Yesod (whamlet)
+import Yesod (shamlet, whamlet)
 
 import Foundation (Handler, Widget, Route(StaticR))
 import Settings (widgetFile)
@@ -119,3 +121,19 @@ withDefaultIO widget = do
           ^{widget}
           <slide .backdrop>
     |]
+
+toTakahashi :: String -> Widget
+toTakahashi message = Y.toWidget [shamlet|
+<slide>
+  <article .takahashi .flexbox .vcenter>
+    <h1>#{message}
+|]
+
+-- Important version
+toTakahashiI :: String -> Widget
+toTakahashiI message = Y.toWidget [shamlet|
+<slide>
+  <article .takahashi .important .flexbox .vcenter>
+    <h1 .red>#{message}
+|]
+

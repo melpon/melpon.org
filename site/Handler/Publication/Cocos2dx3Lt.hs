@@ -9,8 +9,9 @@ import Settings (widgetFile)
 import Foundation (Handler, Route(StaticR))
 import Settings.StaticFiles
   ( publication_io_2012_slides_js_require_1_0_8_min_js
+  , publication_img_pad_png
   )
-import Handler.Publication.Slide (defaultLayout, withDefaultIO)
+import Handler.Publication.Slide (defaultLayout, withDefaultIO, toTakahashi, toTakahashiI)
 
 getPCocos2dx3LtR :: Handler Y.Html
 getPCocos2dx3LtR = do

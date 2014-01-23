@@ -13,22 +13,7 @@ import Foundation (Handler, Route(StaticR), Widget)
 import Settings.StaticFiles
   ( publication_io_2012_slides_js_require_1_0_8_min_js
   )
-import Handler.Publication.Slide (defaultLayout, withDefaultIO)
-
-toTakahashi :: String -> Widget
-toTakahashi message = Y.toWidget [shamlet|
-<slide>
-  <article .takahashi .flexbox .vcenter>
-    <h1>#{message}
-|]
-
--- Important version
-toTakahashiI :: String -> Widget
-toTakahashiI message = Y.toWidget [shamlet|
-<slide>
-  <article .takahashi .important .flexbox .vcenter>
-    <h1 .red>#{message}
-|]
+import Handler.Publication.Slide (defaultLayout, withDefaultIO, toTakahashi, toTakahashiI)
 
 toWandboxURL :: Widget
 toWandboxURL = Y.toWidget [shamlet|
