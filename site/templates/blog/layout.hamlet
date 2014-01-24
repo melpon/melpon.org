@@ -4,4 +4,4 @@
   <div .span3>
     ^{getSidebar}
   <div .span9>
-    ^{blog}
+    ^{blogData}

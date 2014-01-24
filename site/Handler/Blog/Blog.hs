@@ -29,11 +29,11 @@ strptime' string = strptime "%Y-%m-%d %H:%M:%S" string
 blogs :: [Blog]
 blogs =
   [ Blog
-      (strptime' "2013-01-01 10:23:45")
-      ["tag1", "tag2"]
-      "hoge-"
-      "たいとる"
-      "templates/blog/test.hamlet"
+      (strptime' "2014-01-25 03:28:00")
+      ["Haskell", "Yesod"]
+      "created-blog"
+      "新しいブログ作りました"
+      "templates/blog/created-blog.hamlet"
   ]
 
 recentBlogs :: [Blog]

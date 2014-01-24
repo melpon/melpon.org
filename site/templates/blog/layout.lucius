@@ -1,0 +1,43 @@
+
+.article-header {
+  background-color: #eeeeee;
+  padding: 10px;
+  h1 {
+    font-size: 35px;
+  }
+}
+
+.datetime-header {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.title-header {
+}
+
+.tags-header {
+  text-align: left;
+  float: left;
+}
+.tag-list {
+  display: inline;
+  list-style: none;
+  margin-left: 0px;
+}
+.tag-list > li {
+  display: inline;
+}
+
+.social-header {
+  text-align: right;
+}
+
+.article-body {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 22px;
+  p {
+    text-indent: 1em;
+  }
+}
+

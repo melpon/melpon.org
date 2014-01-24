@@ -28,30 +28,29 @@ loadHamlet m f fp = do
     return html
 
 blogToHtml :: Renderer -> Blog -> IO Y.Html
-blogToHtml renderer blog = do
-    let filepath = blogWidgetFile blog
-    let tags = blogTags blog
+blogToHtml renderer blog' = do
+    let datetime = strftime "%Y-%m-%d %H:%M:%S" $ blogDateTime blog'
+    let tags = blogTags blog'
+    let url = blogURL blog'
+    let title = blogTitle blog'
+    let filepath = blogWidgetFile blog'
     let nameToMap name =
             [ (["link"], HamletRT.HDUrl $ BTagR name)
             , (["name"], HamletRT.HDHtml $ Y.toHtml name)
             ]
     let hdTags = HamletRT.HDList $ map nameToMap tags
     let hamletMap =
-            [ (["datetime"], HamletRT.HDHtml $ Y.toHtml $ strftime "%Y-%m-%d %H:%M:%S" $ blogDateTime blog)
+            [ (["datetime"], HamletRT.HDHtml $ Y.toHtml $ datetime)
             , (["tags"], hdTags)
-            , (["urlLink"], HamletRT.HDUrl $ BUrlR $ blogURL blog)
-            , (["urlName"], HamletRT.HDHtml $ Y.toHtml $ blogURL blog)
-            , (["title"], HamletRT.HDHtml $ Y.toHtml $ blogTitle blog)
+            , (["urlLink"], HamletRT.HDUrl $ BUrlR $ url)
+            , (["urlName"], HamletRT.HDHtml $ Y.toHtml $ url)
+            , (["title"], HamletRT.HDHtml $ Y.toHtml $ title)
             ]
-    htmlBlog <- loadHamlet
+    blog <- loadHamlet
         hamletMap
         renderer
         filepath
-    let hamletMap' = (["blog"], HamletRT.HDHtml htmlBlog) : hamletMap
-    template <- loadHamlet
-        hamletMap'
-        renderer
-        "templates/blog/blog-template.hamlet"
+    let template = $(Hamlet.hamletFile "templates/blog/blog-template.hamlet") renderer
     return template
 
 getSidebar :: Widget
@@ -60,12 +59,8 @@ getSidebar = do
     $(widgetFile "blog/sidebar")
 
 renderBlogs :: Widget -> [Blog] -> Widget
-renderBlogs header blogs = do
+renderBlogs header blogs' = do
     renderer <- Y.getUrlRenderParams
-    htmlBlogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs
-    let hdBlogs = HamletRT.HDList $ map (\blog -> [(["value"], HamletRT.HDHtml blog)]) htmlBlogs
-    blog <- Y.liftIO $ loadHamlet
-                            [(["blogs"], hdBlogs)]
-                            renderer
-                            "templates/blog/blog-list.hamlet"
+    blogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs'
+    let blogData = $(widgetFile "blog/blog-list")
     $(widgetFile "blog/layout")

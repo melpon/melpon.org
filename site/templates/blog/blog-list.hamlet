@@ -1,2 +1,2 @@
 $forall blog <- blogs
-  #{value blog}
+  #{blog}
