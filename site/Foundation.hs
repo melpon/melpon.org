@@ -15,6 +15,7 @@ import qualified Yesod.Default.Util                     as YDUtil
 import qualified Yesod.Core.Types                       as YCoreTypes
 import qualified Text.Jasmine                           as Jasmine
 import qualified Text.Hamlet                            as Hamlet
+import qualified Data.Text                              as T
 
 import Yesod.Static (Static)
 

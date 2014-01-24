@@ -1,10 +1,14 @@
 module Handler.Blog.Blog
   ( Blog(..)
   , recentBlogs
+  , taggedBlogs
+  , urlBlog
   ) where
 
 import Import
 import qualified Data.Text                              as T
+
+import Prelude (head)
 
 import Modules.DateTime (DateTime, strptime)
 
@@ -31,3 +35,9 @@ blogs =
 
 recentBlogs :: [Blog]
 recentBlogs = blogs
+
+taggedBlogs :: T.Text -> [Blog]
+taggedBlogs tag = blogs
+
+urlBlog :: T.Text -> Blog
+urlBlog url = head blogs

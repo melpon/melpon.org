@@ -24,8 +24,11 @@ library
                      Handler.Home
                      Handler.Aboutme
                      Handler.Header
-                     Handler.Blog.Root
                      Handler.Blog.Blog
+                     Handler.Blog.Renderer
+                     Handler.Blog.Root
+                     Handler.Blog.Tag
+                     Handler.Blog.Url
                      Handler.Publication.Root
                      Handler.Publication.Wandbox
                      Handler.Publication.KabukizaWandboxLt

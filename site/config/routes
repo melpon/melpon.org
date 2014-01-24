@@ -6,6 +6,8 @@
 / HomeR GET
 /aboutme AboutmeR GET
 /blog BRootR GET
+/blog/#T.Text BUrlR GET
+/blog/tag/#T.Text BTagR GET
 /pub PRootR GET
 /pub/wandbox PWandboxR GET
 /pub/kabukiza-wandbox-lt PKabukizaWandboxLtR GET

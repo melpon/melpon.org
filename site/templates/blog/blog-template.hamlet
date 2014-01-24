@@ -2,7 +2,7 @@
   <p>#{datetime}
   <ul>
     $forall tag <- tags
-      <li>#{value tag}
-  <p>#{url}
+      <li><a href=@{link tag}>#{name tag}</a>
+  <p><a href=@{urlLink}>#{urlName}</a>
   <p>#{title}
   <div>#{blog}
