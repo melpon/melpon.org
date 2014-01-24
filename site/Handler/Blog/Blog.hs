@@ -7,6 +7,8 @@ module Handler.Blog.Blog
 
 import Import
 import qualified Data.Text                              as T
+import qualified Data.Function                          as Func
+import qualified Data.List                              as List
 
 import Prelude (head)
 
@@ -34,10 +36,10 @@ blogs =
   ]
 
 recentBlogs :: [Blog]
-recentBlogs = blogs
+recentBlogs = take 5 $ List.sortBy (compare `Func.on` blogDateTime) blogs
 
 taggedBlogs :: T.Text -> [Blog]
-taggedBlogs tag = blogs
+taggedBlogs tag = take 5 $ filter (any (tag==) . blogTags) blogs
 
 urlBlog :: T.Text -> Blog
-urlBlog url = head blogs
+urlBlog url = maybe (error "url Not Found") id $ List.find ((url==) . blogURL) blogs
