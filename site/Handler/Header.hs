@@ -8,7 +8,17 @@ import qualified Yesod                                  as Y
 import qualified Data.List                              as List
 
 import Settings (widgetFile)
-import Foundation (Widget, App, Route(HomeR, AboutmeR, PRootR, YRootR))
+import Foundation
+    ( Widget
+    , App
+    , Route
+        ( HomeR
+        , AboutmeR
+        , PRootR
+        , YRootR
+        , BRootR
+        )
+    )
 
 type Header = (String, Y.Route App, String)
 type Headers = [Header]
@@ -19,6 +29,7 @@ headers =
   , ("aboutme", AboutmeR, "About Me")
   , ("publication", PRootR, "Publications")
   , ("yesodbookjp", YRootR, "YesodBookJp")
+  , ("blog", BRootR, "Blog")
   ]
 
 getPageTitle :: String -> Maybe String

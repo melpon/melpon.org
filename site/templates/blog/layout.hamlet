@@ -1,0 +1,7 @@
+^{header}
+
+<div .container-fluid>
+  <div .span3>
+    ^{getSidebar}
+  <div .span9>
+    ^{blog}

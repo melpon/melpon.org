@@ -10,7 +10,8 @@ import qualified Data.Text                              as T
 import qualified Data.Text.IO                           as TIO
 
 import Foundation (Widget, App, Route(BTagR, BUrlR))
-import Handler.Blog.Blog (Blog(..))
+import Settings (widgetFile)
+import Handler.Blog.Blog (Blog(..), allTags)
 import Modules.DateTime (strftime)
 
 type Renderer = Route App -> [(T.Text, T.Text)] -> T.Text
@@ -53,18 +54,18 @@ blogToHtml renderer blog = do
         "templates/blog/blog-template.hamlet"
     return template
 
-renderBlogs :: [Blog] -> Widget
-renderBlogs blogs = do
-    Y.setTitle ""
-    Y.addScriptRemote "//codeorigin.jquery.com/jquery-1.10.2.min.js"
-    Y.addScriptRemote "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"
-    Y.addStylesheetRemote "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
+getSidebar :: Widget
+getSidebar = do
+    let tags = allTags
+    $(widgetFile "blog/sidebar")
+
+renderBlogs :: Widget -> [Blog] -> Widget
+renderBlogs header blogs = do
     renderer <- Y.getUrlRenderParams
     htmlBlogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs
     let hdBlogs = HamletRT.HDList $ map (\blog -> [(["value"], HamletRT.HDHtml blog)]) htmlBlogs
-    html <- Y.liftIO $ loadHamlet
+    blog <- Y.liftIO $ loadHamlet
                             [(["blogs"], hdBlogs)]
                             renderer
                             "templates/blog/blog-list.hamlet"
-    Y.toWidget html
-
+    $(widgetFile "blog/layout")

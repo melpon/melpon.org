@@ -1,8 +1,11 @@
-<div>
-  <p>#{datetime}
-  <ul>
-    $forall tag <- tags
-      <li><a href=@{link tag}>#{name tag}</a>
-  <p><a href=@{urlLink}>#{urlName}</a>
-  <p>#{title}
-  <div>#{blog}
+<article .article>
+  <div .article-header>
+    <div .datetime-header>#{datetime}
+    <h1 .title-header><a href=@{urlLink}>#{title}</a>
+    <div .tags-header>
+      <ul .tag-list>
+        $forall tag <- tags
+          <li><a href=@{link tag}>#{name tag}</a>
+    <div .social-header>
+  <div .article-body>
+    #{blog}

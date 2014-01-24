@@ -49,6 +49,6 @@ withSidebar mTitle widget = do
           <div .span3>
             ^{contents}
             <a href="@{YRootR}">Home
-          <div .span8>
+          <div .span9>
             ^{widget}
     |]

@@ -3,6 +3,7 @@ module Handler.Blog.Blog
   , recentBlogs
   , taggedBlogs
   , urlBlog
+  , allTags
   ) where
 
 import Import
@@ -43,3 +44,6 @@ taggedBlogs tag = take 5 $ filter (any (tag==) . blogTags) blogs
 
 urlBlog :: T.Text -> Blog
 urlBlog url = maybe (error "url Not Found") id $ List.find ((url==) . blogURL) blogs
+
+allTags :: [T.Text]
+allTags = List.nub $ concat $ map blogTags blogs
