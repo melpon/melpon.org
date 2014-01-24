@@ -1,7 +1,8 @@
 ^{header}
 
 <div .container-fluid>
-  <div .span3>
-    ^{getSidebar}
-  <div .span9>
-    ^{blogData}
+  <div .row-fluid>
+    <div .span3>
+      ^{getSidebar}
+    <div .span9>
+      ^{blogData}

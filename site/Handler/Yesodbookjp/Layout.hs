@@ -46,9 +46,10 @@ withSidebar mTitle widget = do
           ^{getHeader "yesodbookjp"}
 
         <div .container-fluid>
-          <div .span3>
-            ^{contents}
-            <a href="@{YRootR}">Home
-          <div .span9>
-            ^{widget}
+          <div .row-fluid>
+            <div .span3>
+              ^{contents}
+              <a href="@{YRootR}">Home
+            <div .span9>
+              ^{widget}
     |]
