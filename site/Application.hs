@@ -28,6 +28,7 @@ import Settings.Development (development)
 -- Don't forget to add new modules to your cabal file!
 import Handler.Home (getHomeR)
 import Handler.Aboutme (getAboutmeR)
+import Handler.Blog.Root (getBRootR)
 import Handler.Publication.Root (getPRootR)
 import Handler.Publication.Wandbox (getPWandboxR)
 import Handler.Publication.KabukizaWandboxLt (getPKabukizaWandboxLtR)

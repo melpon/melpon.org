@@ -1,0 +1,8 @@
+<div>
+  <p>#{datetime}
+  <ul>
+    $forall tag <- tags
+      <li>#{value tag}
+  <p>#{url}
+  <p>#{title}
+  <div>#{blog}

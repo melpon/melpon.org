@@ -23,6 +23,7 @@ library
                      Handler.Home
                      Handler.Aboutme
                      Handler.Header
+                     Handler.Blog.Root
                      Handler.Publication.Root
                      Handler.Publication.Wandbox
                      Handler.Publication.KabukizaWandboxLt

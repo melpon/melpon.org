@@ -23,6 +23,7 @@ import qualified Data.IORef                             as IORef
 import qualified Data.List                              as List
 import qualified Data.Maybe                             as Maybe
 import qualified Data.Text                              as T
+import qualified Data.Text.IO                           as TIO
 import qualified Data.Text.Encoding                     as TE
 import qualified Data.Word                              as Word
 import qualified Data.Yaml                              as Yaml
@@ -45,6 +46,7 @@ import qualified System.Mem                             as Mem
 import qualified System.Environment                     as Environment
 
 import qualified Text.Hamlet                            as Hamlet
+import qualified Text.Hamlet.RT                         as HamletRT
 import qualified Text.Jasmine                           as Jasmine
 import qualified Text.Shakespeare.Text                  as Text
 
