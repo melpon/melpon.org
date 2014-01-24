@@ -20,10 +20,12 @@ library
                      Settings.StaticFiles
                      Settings.Development
                      Modules.RawString
+                     Modules.DateTime
                      Handler.Home
                      Handler.Aboutme
                      Handler.Header
                      Handler.Blog.Root
+                     Handler.Blog.Blog
                      Handler.Publication.Root
                      Handler.Publication.Wandbox
                      Handler.Publication.KabukizaWandboxLt
@@ -90,6 +92,8 @@ library
 
                  , blaze-html
                  , blaze-markup
+                 , time
+                 , old-locale
 
 executable         melpon-org
     if flag(library-only)

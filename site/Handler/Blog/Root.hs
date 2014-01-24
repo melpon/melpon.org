@@ -12,15 +12,8 @@ import qualified Data.Text.IO                           as TIO
 import Foundation (Handler, Widget, App, Route(StaticR))
 import Settings.StaticFiles (publication_img_pad_png)
 import Settings (widgetFile)
-import Handler.Header(getHeader)
-
-data Blog = Blog
-  { blogDateTime :: String
-  , blogTags :: [T.Text]
-  , blogURL :: T.Text
-  , blogTitle :: T.Text
-  , blogWidgetFile :: FilePath
-  }
+import Handler.Blog.Blog (Blog(..), recentBlogs)
+import Modules.DateTime (strftime)
 
 type Renderer = Route App -> [(T.Text, T.Text)] -> T.Text
 
@@ -41,7 +34,7 @@ blogToHtml renderer blog = do
     let tags = blogTags blog
     let hdTags = HamletRT.HDList $ map (\tag -> [(["value"], HamletRT.HDHtml $ Y.toHtml tag)]) tags
     let hamletMap =
-            [ (["datetime"], HamletRT.HDHtml $ Y.toHtml $ blogDateTime blog)
+            [ (["datetime"], HamletRT.HDHtml $ Y.toHtml $ strftime "%Y-%m-%d %H:%M:%S" $ blogDateTime blog)
             , (["tags"], hdTags)
             , (["url"], HamletRT.HDHtml $ Y.toHtml $ blogURL blog)
             , (["title"], HamletRT.HDHtml $ Y.toHtml $ blogTitle blog)
@@ -66,11 +59,14 @@ renderBlogs blogs = do
     renderer <- Y.getUrlRenderParams
     htmlBlogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs
     let hdBlogs = HamletRT.HDList $ map (\blog -> [(["value"], HamletRT.HDHtml blog)]) htmlBlogs
-    f <- Y.getUrlRenderParams
-    html <- Y.liftIO $ loadHamlet [(["blogs"], hdBlogs)] f "templates/blog/blog-list.hamlet"
+    renderer <- Y.getUrlRenderParams
+    html <- Y.liftIO $ loadHamlet
+                            [(["blogs"], hdBlogs)]
+                            renderer
+                            "templates/blog/blog-list.hamlet"
     Y.toWidget html
 
 getBRootR :: Handler Y.Html
 getBRootR = do
     Y.defaultLayout $ do
-        renderBlogs [Blog "2013-01-01" ["tag1", "tag2"] "hoge-" "たいとる" "templates/blog/test.hamlet"]
+        renderBlogs recentBlogs
