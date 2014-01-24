@@ -131,9 +131,14 @@
 
 ^{toTakahashi "その１"}
 ^{toTakahashi "cc_ptr"}
+^{toTakahashi "要するに"}
+^{toTakahashi "Objective-C"}
+^{toTakahashi "ARC"}
+^{toTakahashi "Auto"}
+^{toTakahashi "Reference"}
+^{toTakahashi "Counting"}
 <slide>
   <article .flexbox .vcenter>
-    <h2>要するに Objective-C の ARC
     <h2>C++ならライブラリで作れる
     <pre .large-font .prettyprint data-lang="c++">
       \{
@@ -145,6 +150,10 @@
       \} // p2->release()
       \  // p1->release()
     <footer .source><a href="https://gist.github.com/melpon/7983935">cc_ptr.hpp</a>
+^{toTakahashi "仕組み"}
+^{toTakahashi "operatorオーバーロードとか使ってる"}
+^{toTakahashi "C++11の機能ではない"}
+^{toTakahashi "以上"}
 
 ^{toTakahashi "その２"}
 ^{toTakahashi "create_func"}
@@ -196,6 +205,9 @@
       auto test1 = TestLayer::create(100);
       auto test2 = TestLayer::create(100, "aa");
     <footer .source><a href="https://gist.github.com/melpon/8280545">create_func.hpp</a>
+^{toTakahashi "仕組み"}
+^{toTakahashi "可変長テンプレート使ってる"}
+^{toTakahashi "以上"}
 
 ^{toTakahashi "その３"}
 ^{toTakahashi "event"}
