@@ -50,17 +50,17 @@ blogToHtml renderer blog' = do
         hamletMap
         renderer
         filepath
-    let template = $(Hamlet.hamletFile "templates/blog/blog-template.hamlet") renderer
+    let template = $(Hamlet.hamletFile "templates/blog/templates/blog-template.hamlet") renderer
     return template
 
 getSidebar :: Widget
 getSidebar = do
     let tags = allTags
-    $(widgetFile "blog/sidebar")
+    $(widgetFile "blog/templates/sidebar")
 
 renderBlogs :: Widget -> [Blog] -> Widget
 renderBlogs header blogs' = do
     renderer <- Y.getUrlRenderParams
     blogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs'
-    let blogData = $(widgetFile "blog/blog-list")
-    $(widgetFile "blog/layout")
+    let blogData = $(widgetFile "blog/templates/blog-list")
+    $(widgetFile "blog/templates/layout")

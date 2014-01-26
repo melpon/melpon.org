@@ -31,9 +31,9 @@ blogs =
   [ Blog
       (strptime' "2014-01-25 03:28:00")
       ["Haskell", "Yesod"]
-      "created-blog"
+      "new-blog"
       "新しいブログ作りました"
-      "templates/blog/created-blog.hamlet"
+      "templates/blog/new-blog.hamlet"
   ]
 
 recentBlogs :: [Blog]
