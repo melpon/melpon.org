@@ -34,10 +34,16 @@ blogs =
       "new-blog"
       "新しいブログ作りました"
       "templates/blog/new-blog.hamlet"
+  , Blog
+      (strptime' "2014-01-26 11:21:00")
+      ["C++", "Cocos2d-x"]
+      "cocos2dx-vector-leak"
+      "Cocos2d-x 3.0 beta の Vector がリークする"
+      "templates/blog/cocos2dx-vector-leak.hamlet"
   ]
 
 recentBlogs :: [Blog]
-recentBlogs = take 5 $ List.sortBy (compare `Func.on` blogDateTime) blogs
+recentBlogs = take 5 $ List.sortBy ((flip compare) `Func.on` blogDateTime) blogs
 
 taggedBlogs :: T.Text -> [Blog]
 taggedBlogs tag = take 5 $ filter (any (tag==) . blogTags) blogs
