@@ -1,15 +1,33 @@
 
+.container-fluid {
+  margin-right: 60px;
+}
+
+.article {
+  margin-bottom: 50px;
+}
+
+.article pre {
+}
+
 .article-header {
-  background-color: #eeeeee;
+  background-color: #C8EFEA;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   padding: 10px;
   h1 {
     font-size: 35px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #999;
   }
 }
 
 .datetime-header {
-  text-align: right;
+  text-align: left;
   margin-right: 20px;
+  float: left;
 }
 
 .title-header {
@@ -17,7 +35,6 @@
 
 .tags-header {
   text-align: left;
-  float: left;
 }
 .tag-list {
   display: inline;
@@ -34,10 +51,13 @@
 
 .article-body {
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 22px;
   p {
     text-indent: 1em;
+  }
+  ul {
+    padding-left: 1em;
   }
 }
 
