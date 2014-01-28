@@ -69,7 +69,7 @@
     \    template&lt;class... Args&gt;
     \    static Derived* create(Args&amp;&amp;... args) {
     \        auto p = new Derived();
-    \        if (p-&gt;init(std::forward<Args>(args)...)) {
+    \        if (p-&gt;init(std::forward&lt;Args&gt;(args)...)) {
     \            p-&gt;autorelease();
     \            return p;
     \        } else {
