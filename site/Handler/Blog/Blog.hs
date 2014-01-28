@@ -40,6 +40,12 @@ blogs =
       "cocos2dx-vector-leak"
       "Cocos2d-x 3.0 beta の Vector がリークする"
       "templates/blog/cocos2dx-vector-leak.hamlet"
+  , Blog
+      (strptime' "2014-01-28 14:13:00")
+      ["C++", "Cocos2d-x"]
+      "cocos2dx-create-func"
+      "Cocos2d-x の CREATE_FUNC をマシな実装にした"
+      "templates/blog/cocos2dx-create-func.hamlet"
   ]
 
 recentBlogs :: [Blog]

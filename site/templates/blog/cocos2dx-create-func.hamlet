@@ -1,0 +1,102 @@
+
+<p>Cocos2d-x には <code>CREATE_FUNC</code> というマクロがあります。これは以下の実装になっています。
+
+<pre>
+  <code>
+    \#define CREATE_FUNC(__TYPE__) \
+    \static __TYPE__* create() \
+    \{ \
+    \    __TYPE__ *pRet = new __TYPE__(); \
+    \    if (pRet &amp;&amp; pRet-&gt;init()) \
+    \    { \
+    \        pRet-&gt;autorelease(); \
+    \        return pRet; \
+    \    } \
+    \    else \
+    \    { \
+    \        delete pRet; \
+    \        pRet = NULL; \
+    \        return NULL; \
+    \    } \
+    \}
+
+<p>これを以下の様に使うことで、<code>autorelease</code> 済みの <code>TestLayer</code> オブジェクトを生成できます。
+
+<pre>
+  <code>
+    \class TestLayer : public cocos2d::Layer {
+    \public:
+    \    bool init();
+    \    CREATE_FUNC(TestLayer);
+    \};
+
+<p>
+  ただ、これには問題があります。
+  マクロを見れば分かるように、<code>create</code> や <code>init</code> 関数はパラメータを持ちません。
+  つまり、初期化する際に引数を渡したい場合、<code>CREATE_FUNC</code> を利用できません。
+
+<p>もし値を渡したい場合、<code>CREATE_FUNC</code> マクロがやっていることを手動で書く必要があります。
+
+<pre>
+  <code>
+    \class TestLayer : public cocos2d::Layer {
+    \public:
+    \    bool init(int n, std::string s);
+    \    static TestLayer* create(int n, std::string s) {
+    \        auto p = new TestLayer();
+    \        if (p-&gt;init(n, s)) {
+    \            p-&gt;autorelease();
+    \            return p;
+    \        } else {
+    \            delete p;
+    \            return nullptr;
+    \        }
+    \    }
+    \};
+
+<p>
+  これはちょっと書くのが面倒過ぎます。
+  さらに <code>init</code> 関数のオーバーロードが増えると、<code>create</code> 関数の実装も増え、更に面倒になります。
+
+<p>これを解決するため、以下のクラスを作りました。
+
+<pre>
+  <code>
+    \#include&lt;utility&gt;
+    \
+    \template&lt;class Derived&gt;
+    \struct create_func {
+    \    template&lt;class... Args&gt;
+    \    static Derived* create(Args&amp;&amp;... args) {
+    \        auto p = new Derived();
+    \        if (p-&gt;init(std::forward<Args>(args)...)) {
+    \            p-&gt;autorelease();
+    \            return p;
+    \        } else {
+    \            delete p;
+    \            return nullptr;
+    \        }
+    \    }
+    \};
+
+<p>Variadic Templates や Perfect Forwarding を使っているので、C++11 限定です。Cocos2d-x 3.0 を使うなら問題にならないでしょう。
+
+<p>これは以下の様に利用します。
+
+<pre>
+  <code>
+    \class TestLayer : public cocos2d::Layer, create_func&lt;TestLayer&gt; {
+    \public:
+    \    bool init(int n);
+    \    bool init(int n, std::string s);
+    \    using create_func::create;
+    \};
+
+<pre>
+  <code>
+    auto p = TestLayer::create(10); // init(10) が呼ばれる
+    auto p2 = TestLayer::create(10, "aaa"); // init(10, "aaa") が呼ばれる
+
+<p><a href="http://ja.wikibooks.org/wiki/More_C%2B%2B_Idioms/%E5%A5%87%E5%A6%99%E3%81%AB%E5%86%8D%E5%B8%B0%E3%81%97%E3%81%9F%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3(Curiously_Recurring_Template_Pattern)">CRTP</a> を使っているため、<code>create_func&lt;TestLayer&gt;</code> と書く手間が発生します。が、それを書くだけで <code>create</code> 関数に値を渡すことでき、<code>init</code> 関数のオーバーロードもできます。
+
+<p><code>create</code> 関数を書くのが面倒になったら、このクラスを利用することを考えましょう。
