@@ -1,5 +1,7 @@
 module Handler.Blog.Renderer
-  ( renderBlogs
+  ( Renderer
+  , blogToHtml
+  , renderBlogs
   ) where
 
 import Import
@@ -9,8 +11,11 @@ import qualified Text.Hamlet.RT                         as HamletRT
 import qualified Data.Text                              as T
 import qualified Data.Text.IO                           as TIO
 
-import Foundation (Widget, App, Route(BTagR, BUrlR))
+import Yesod (hamlet)
+
+import Foundation (Widget, App, Route(BTagR, BUrlR, BFeedR, StaticR))
 import Settings (widgetFile)
+import Settings.StaticFiles (blog_feed_icon_14x14_png)
 import Handler.Blog.Blog (Blog(..), allTags)
 import Modules.DateTime (strftime)
 
@@ -60,6 +65,7 @@ getSidebar = do
 
 renderBlogs :: Widget -> [Blog] -> Widget
 renderBlogs header blogs' = do
+    Y.toWidgetHead [hamlet|<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href=@{BFeedR}>|]
     renderer <- Y.getUrlRenderParams
     blogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs'
     let blogData = $(widgetFile "blog/templates/blog-list")

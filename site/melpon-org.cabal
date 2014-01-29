@@ -29,6 +29,7 @@ library
                      Handler.Blog.Root
                      Handler.Blog.Tag
                      Handler.Blog.Url
+                     Handler.Blog.Feed
                      Handler.Publication.Root
                      Handler.Publication.Wandbox
                      Handler.Publication.KabukizaWandboxLt
@@ -97,6 +98,7 @@ library
                  , blaze-markup
                  , time
                  , old-locale
+                 , yesod-newsfeed
 
 executable         melpon-org
     if flag(library-only)

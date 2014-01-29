@@ -1,0 +1,5 @@
+
+.feed {
+  background: url("@{StaticR blog_feed_icon_14x14_png}") no-repeat 0 50%;
+}
+

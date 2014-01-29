@@ -2,3 +2,5 @@
   <li .hav-header><i .icon-tags></i>Tags
   $forall tag <- tags
     <li><a href=@{BTagR tag}>#{tag}</a>
+  <li .nav-header>RSS
+    <li><a href="@{BFeedR}" class="feed">RSS購読</a>

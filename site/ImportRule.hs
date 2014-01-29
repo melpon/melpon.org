@@ -54,9 +54,12 @@ import qualified Text.Jasmine                           as Jasmine
 import qualified Text.Shakespeare.Text                  as Text
 
 import qualified Yesod                                  as Y
+import qualified Yesod.AtomFeed                         as YAtomFeed
 import qualified Yesod.Core.Types                       as YCoreTypes
 import qualified Yesod.Default.Config                   as YDConfig
 import qualified Yesod.Default.Handlers                 as YDHandlers
 import qualified Yesod.Default.Main                     as YDMain
 import qualified Yesod.Default.Util                     as YDUtil
+import qualified Yesod.Feed                             as YFeed
+import qualified Yesod.RssFeed                          as YRssFeed
 import qualified Yesod.Static                           as YStatic

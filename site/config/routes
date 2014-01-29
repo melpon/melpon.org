@@ -6,6 +6,7 @@
 / HomeR GET
 /aboutme AboutmeR GET
 /blog BRootR GET
+/blog.xml BFeedR GET
 /blog/#T.Text BUrlR GET
 /blog/tag/#T.Text BTagR GET
 /pub PRootR GET
