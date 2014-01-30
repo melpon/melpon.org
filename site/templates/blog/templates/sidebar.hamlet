@@ -1,5 +1,5 @@
 <ul .nav .nav-list>
-  <li .hav-header><i .icon-tags></i>Tags
+  <li .nav-header><i .icon-tags></i>Tags
   $forall tag <- tags
     <li><a href=@{BTagR tag}>#{tag}</a>
   <li .nav-header>RSS
