@@ -12,36 +12,6 @@ import Foundation (Handler, Route(BUrlR, BRootR), App)
 import Handler.Blog.Blog (recentBlogs, Blog(..))
 import Handler.Blog.Renderer (Renderer, blogToHtml)
 
-{-
-feedFromPosts :: [Post] -> Handler RepRss
-feedFromPosts posts = do
-    entries <- mapM postToRssEntry posts
-
-    rssFeed Feed
-        { feedAuthor      = "Patrick Brisbin"
-        , feedTitle       = "pbrisbin dot com"
-        , feedDescription = "New posts on pbrisbin dot com"
-        , feedLanguage    = "en-us"
-        , feedLinkSelf    = FeedR
-        , feedLinkHome    = RootR
-        , feedUpdated     = postDate $ head posts
-        , feedEntries     = entries
-        }
-
--- | Note: does not gracefully handle a post with no pandoc or in-db
---   content
-postToRssEntry :: Post -> Handler (FeedEntry (Route App))
-postToRssEntry post = do
-    markdown <- liftIO $ postMarkdown post
-
-    return FeedEntry
-        { feedEntryLink    = PostR $ postSlug post
-        , feedEntryUpdated = postDate  post
-        , feedEntryTitle   = postTitle post
-        , feedEntryContent = markdownToHtml markdown
-        }
--}
-
 toEntry :: Renderer -> Blog -> IO (YFeed.FeedEntry (Route App))
 toEntry renderer blog = do
     html <- blogToHtml renderer blog
