@@ -1,0 +1,84 @@
+<p>このブログに RSS を付けました。
+
+<p>
+  このブログは Haskell の Web フレームワークである Yesod 上で動かしています。
+  それ自体の話は今後書くとして、今回は RSS の設置について書きます。
+
+<p>
+  Yesod 上で設置できる RSS は <a href="http://hackage.haskell.org/package/yesod-newsfeed">yesod-newsfeed</a> というのがあるようです。
+
+<p>
+  yesod-newsfeed は Atom と RSS のどちらも対応しています。
+  Atom だけ配信するなら <code>Yesod.AtomFeed</code> を、RSS だけ配信するなら <code>Yesod.RssFeed</code> を、両方配信するなら <code>Yesod.Feed</code> を使います。
+
+<p>フィードを配信するのは簡単です。<code>Feed</code> 型のデータを作って、それをそれぞれの方法で配信するだけです。
+
+<pre .prettyprint .linenums>
+  <code>
+    \import qualified Yesod                                  as Y
+    \import qualified Yesod.Feed                             as YFeed
+    \
+    \import Foundatin (Route, App)
+    \
+    \data Blog = ... -- 適当なブログの定義があるとする
+    \
+    \recentBlogs :: [Blog]
+    \recentBlogs = undefined -- 最新のブログ何件か取得する
+    \
+    \toFeed :: [Blog] -&gt; IO (YFeed.Feed (Route App))
+    \toFeed blogs = undefined -- 適当に Feed を作る
+    \
+    \getFeedR :: Handler Y.TypedContent
+    \getFeedR = do
+    \    feed &lt;- Y.liftIO $ toFeed recentBlogs
+    \    YFeed.newsFeed feed -- Atom と RSS の両方に対応した Feed を返す
+
+<p><code>newsFeed</code> は、Accept ヘッダーを見て、<code>application/atom+xml</code> なら Atom のフィードを、<code>application/rss+xml</code> なら RSS のフィードを返します。
+
+<p>
+  実際のところ、一番面倒なのは <code>Feed</code> を作る部分です。
+  これは以下のようになっています。
+
+<pre .prettyprint .linenums>
+  <code>
+    \blogToHtml :: Blog -&gt; Y.Html
+    \blogToHtml = undefined
+    \
+    \toEntry :: Blog -&gt; IO (YFeed.FeedEntry (Route App))
+    \toEntry blog = do
+    \    html &lt;- blogToHtml blog
+    \    return YFeed.FeedEntry
+    \        { YFeed.feedEntryLink    = UrlR $ blogURL blog
+    \        , YFeed.feedEntryUpdated = blogDateTime blog
+    \        , YFeed.feedEntryTitle   = blogTitle blog
+    \        , YFeed.feedEntryContent = html
+    \        }
+    \
+    \toFeed :: [Blog] -&gt; IO (YFeed.Feed (Route App))
+    \toFeed blogs = do
+    \    entries &lt;- mapM toEntry blogs
+    \    return YFeed.Feed
+    \        { YFeed.feedAuthor      = "melpon"
+    \        , YFeed.feedTitle       = "Blog :: Licensed by Meatware"
+    \        , YFeed.feedDescription = "blog by melpon"
+    \        , YFeed.feedLanguage    = "ja"
+    \        , YFeed.feedLinkSelf    = FeedR
+    \        , YFeed.feedLinkHome    = RootR
+    \        , YFeed.feedUpdated     = YFeed.feedEntryUpdated $ head entries
+    \        , YFeed.feedEntries     = entries
+    \        }
+
+<p>
+  結構埋める項目があって面倒です。
+  ただ、結構当たり前のデータを入れてるだけなので、難しい訳ではないと思います。
+
+<p>これでフィードを配信できるようになったので、あとはブログページに RSS を用意するだけです。
+<p>hamlet ファイルに直接書いてもいいですが、ここは Haskell のコードで書きましょう。
+
+<pre .prettyprint .linenums>
+  <code>
+    Y.toWidgetHead [hamlet|&lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href=&#x40;{FeedR}&gt;|]
+
+<p>
+  これを Blog ページへのリクエストを処理するハンドラに書けば完成です。
+  読者がこの Blog ページをフィードリーダーに登録すれば、フィードリーダーが RSS を見つけてくれます。

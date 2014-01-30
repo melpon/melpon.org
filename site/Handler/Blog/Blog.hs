@@ -46,6 +46,12 @@ blogs =
       "cocos2dx-create-func"
       "Cocos2d-x の CREATE_FUNC をマシな実装にした"
       "templates/blog/cocos2dx-create-func.hamlet"
+  , Blog
+      (strptime' "2014-01-30 23:45:00")
+      ["Haskell", "Yesod"]
+      "put-rss"
+      "RSS を配信しました"
+      "templates/blog/put-rss.hamlet"
   ]
 
 recentBlogs :: [Blog]
