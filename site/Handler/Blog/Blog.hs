@@ -54,11 +54,14 @@ blogs =
       "templates/blog/put-rss.hamlet"
   ]
 
+sortBlog :: [Blog] -> [Blog]
+sortBlog = List.sortBy ((flip compare) `Func.on` blogDateTime)
+
 recentBlogs :: [Blog]
-recentBlogs = take 5 $ List.sortBy ((flip compare) `Func.on` blogDateTime) blogs
+recentBlogs = take 5 $ sortBlog blogs
 
 taggedBlogs :: T.Text -> [Blog]
-taggedBlogs tag = take 5 $ filter (any (tag==) . blogTags) blogs
+taggedBlogs tag = take 5 $ sortBlog $ filter (any (tag==) . blogTags) blogs
 
 urlBlog :: T.Text -> Blog
 urlBlog url = maybe (error "url Not Found") id $ List.find ((url==) . blogURL) blogs
