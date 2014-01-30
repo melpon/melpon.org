@@ -11,7 +11,7 @@
 
 <p>現在の<a href="https://github.com/cocos2d/cocos2d-x/blob/28812755bebb959561e4c91b3172c645da2a6d1c/cocos/base/CCVector.h">最新版のソース</a>では、以下のようになっています。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \template&lt;class T&gt;
     \class Vector {
@@ -20,7 +20,7 @@
     \  std::vector&lt;T&gt; _data;
     \};
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \Vector&lt;Sprite*&gt; v;
     \v.pushBack(Sprite::create(...));
@@ -33,7 +33,7 @@
 
 <p>まず、以下のようなコードが書けません。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \template&lt;class T&gt;
     \class Vector {
@@ -45,7 +45,7 @@
 
 <p>これは、以下のようなコードを書くと簡単にリークしてしまうからです。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \Vector&lt;Sprite*&gt; v;
     \v.pushBack(Sprite::create(...));
@@ -54,7 +54,7 @@
 
 <p>もう一点、iterator に対して代入ができません。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \Vector&lt;Sprite*&gt; v;
     \...
@@ -65,7 +65,7 @@
 
 <p>これらの問題を解決する一番簡単な方法は、<code><a href="http://www.kmonos.net/alang/boost/classes/intrusive_ptr.html">intrusive_ptr</a></code> のようなクラスを使う（あるいは自作する）ことです。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \template&lt;class T&gt;
     \class Vector {

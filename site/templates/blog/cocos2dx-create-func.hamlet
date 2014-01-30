@@ -1,7 +1,7 @@
 
 <p>Cocos2d-x には <code>CREATE_FUNC</code> というマクロがあります。これは以下の実装になっています。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \#define CREATE_FUNC(__TYPE__) \
     \static __TYPE__* create() \
@@ -22,7 +22,7 @@
 
 <p>これを以下の様に使うことで、<code>autorelease</code> 済みの <code>TestLayer</code> オブジェクトを生成できます。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \class TestLayer : public cocos2d::Layer {
     \public:
@@ -37,7 +37,7 @@
 
 <p>もし値を渡したい場合、<code>CREATE_FUNC</code> マクロがやっていることを手動で書く必要があります。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \class TestLayer : public cocos2d::Layer {
     \public:
@@ -60,7 +60,7 @@
 
 <p>これを解決するため、以下のクラスを作りました。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \#include&lt;utility&gt;
     \
@@ -83,7 +83,7 @@
 
 <p>これは以下の様に利用します。
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     \class TestLayer : public cocos2d::Layer, create_func&lt;TestLayer&gt; {
     \public:
@@ -92,7 +92,7 @@
     \    using create_func::create;
     \};
 
-<pre>
+<pre .prettyprint .linenums>
   <code>
     auto p = TestLayer::create(10); // init(10) が呼ばれる
     auto p2 = TestLayer::create(10, "aaa"); // init(10, "aaa") が呼ばれる
