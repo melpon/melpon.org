@@ -56,7 +56,7 @@ blogs =
       (strptime' "2014-02-02 04:42:00")
       ["iOS", "In-App Purchase"]
       "ios-consumable-in-app-purchase"
-      "iOS で消費型アイテムのアプリ内課金する際の注意点"
+      "iOSで消費型プロダクトのアプリ内課金を実装する際の注意点"
       "templates/blog/ios-consumable-in-app-purchase.hamlet"
   ]
 
