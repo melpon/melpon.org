@@ -52,6 +52,12 @@ blogs =
       "put-rss"
       "RSS を配信しました"
       "templates/blog/put-rss.hamlet"
+  , Blog
+      (strptime' "2014-02-02 04:42:00")
+      ["iOS", "In-App Purchase"]
+      "ios-consumable-in-app-purchase"
+      "iOS で消費型アイテムのアプリ内課金する際の注意点"
+      "templates/blog/ios-consumable-in-app-purchase.hamlet"
   ]
 
 sortBlog :: [Blog] -> [Blog]

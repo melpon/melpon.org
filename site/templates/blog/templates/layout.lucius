@@ -56,8 +56,19 @@
   p {
     text-indent: 1em;
   }
-  ul {
+  ul,ol {
     padding-left: 1em;
+  }
+  h2 {
+    font-size: 30px;
+    padding-left: 10px;
+    border-left: 8px solid #D7EEF5;
+    border-bottom: 3px solid #D7EEF5;
+  }
+  h3 {
+    font-size: 20px;
+    padding-left: 5px;
+    border-bottom: 2px solid #D7EEF5;
   }
 }
 
