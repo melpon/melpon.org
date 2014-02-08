@@ -3,4 +3,7 @@
   $forall tag <- tags
     <li><a href=@{BTagR tag}>#{tag}</a>
   <li .nav-header>RSS
-    <li><a href="@{BFeedR}" class="feed">RSS購読</a>
+  <li><a href="@{BFeedR}" class="feed">RSS購読</a>
+  <li .nav-header>記事一覧
+  $forall blog <- sortedBlogs
+    <li><a href="@{BUrlR $ blogURL blog}">#{blogTitle blog}</a>

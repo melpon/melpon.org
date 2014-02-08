@@ -4,6 +4,8 @@ module Handler.Blog.Blog
   , taggedBlogs
   , urlBlog
   , allTags
+  , allBlogs
+  , sortedBlogs
   ) where
 
 import Import
@@ -26,8 +28,8 @@ data Blog = Blog
 strptime' :: String -> DateTime
 strptime' string = strptime "%Y-%m-%d %H:%M:%S" string
 
-blogs :: [Blog]
-blogs =
+allBlogs :: [Blog]
+allBlogs =
   [ Blog
       (strptime' "2014-01-25 03:28:00")
       ["Haskell", "Yesod"]
@@ -63,14 +65,17 @@ blogs =
 sortBlog :: [Blog] -> [Blog]
 sortBlog = List.sortBy ((flip compare) `Func.on` blogDateTime)
 
+sortedBlogs :: [Blog]
+sortedBlogs = sortBlog allBlogs
+
 recentBlogs :: [Blog]
-recentBlogs = take 5 $ sortBlog blogs
+recentBlogs = take 5 $ sortBlog allBlogs
 
 taggedBlogs :: T.Text -> [Blog]
-taggedBlogs tag = take 5 $ sortBlog $ filter (any (tag==) . blogTags) blogs
+taggedBlogs tag = take 5 $ sortBlog $ filter (any (tag==) . blogTags) allBlogs
 
 urlBlog :: T.Text -> Blog
-urlBlog url = maybe (error "url Not Found") id $ List.find ((url==) . blogURL) blogs
+urlBlog url = maybe (error "url Not Found") id $ List.find ((url==) . blogURL) allBlogs
 
 allTags :: [T.Text]
-allTags = List.nub $ concat $ map blogTags blogs
+allTags = List.nub $ concat $ map blogTags allBlogs

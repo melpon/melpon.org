@@ -16,7 +16,7 @@ import Yesod (hamlet)
 import Foundation (Widget, App, Route(BTagR, BUrlR, BFeedR, StaticR))
 import Settings (widgetFile)
 import Settings.StaticFiles (blog_feed_icon_14x14_png)
-import Handler.Blog.Blog (Blog(..), allTags)
+import Handler.Blog.Blog (Blog(..), allTags, sortedBlogs)
 import Modules.DateTime (strftime)
 
 type Renderer = Route App -> [(T.Text, T.Text)] -> T.Text
