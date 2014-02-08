@@ -1,6 +1,8 @@
 
-.container-fluid {
-  margin-right: 60px;
+@media screen and (min-width: 979px) {
+  .container-fluid {
+    margin-right: 60px;
+  }
 }
 
 .article {
