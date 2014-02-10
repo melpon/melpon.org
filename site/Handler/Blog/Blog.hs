@@ -60,6 +60,12 @@ allBlogs =
       "ios-consumable-in-app-purchase"
       "iOSで消費型プロダクトのアプリ内課金を実装する際の注意点"
       "templates/blog/ios-consumable-in-app-purchase.hamlet"
+  , Blog
+      (strptime' "2014-02-10 18:56:00")
+      ["Haskell", "Yesod"]
+      "haskell-import-qualified"
+      "Haskellでのimportの使い方"
+      "templates/blog/haskell-import-qualified.hamlet"
   ]
 
 sortBlog :: [Blog] -> [Blog]

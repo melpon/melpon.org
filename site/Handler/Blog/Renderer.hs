@@ -67,6 +67,7 @@ renderBlogs :: Widget -> [Blog] -> Widget
 renderBlogs header blogs' = do
     Y.toWidgetHead [hamlet|<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href=@{BFeedR}>|]
     Y.addScriptRemote "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"
+    Y.addScriptRemote "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/lang-hs.min.js"
 
     renderer <- Y.getUrlRenderParams
     blogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs'

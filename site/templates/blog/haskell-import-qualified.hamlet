@@ -1,0 +1,249 @@
+<h2>修飾名を付ける
+
+<p>基本的に、Haskell でモジュールを import する際には、ちゃんと修飾名を付けるべきです。
+
+<p>これは名前の衝突を防ぐためです。
+
+<p>
+  例えば以下のコードはコンパイルエラーになります。
+  <code>putStrLn</code> が <code>Data.Text</code> と <code>Data.ByteString</code> の両方に存在しているからです。
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \import Data.Text
+    \import Data.ByteString
+    \
+    \main = putStrLn ""
+
+<p>
+  これが衝突しなかったら自由に import していいのかというと、これもやめておいた方がいいでしょう。
+
+<p>というのも、依存パッケージをバージョンアップした時に関数が増えた場合、その関数が他のパッケージの名前を重複する場合があるからです。
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \module Module.Oreore (oreore) where
+    \oreore = undefined
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \module Module.Moremore (moremore) where
+    \moremore = undefined
+
+<p>というモジュールがあり、以下の様に利用していたとします。
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \import Module.Oreore
+    \import Module.Moremore
+    \
+    \main = oreore
+
+<p>この後、<code>Module.Moremore</code> モジュールが以下の様に更新されてしまうと…。
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \module Module.Moremore (moremore, oreore) where
+    \moremore = undefined
+    \oreore = undefined
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \import Module.Oreore
+    \import Module.Moremore
+    \
+    \main = oreore -- コンパイルエラー！
+
+<p><code>oreore</code> という名前が重複してしまい、コンパイルエラーになります。
+
+<p>
+  この現象のひどいところは、元のソースコードを一切行っていないにも関わらず発生する可能性があることです。
+  依存するパッケージが、何気ないつもりで関数を一個追加しただけで、コンパイルが通らなくなる可能性があるのです。
+
+<p>このような悲劇を防止するためにも、修飾名を付けるか、あるいは関数名を明示的に指定するべきです。
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \import qualified Module.Oreore as O
+    \import qualified Module.Moremore as M
+    \
+    \main = O.oreore
+    \
+    \-- あるいは以下の様にする
+    \import Module.Oreore (oreore)
+    \import Module.Moremore (moremore)
+    \
+    \main = oreore
+
+<h2>修飾名のルール
+
+<p>
+  自分が作っている Yesod のプロジェクト（例えば <a href="https://github.com/melpon/melpon.org">melpon.org</a>）では、可能な限り修飾名を統一しています。
+  これは、ファイルによって異なる修飾名にされると、非常に読みにくいからです。
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \import qualified Data.Text as T
+    \import qualified Control.Monad as M
+
+<pre .prettyprint .lang-hs>
+  <code>
+    \import qualified Data.Text as Text
+    \import qualified Data.Map as M
+
+<p>
+  <code>Data.Text</code> の修飾名が <code>T</code> だったり <code>Text</code> だったりと、統一されていません。
+  また、<code>M</code> という修飾名が <code>Data.Map</code> だったり <code>Control.Monad</code> だったりと統一されていません。
+
+<p>
+  ファイルによって修飾名を変えられたコードを読むのは非常に大変です。
+  これはプロジェクト全体で統一してやるべきです。
+
+<p>
+  自分の場合は、以下の様な ImportRule.hs を用意し、それを目的のファイルにコピペしています。
+
+<pre .prettyprint .lang-hs .linenums>
+  <code>
+    \{-# OPTIONS_GHC -w #-}
+    \module ImportRule () where
+    \
+    \import qualified Control.Monad                          as Monad
+    \import qualified Control.Monad.Logger                   as MonadLogger
+    \import qualified Control.Applicative                    as Applicative
+    \import qualified Control.Exception                      as Exc
+    \import qualified Control.Concurrent                     as Concurrent
+    \import qualified Control.Concurrent.Chan                as Chan
+    \
+    \import qualified Data.Aeson                             as Aeson
+    \import qualified Data.Aeson.Types                       as AesonTypes
+    \import qualified Data.Bits                              as Bits
+    \import qualified Data.ByteString                        as BS
+    \import qualified Data.ByteString.Char8                  as BSC
+    \import qualified Data.ByteString.Lazy                   as BSL
+    \import qualified Data.Char                              as Char
+    \import qualified Data.Conduit                           as Conduit
+    \import qualified Data.Conduit.Binary                    as ConduitB
+    \import qualified Data.Conduit.List                      as ConduitL
+    \import qualified Data.Default                           as Default
+    \import qualified Data.Function                          as Func
+    \import qualified Data.IORef                             as IORef
+    \import qualified Data.List                              as List
+    \import qualified Data.Maybe                             as Maybe
+    \import qualified Data.Text                              as T
+    \import qualified Data.Text.IO                           as TIO
+    \import qualified Data.Text.Encoding                     as TE
+    \import qualified Data.Time                              as Time
+    \import qualified Data.Word                              as Word
+    \import qualified Data.Yaml                              as Yaml
+    \
+    \import qualified Language.Haskell.TH                    as TH
+    \import qualified Language.Haskell.TH.Syntax             as THS
+    \
+    \import qualified Network.HTTP.Conduit                   as HConduit
+    \import qualified Network.Wai.Logger                     as WaiLogger
+    \import qualified Network.Wai.Middleware.RequestLogger   as RequestLogger
+    \import qualified Network.Wai.Handler.Warp               as Warp
+    \
+    \import qualified System.Directory                       as Directory
+    \import qualified System.Exit                            as Exit
+    \import qualified System.IO                              as I
+    \import qualified System.Locale                          as Locale
+    \import qualified System.Log.FastLogger                  as FastLogger
+    \import qualified System.Mem                             as Mem
+    \import qualified System.Environment                     as Environment
+    \
+    \import qualified Text.Hamlet                            as Hamlet
+    \import qualified Text.Hamlet.RT                         as HamletRT
+    \import qualified Text.Jasmine                           as Jasmine
+    \import qualified Text.Shakespeare.Text                  as Text
+    \
+    \import qualified Yesod                                  as Y
+    \import qualified Yesod.AtomFeed                         as YAtomFeed
+    \import qualified Yesod.Core.Types                       as YCoreTypes
+    \import qualified Yesod.Default.Config                   as YDConfig
+    \import qualified Yesod.Default.Handlers                 as YDHandlers
+    \import qualified Yesod.Default.Main                     as YDMain
+    \import qualified Yesod.Default.Util                     as YDUtil
+    \import qualified Yesod.Feed                             as YFeed
+    \import qualified Yesod.RssFeed                          as YRssFeed
+    \import qualified Yesod.Static                           as YStatic
+
+<p>
+  これは別に .hs ファイルにする必要は無く、単なるテキストファイルに書いておいても構いません。
+  .hs にしているのは、vim でシンタックスハイライトした表示にするのが楽だからというだけです。
+
+<p>
+  ひとまず、こうすることで、プロジェクト全体で統一した名前になり、コードが読みやすくなりました。
+
+<p>例えば以下のコードは Yesod が自動生成したコードです。
+
+<pre .prettyprint .lang-hs .linenums>
+  <code>
+    \import Yesod
+    \import Yesod.Default.Config
+    \import Yesod.Core.Types
+    \import Network.Wai.Middleware.RequestLogger
+    \    ( mkRequestLogger, outputFormat, OutputFormat (..), IPAddrSource (..), destination
+    \    )
+    \import qualified Network.Wai.Middleware.RequestLogger as RequestLogger
+    \import Data.Default
+    \
+    \import Foundation
+    \import Settings
+    \import Settings.Development
+    \
+    \makeApplication :: AppConfig DefaultEnv Extra -&gt; IO Application
+    \makeApplication conf = do
+    \    foundation &lt;- makeFoundation conf
+    \
+    \    -- Initialize the logging middleware
+    \    logWare &lt;- mkRequestLogger def
+    \        { outputFormat =
+    \            if development
+    \                then Detailed True
+    \                else Apache FromSocket
+    \        , destination = RequestLogger.Logger $ loggerSet $ appLogger foundation
+    \        }
+    \
+    \    -- Create the WAI application and apply middlewares
+    \    app &lt;- toWaiAppPlain foundation
+    \    return $ logWare app
+
+<p>これが、ルールに従って書くと、以下の様になります。
+
+<pre .prettyprint .lang-hs .linenums>
+  <code>
+    \import qualified Yesod                                  as Y
+    \import qualified Yesod.Default.Config                   as YDConfig
+    \import qualified Yesod.Core.Types                       as YCoreTypes
+    \import qualified Network.Wai.Middleware.RequestLogger   as RequestLogger
+    \import qualified Data.Default                           as Default
+    \
+    \import Foundation (App(appLogger))
+    \import Settings (Extra)
+    \import Settings.Development (development)
+    \
+    \makeApplication :: YDConfig.AppConfig YDConfig.DefaultEnv Extra -&gt; IO Y.Application
+    \makeApplication conf = do
+    \    foundation &lt;- makeFoundation conf
+    \
+    \    -- Initialize the logging middleware
+    \    logWare &lt;- RequestLogger.mkRequestLogger Default.def
+    \        { RequestLogger.outputFormat =
+    \            if development
+    \                then RequestLogger.Detailed True
+    \                else RequestLogger.Apache RequestLogger.FromSocket
+    \        , RequestLogger.destination = RequestLogger.Logger $ YCoreTypes.loggerSet $ appLogger foundation
+    \        }
+    \
+    \    -- Create the WAI application and apply middlewares
+    \    app &lt;- Y.toWaiAppPlain foundation
+    \    return $ logWare app
+
+<p>
+  自分としては、これで大分読みやすくなったかなと思います。
+
+<p>
+  デメリットは、新しいモジュールを追加する場合、ImportRule.hs に記述してから目的のファイルに記述することになり、手間が増えることです。
+  正直、これぐらい Haskell の機能として用意して欲しいところですが…。
+  無いものは仕方がないので、ひとまずこの方法でやっています。
