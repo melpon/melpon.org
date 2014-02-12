@@ -39,5 +39,6 @@ toFeed renderer blogs = do
 getBFeedR :: Handler Y.TypedContent
 getBFeedR = do
     renderer <- Y.getUrlRenderParams
-    feed <- Y.liftIO $ toFeed renderer recentBlogs
+    let (blogs, _) = recentBlogs
+    feed <- Y.liftIO $ toFeed renderer blogs
     YFeed.newsFeed feed

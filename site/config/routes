@@ -9,6 +9,7 @@
 /blog.xml BFeedR GET
 /blog/#T.Text BUrlR GET
 /blog/tag/#T.Text BTagR GET
+/blog/page/#T.Text BPageR GET
 /pub PRootR GET
 /pub/wandbox PWandboxR GET
 /pub/kabukiza-wandbox-lt PKabukizaWandboxLtR GET

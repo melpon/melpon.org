@@ -6,6 +6,8 @@ module Handler.Blog.Blog
   , allTags
   , allBlogs
   , sortedBlogs
+  , urlBlogNextPrev
+  , recentBlogsNextPrev
   ) where
 
 import Import
@@ -74,8 +76,16 @@ sortBlog = List.sortBy ((flip compare) `Func.on` blogDateTime)
 sortedBlogs :: [Blog]
 sortedBlogs = sortBlog allBlogs
 
-recentBlogs :: [Blog]
-recentBlogs = take 5 $ sortBlog allBlogs
+takeInitLast :: Int -> [a] -> ([a], Maybe (a, Int))
+takeInitLast n xs =
+    let (ys, zs) = splitAt n xs
+    in
+        case zs of
+            []     -> (ys, Nothing)
+            (a:_) -> (ys, Just (a, length $ take n zs))
+
+recentBlogs :: ([Blog], Maybe (Blog, Int))
+recentBlogs = takeInitLast 5 sortedBlogs
 
 taggedBlogs :: T.Text -> [Blog]
 taggedBlogs tag = take 5 $ sortBlog $ filter (any (tag==) . blogTags) allBlogs
@@ -85,3 +95,34 @@ urlBlog url = maybe (error "url Not Found") id $ List.find ((url==) . blogURL) a
 
 allTags :: [T.Text]
 allTags = List.nub $ concat $ map blogTags allBlogs
+
+findPrevNext :: (a -> Bool) -> [a] -> Maybe (a, Maybe a, Maybe a)
+findPrevNext p xs = go xs Nothing
+  where
+    go (x:next:_) prev | p x = Just (x, prev, Just next)
+    go (x:_)      prev | p x = Just (x, prev, Nothing)
+    go (x:ys)     _          = go ys (Just x)
+    go []         _          = Nothing
+
+-- return a specified url blog, a preview blog and a next blog.
+urlBlogNextPrev :: T.Text -> (Blog, Maybe Blog, Maybe Blog)
+urlBlogNextPrev url =
+    maybe (error "url Not Found") id
+        $ findPrevNext ((url==) . blogURL) sortedBlogs
+
+findListPrevNext :: Int -> (a -> Bool) -> [a] -> Maybe ([a], Maybe (a, Int), Maybe (a, Int))
+findListPrevNext n p xs =
+    case List.findIndex p xs of
+        Nothing      -> Nothing
+        (Just index) ->
+            let (blogs, next) = takeInitLast n $ drop index xs
+            in
+                case index of
+                    0             -> Just (blogs, Nothing, next)
+                    _ | index < n -> Just (blogs, Just (head xs, index), next)
+                    _             -> Just (blogs, Just (head $ drop (index-n) xs, n), next)
+
+recentBlogsNextPrev :: T.Text -> ([Blog], Maybe (Blog, Int), Maybe (Blog, Int))
+recentBlogsNextPrev url =
+    maybe (error "url Not Found") id
+        $ findListPrevNext 5 ((url==) . blogURL) sortedBlogs

@@ -6,14 +6,20 @@ import Import
 import qualified Yesod                                  as Y
 import qualified Data.Text                              as T
 
-import Foundation (Handler)
-import Handler.Blog.Blog (urlBlog, Blog(blogTitle))
-import Handler.Blog.Renderer (renderBlogs)
+import Foundation (Handler, Route(BUrlR))
+import Handler.Blog.Blog (urlBlogNextPrev, Blog(blogTitle, blogURL))
+import Handler.Blog.Renderer (renderBlogsGuide)
 import Handler.Header (getSubHeader)
 
 getBUrlR :: T.Text -> Handler Y.Html
 getBUrlR url = do
     Y.defaultLayout $ do
-        let blog = urlBlog url
+        let (blog, next, prev) = urlBlogNextPrev url
+        let mNext = (,)
+                        <$> (blogTitle <$> next)
+                        <*> ((BUrlR . blogURL) <$> next)
+        let mPrev = (,)
+                        <$> (blogTitle <$> prev)
+                        <*> ((BUrlR . blogURL) <$> prev)
         let header = getSubHeader "blog" $ T.unpack $ blogTitle blog
-        renderBlogs header $ [blog]
+        renderBlogsGuide header [blog] mNext mPrev

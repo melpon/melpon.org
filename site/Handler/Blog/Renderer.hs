@@ -2,6 +2,7 @@ module Handler.Blog.Renderer
   ( Renderer
   , blogToHtml
   , renderBlogs
+  , renderBlogsGuide
   ) where
 
 import Import
@@ -63,13 +64,30 @@ getSidebar = do
     let tags = allTags
     $(widgetFile "blog/templates/sidebar")
 
+makeGuide :: Maybe (T.Text, Route App) -> Maybe (T.Text, Route App) -> Widget
+makeGuide mNext mPrev = do
+    Y.toWidget [hamlet|
+      <ul .pager>
+        $maybe (title, route) <- mNext
+          <li .previous>
+            <a href="@{route}">&larr; #{title}
+        $maybe (title, route) <- mPrev
+          <li .next>
+            <a href="@{route}">#{title} &rarr;
+    |]
+
 renderBlogs :: Widget -> [Blog] -> Widget
-renderBlogs header blogs' = do
+renderBlogs header blogs' =
+    renderBlogsGuide header blogs' Nothing Nothing
+
+renderBlogsGuide :: Widget -> [Blog] -> Maybe (T.Text, Route App) -> Maybe (T.Text, Route App) -> Widget
+renderBlogsGuide header blogs' next prev = do
     Y.toWidgetHead [hamlet|<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href=@{BFeedR}>|]
     Y.addScriptRemote "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"
     Y.addScriptRemote "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/lang-hs.min.js"
 
     renderer <- Y.getUrlRenderParams
     blogs <- Y.liftIO $ mapM (blogToHtml renderer) blogs'
+    let guide = makeGuide next prev
     let blogData = $(widgetFile "blog/templates/blog-list")
     $(widgetFile "blog/templates/layout")

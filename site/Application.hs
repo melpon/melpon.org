@@ -28,7 +28,7 @@ import Settings.Development (development)
 -- Don't forget to add new modules to your cabal file!
 import Handler.Home (getHomeR)
 import Handler.Aboutme (getAboutmeR)
-import Handler.Blog.Root (getBRootR)
+import Handler.Blog.Root (getBRootR, getBPageR)
 import Handler.Blog.Tag (getBTagR)
 import Handler.Blog.Url (getBUrlR)
 import Handler.Blog.Feed (getBFeedR)

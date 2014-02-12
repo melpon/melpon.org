@@ -1,2 +1,4 @@
+^{guide}
 $forall blog <- blogs
   #{blog}
+^{guide}
