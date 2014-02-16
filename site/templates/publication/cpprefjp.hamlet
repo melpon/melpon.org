@@ -1,0 +1,98 @@
+<slide .title-slide .segue .nobackground>
+  <hgroup .auto-fadein>
+    <h1>cpprefjpを支える技術
+    <p>@cpp_akira, @melponn
+
+<slide>
+  <hgroup>
+    <h2>cpprefjpの概要
+  <article>
+    <ul>
+      <li>標準C++のリファレンスサイト
+      <li>Google Sitesを使ってる
+        <ul>
+          <li>Google製のWiki。
+      <li>2014年3月現在で2,000ページ超。
+
+<slide>
+  <hgroup>
+    <h2>Google Sitesはけっこう大変だった。
+  <article>
+    <ul>
+      <li>Google Sitesでリファレンスを書くのは、けっこう大変だった。
+        <ul>
+          <li>グラフィカルな操作は、作業者が統一的な書き方をするには困難だった。
+          <li>マウスでポチポチ押してコードのフォントを直していくのがしんどかった。
+
+<slide>
+  <hgroup>
+    <h2>作業環境をGitHubに移行した
+  <article>
+    <ul>
+      <li>プレーンテキストで書きたい！
+        <ul>
+          <li>書き方の統一を容易にするため
+          <li>バージョン管理しやすくするため
+    <p>→ MarkdownをGitHubリポジトリで管理することにした。
+
+<slide>
+  <hgroup>
+    <h2>移行は作業環境のみ
+  <article>
+    <ul>
+      <li>Google Sitesはそのままにした。
+      <li>GitHubで書いたMarkdownを、自動的にHTMLに変換してGoogle Sitesに同期する仕組みを作った。
+
+<slide>
+  <hgroup>
+    <h2>移行ツール
+  <article>
+    <pre>
+      こんな図にしたい。
+      
+      
+      高橋晶 担当
+      
+      Google Sites
+      
+      ↓ Google Apps Script
+      
+      HTMLをダウンロード
+      
+      ↓ Ruby
+      
+      HTMLをMarkdownに変換
+      
+      ↓ Git
+      
+      GitHubにコミット
+      
+      
+      めるぽん 担当
+      
+      GitHub
+      
+      ↓ Python
+      
+      Markdownを拾ってきてHTMLに変換
+      
+      ↓ Google Apps Script
+      
+      Google Sitesに適用
+
+<slide>
+  <hgroup>
+    <h2>Google SitesからHTMLをダウンロードする
+  <article>
+    <ul>
+      <li>Google Apps ScriptというJavaScriptの方言を使った
+      <li>Google SitesのAPIは、1日に呼べる回数が決まっているので、何回かに分けてダウンロードした。
+
+<slide>
+  <hgroup>
+    <h2>HTMLをMarkdownに変換
+  <article>
+    <ul>
+      <li>Ruby 1.9を使って、HTMLを正規表現でがんばってMarkdownに変換した。
+      <li>完全には自動変換できなかったので、その後全部のリファレンスを手動で手直しした。
+      <li>なのでこのツールは使い捨て。

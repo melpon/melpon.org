@@ -14,6 +14,7 @@
 /pub/wandbox PWandboxR GET
 /pub/kabukiza-wandbox-lt PKabukizaWandboxLtR GET
 -- /pub/cocos2dx3-lt PCocos2dx3LtR GET
+/pub/cpprefjp PCpprefjpR GET
 /yesodbookjp YRootR GET
 /yesodbookjp/introduction YIntroductionR GET
 /yesodbookjp/shakespeare YShakespeareR GET
