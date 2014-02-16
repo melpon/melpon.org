@@ -9,6 +9,8 @@ import Settings (widgetFile)
 import Foundation (Handler, Route(StaticR))
 import Settings.StaticFiles
   ( publication_io_2012_slides_js_require_1_0_8_min_js
+  , publication_img_cpprefjp_to_github_png
+  , publication_img_github_to_cpprefjp_png
   )
 import Handler.Publication.Slide (defaultLayout, withDefaultIO)
 

@@ -46,40 +46,15 @@
 
 <slide>
   <hgroup>
-    <h2>移行ツール
+    <h2>移行ツール（初回のみ）
   <article>
-    <pre>
-      こんな図にしたい。
-      
-      
-      高橋晶 担当
-      
-      Google Sites
-      
-      ↓ Google Apps Script
-      
-      HTMLをダウンロード
-      
-      ↓ Ruby
-      
-      HTMLをMarkdownに変換
-      
-      ↓ Git
-      
-      GitHubにコミット
-      
-      
-      めるぽん 担当
-      
-      GitHub
-      
-      ↓ Python
-      
-      Markdownを拾ってきてHTMLに変換
-      
-      ↓ Google Apps Script
-      
-      Google Sitesに適用
+    <img src=@{StaticR publication_img_cpprefjp_to_github_png} alt="cpprefjpからMarkdownへ変換">
+
+<slide>
+  <hgroup>
+    <h2>移行ツール（運用中）
+  <article>
+    <img src=@{StaticR publication_img_github_to_cpprefjp_png} alt="Markdownからcpprefjpへ変換">
 
 <slide>
   <hgroup>
