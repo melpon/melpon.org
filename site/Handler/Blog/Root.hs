@@ -11,7 +11,7 @@ import Foundation (Handler, Route(BPageR))
 import Handler.Blog.Blog
     ( recentBlogs
     , recentBlogsNextPrev
-    , Blog(blogTitle, blogURL)
+    , Blog(blogURL)
     )
 import Handler.Blog.Renderer (renderBlogsGuide)
 import Handler.Header (getHeader)
