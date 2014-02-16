@@ -3,4 +3,17 @@ slides > slide {
   -moz-transition: all 200ms ease-in-out;
   -o-transition: all 200ms ease-in-out;
   transition: all 200ms ease-in-out;
+
+  .build > * {
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+  }
+
+  ul > li, p {
+    font-size: 40px;
+    line-height: 55px;
+    margin-bottom: 0.8em;
+  }
 }

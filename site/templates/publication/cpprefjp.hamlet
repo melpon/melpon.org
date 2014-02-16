@@ -33,7 +33,8 @@
         <ul>
           <li>書き方の統一を容易にするため
           <li>バージョン管理しやすくするため
-    <p>→ MarkdownをGitHubリポジトリで管理することにした。
+    <ul .build>
+      <li>→ MarkdownをGitHubリポジトリで管理することにした。
 
 <slide>
   <hgroup>
