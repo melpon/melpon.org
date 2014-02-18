@@ -17,3 +17,8 @@ slides > slide {
     margin-bottom: 0.8em;
   }
 }
+
+img.large-image {
+  width: 100%;
+  height: 100%;
+}

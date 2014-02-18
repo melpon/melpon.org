@@ -3,9 +3,21 @@
     <h1>cpprefjpを支える技術
     <p>@cpp_akira, @melponn
 
+^{index Nothing}
+
+^{index (Just "overview")}
+
 <slide>
   <hgroup>
-    <h2>cpprefjpの概要
+    <h2>^{title "overview"}
+  <article>
+    <ul>
+      <li>こんなページです
+    <iframe data-src="https://sites.google.com/site/cpprefjp/" sandbox="allow-same-origin"></iframe>
+
+<slide>
+  <hgroup>
+    <h2>^{title "overview"}
   <article>
     <ul>
       <li>標準C++のリファレンスサイト
@@ -16,13 +28,32 @@
 
 <slide>
   <hgroup>
-    <h2>Google Sitesはけっこう大変だった。
+    <h2>^{title "overview"}
+  <article>
+    <ul>
+      <li>現在、ページを作成・編集するためにGoogle Sitesを直接叩いているわけではない。
+      <li>cpprefjpの裏側がどうなっているのかについて話します。
+
+^{index (Just "problem")}
+
+<slide>
+  <hgroup>
+    <h2>^{title "problem"}
+  <article>
+    <img src=@{StaticR publication_img_cpprefjp_ui_png} alt="cpprefjpのUI">
+
+<slide>
+  <hgroup>
+    <h2>^{title "problem"}
   <article>
     <ul>
       <li>Google Sitesでリファレンスを書くのは、けっこう大変だった。
         <ul>
           <li>グラフィカルな操作は、作業者が統一的な書き方をするには困難だった。
           <li>マウスでポチポチ押してコードのフォントを直していくのがしんどかった。
+          <li>シンタックスハイライトが無くて見にくかった。
+
+^{index (Just "do")}
 
 <slide>
   <hgroup>
@@ -42,6 +73,8 @@
   <article>
     <ul>
       <li>Google Sitesはそのままにした。
+        <ul>
+          <li>この時点で既に1200ページ以上あり、それらのページを行方不明にするのは良くない。
       <li>GitHubで書いたMarkdownを、自動的にHTMLに変換してGoogle Sitesに同期する仕組みを作った。
 
 <slide>
@@ -55,6 +88,8 @@
     <h2>移行ツール（運用中）
   <article>
     <img src=@{StaticR publication_img_github_to_cpprefjp_png} alt="Markdownからcpprefjpへ変換">
+
+^{index (Just "1st")}
 
 <slide>
   <hgroup>
@@ -72,3 +107,47 @@
       <li>Ruby 1.9を使って、HTMLを正規表現でがんばってMarkdownに変換した。
       <li>完全には自動変換できなかったので、その後全部のリファレンスを手動で手直しした。
       <li>なのでこのツールは使い捨て。
+
+^{index (Just "2nd")}
+
+<slide>
+  <hgroup>
+    <h2>当時のめるぽんについて
+  <article>
+    <ul>
+      <li>GitHub移行プロジェクト、@cpp_akira がやってるのを見てるだけだった。
+      <li>GitHubからMarkdownファイルを取得してhtmlにして返すサーバを作るぐらいなら簡単そう。
+      <li>なので、一晩かけて軽い気持ちで簡単な変換サーバを書いてみた。
+
+<slide>
+  <hgroup>
+    <h2>管理者になってしまった
+  <article>
+    <img .large-image src=@{StaticR publication_img_cpprefjp_comtg1_png}>
+    <img .large-image src=@{StaticR publication_img_cpprefjp_comtg2_png}>
+
+<slide>
+  <hgroup>
+    <h2>作ったもの
+  <article>
+    <ul>
+      <li>変換サーバ
+        <ul>
+          <li>GitHubからMarkdownファイルを取得
+          <li>それをhtmlにして返す
+      <li>アップロード用Google Apps Script
+        <ul>
+          <li>変換サーバにアクセスしてhtmlを取得
+          <li>Google Sitesに毎日アップロードする
+
+<slide>
+  <hgroup>
+    <h2>移行ツール（運用中）
+  <article>
+    <img src=@{StaticR publication_img_github_to_cpprefjp_png} alt="Markdownからcpprefjpへ変換">
+
+<slide>
+  <hgroup>
+    <h2>変換サーバ
+  <article>
+    <ul>
