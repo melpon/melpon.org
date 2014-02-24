@@ -16,6 +16,16 @@ slides > slide {
     line-height: 55px;
     margin-bottom: 0.8em;
   }
+  ol {
+    list-style-type: decimal;
+    padding-top: 20px;
+    margin-left: 70px;
+  }
+  ol > li, p {
+    font-size: 40px;
+    line-height: 55px;
+    margin-bottom: 0.8em;
+  }
 }
 
 img.large-image {

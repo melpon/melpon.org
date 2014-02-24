@@ -14,6 +14,7 @@ import Settings.StaticFiles
   , publication_img_cpprefjp_ui_png
   , publication_img_cpprefjp_comtg1_png
   , publication_img_cpprefjp_comtg2_png
+  , publication_img_cpprefjp_comtg3_png
   )
 import Handler.Publication.Slide (getTitleWidget, indexToWidget, Index(..), Title(..), defaultLayout, withDefaultIO)
 

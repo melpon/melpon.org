@@ -13,7 +13,7 @@
   <article>
     <ul>
       <li>こんなページです
-    <iframe data-src="https://sites.google.com/site/cpprefjp/" sandbox="allow-same-origin"></iframe>
+    <iframe data-src="https://sites.google.com/site/cpprefjp/" sandbox="allow-same-origin">
 
 <slide>
   <hgroup>
@@ -130,8 +130,8 @@
   <hgroup>
     <h2>作ったもの
   <article>
-    <ul>
-      <li>変換サーバ
+    <ul .build>
+      <li>変換サーバ（andare）
         <ul>
           <li>GitHubからMarkdownファイルを取得
           <li>それをhtmlにして返す
@@ -148,6 +148,52 @@
 
 <slide>
   <hgroup>
-    <h2>変換サーバ
+    <h2>変換サーバの特徴
   <article>
     <ul>
+      <li>Python+Django製
+      <li><a href="https://pypi.python.org/pypi/Markdown">Markdown</a>というPythonのライブラリでHTMLに変換
+      <li>シンタックスハイライトを改造
+      <li>GitHubで差分管理
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライト
+  <article>
+    <ul>
+      <li>「PythonのMarkdownライブラリにシンタックスハイライトあったから入れてみました！」
+    <img .large-image src=@{StaticR publication_img_cpprefjp_comtg3_png}>
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライト
+  <article>
+    <ul>
+      <li>リンクや色を付けれるようにした
+      <li>意外と面倒だった
+    <iframe data-src="https://sites.google.com/site/cpprefjp/article/at_thread_exit" sandbox="allow-same-origin">
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+  <article>
+    <ul>
+      <li>PythonのMarkdownライブラリはコードを渡したら適当にHTMLに変換してくれる仕組み
+      <li>つまり特定の文字を色付けとかできない
+      <li>そこで考えた
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+  <article>
+    <ul>
+      <li>そうだ力づくで解決しよう（考えてない）
+        <ol>
+          <li>コードから修飾したい文字列を探してランダムな文字列を埋め込む
+          <li>HTMLに変換する
+          <li>最初に使ったランダムな文字列を検索して適当なタグに置き換える
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+  <article>
