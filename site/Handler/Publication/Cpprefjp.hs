@@ -34,6 +34,27 @@ index = indexToWidget indexData
 title :: String -> Widget
 title = getTitleWidget indexData
 
+indexData2 :: Index
+indexData2 = Index "GitHubからGoogle Siteへ"
+  [ TitleOnly ("motivation", "動機")
+  , Title ("create", "作ったもの")
+      [ Title ("md-to-html", "MarkdownからHTMLへ")
+          [ TitleOnly ("highlight", "シンタックスハイライト")
+          , TitleOnly ("github", "GitHubの差分管理")
+          ]
+      , Title ("html-to-google", "HTMLからGoogle Sitesへ")
+          [ TitleOnly ("script", "スクリプトの制限")
+          , TitleOnly ("error", "エラー通知")
+          ]
+      ]
+  ]
+
+index2 :: Maybe String -> Widget
+index2 = indexToWidget indexData2
+
+title2 :: String -> Widget
+title2 = getTitleWidget indexData2
+
 getPCpprefjpR :: Handler Y.Html
 getPCpprefjpR = do
     defaultLayout $ do

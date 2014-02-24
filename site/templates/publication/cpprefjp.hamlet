@@ -110,6 +110,9 @@
 
 ^{index (Just "2nd")}
 
+^{index2 Nothing}
+^{index2 (Just "motivation")}
+
 <slide>
   <hgroup>
     <h2>当時のめるぽんについて
@@ -125,6 +128,8 @@
   <article>
     <img .large-image src=@{StaticR publication_img_cpprefjp_comtg1_png}>
     <img .large-image src=@{StaticR publication_img_cpprefjp_comtg2_png}>
+
+^{index2 (Just "create")}
 
 <slide>
   <hgroup>
@@ -146,6 +151,8 @@
   <article>
     <img src=@{StaticR publication_img_github_to_cpprefjp_png} alt="Markdownからcpprefjpへ変換">
 
+^{index2 (Just "md-to-html")}
+
 <slide>
   <hgroup>
     <h2>変換サーバの特徴
@@ -153,8 +160,12 @@
     <ul>
       <li>Python+Django製
       <li><a href="https://pypi.python.org/pypi/Markdown">Markdown</a>というPythonのライブラリでHTMLに変換
-      <li>シンタックスハイライトを改造
-      <li>GitHubで差分管理
+      <li>普通のRESTfulなサーバ
+        <ul>
+          <li><code>GET /contents</code>で更新するファイル一覧を返す
+          <li><code>GET /html/:paths</code>で:pathsのデータをHTMLで返す
+
+^{index2 (Just "highlight")}
 
 <slide>
   <hgroup>
@@ -197,3 +208,118 @@
   <hgroup>
     <h2>シンタックスハイライトの仕組み
   <article>
+    <pre>
+      <code  .medium-font>
+        \int main() {
+        \    std::vector&lt;int&gt; v;
+        \    v.<b>push_back</b>(10);
+        \}
+    <ul>
+      <li>push_backを赤文字にしたい場合
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+  <article>
+    <pre>
+      <code .medium-font>
+        \int main() {
+        \    std::vector&lt;int&gt; v;
+        \    v.<b>Yg88HuTPpush_backYg88HuTP</b>(10);
+        \}
+    <ul>
+      <li>push_backの前後にランダムな文字列を埋め込む
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+  <article>
+    <pre>
+      <code .medium-font>
+        \&lt;span ...&gt;int&lt;/span&gt; main() {
+        \    std::vector&amp;lt;&lt;span ...&gt;int&lt;/span&gt;&amp;gt; v;
+        \    v.<b>Yg88HuTPpush_backYg88HuTP</b>(&lt;span ...&gt;10&lt;/span&gt;);
+        \}
+    <ul>
+      <li>HTMLに変換する
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+  <article>
+    <pre>
+      <code .medium-font>
+        \&lt;span ...&gt;int&lt;/span&gt; main() {
+        \    std::vector&amp;lt;&lt;span ...&gt;int&lt;/span&gt;&amp;gt; v;
+        \    v.<b>&lt;span style="color:red"&gt;push_back&lt;/span&gt;</b>(&lt;span ...&gt;10&lt;/span&gt;);
+        \}
+    <ul>
+      <li>ランダムな文字列を適切なタグにする
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+  <article>
+    <pre>
+      <code .prettyprint .medium-font>
+        \int main() {
+        \    std::vector&lt;int&gt; v;
+        \    v.<span id="highlight">push_back</span>(10);
+        \}
+    <ul>
+      <li>結果
+
+<slide>
+  <hgroup>
+    <h2>なぜ〜という方法でやらないのか？
+  <article>
+    <ul>
+      <li>普通に変換後のHTMLを置換
+        <ul>
+          <li>classやspanを強調表示するとHTMLがグチャグチャになる
+      <li>ランダムでない文字列を埋め込む
+        <ul>
+          <li>その文字列がハイライトの対象になる可能性が高い
+
+^{index2 (Just "github")}
+
+<slide>
+  <hgroup>
+    <h2>GitHubで差分管理
+  <article>
+    <ul>
+      <li>現在2,000ページ超のページがある
+      <li>毎日全部更新するのは厳しい
+      <li>更新があったファイルだけ更新させたい
+    <ul .build>
+      <li>そうだGitHubを使おう
+
+<slide>
+  <hgroup>
+    <h2>GitHubで差分管理
+  <article>
+    <ul>
+      <li>サーバ内にcpprefjpのリポジトリをcloneしておく
+      <li>cpprefjpリポジトリには２つローカルブランチを作っておく
+        <ul>
+          <li>cpprefjpの最新版を置いておく<b class="master-branch">masterブランチ</b>
+          <li>Google Sitesに上がっている最新版を置いておく<b class="site-branch">siteブランチ</b>
+          <li><b class="master-branch">masterブランチ</b>は常に<b class="site-branch">siteブランチ</b>と同じか進んでいる状態になる
+
+<slide>
+  <hgroup>
+    <h2>GitHubで差分管理
+  <article>
+    <ul>
+      <li><b class="master-branch">masterブランチ</b>と<b class="site-branch">siteブランチ</b>の違いを見れば更新ファイルが分かる
+    <pre .prettyprint .large-font>
+      <code>
+        \$ git diff --name-status site master
+        \M	implementation.md
+        \A	reference/vector.md
+        \D	reference/memory.md
+    <ul>
+      <li>Google Sitesを更新したら<b class="master-branch">masterブランチ</b>を<b class="site-branch">siteブランチ</b>へマージ
+
+^{index2 (Just "html-to-google")}
+

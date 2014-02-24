@@ -18,3 +18,7 @@ slides h3 {
   font-size: 40px;
   line-height: 48px;
 }
+.medium-font {
+  font-size: 25px;
+  line-height: 32px;
+}

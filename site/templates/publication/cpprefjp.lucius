@@ -27,8 +27,25 @@ slides > slide {
     margin-bottom: 0.8em;
   }
 }
+slide.index ul > li, p {
+  font-size: 35px;
+  line-height: 45px;
+  margin-bottom: 0.7em;
+}
 
 img.large-image {
   width: 100%;
   height: 100%;
+}
+
+#highlight .pln {
+  color: red;
+  font-weight: bold;
+}
+
+b.master-branch {
+  color: red;
+}
+b.site-branch {
+  color: blue;
 }
