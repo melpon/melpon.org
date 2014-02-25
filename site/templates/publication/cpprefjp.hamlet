@@ -135,8 +135,8 @@
   <hgroup>
     <h2>作ったもの
   <article>
-    <ul .build>
-      <li>変換サーバ（andare）
+    <ul>
+      <li>変換サーバ（<a href="https://github.com/cpprefjp/andare">andare</a>）
         <ul>
           <li>GitHubからMarkdownファイルを取得
           <li>それをhtmlにして返す
@@ -180,8 +180,7 @@
     <h2>シンタックスハイライト
   <article>
     <ul>
-      <li>リンクや色を付けれるようにした
-      <li>意外と面倒だった
+      <li>シンタックスハイライトとは別でリンクや色を付けれるようにした
     <iframe data-src="https://sites.google.com/site/cpprefjp/article/at_thread_exit" sandbox="allow-same-origin">
 
 <slide>
@@ -191,18 +190,18 @@
     <ul>
       <li>PythonのMarkdownライブラリはコードを渡したら適当にHTMLに変換してくれる仕組み
       <li>つまり特定の文字を色付けとかできない
-      <li>そこで考えた
+      <li .red>そこで考えた
 
 <slide>
   <hgroup>
     <h2>シンタックスハイライトの仕組み
   <article>
     <ul>
-      <li>そうだ力づくで解決しよう（考えてない）
-        <ol>
-          <li>コードから修飾したい文字列を探してランダムな文字列を埋め込む
-          <li>HTMLに変換する
-          <li>最初に使ったランダムな文字列を検索して適当なタグに置き換える
+      <li .red>そうだ力づくで解決しよう（考えてない）
+      <ol>
+        <li>コードから修飾したい文字列を探してランダムな文字列を埋め込む
+        <li>HTMLに変換する
+        <li>最初に使ったランダムな文字列を検索して適当なタグに置き換える
 
 <slide>
   <hgroup>
@@ -215,7 +214,7 @@
         \    v.<b>push_back</b>(10);
         \}
     <ul>
-      <li>push_backを赤文字にしたい場合
+      <li>push_backを赤文字にしたい
 
 <slide>
   <hgroup>
@@ -274,10 +273,10 @@
     <h2>なぜ〜という方法でやらないのか？
   <article>
     <ul>
-      <li>普通に変換後のHTMLを置換
+      <li>変換後のHTMLを置換するだけだと…
         <ul>
           <li>classやspanを強調表示するとHTMLがグチャグチャになる
-      <li>ランダムでない文字列を埋め込む
+      <li>ランダムでない文字列を埋め込むと…
         <ul>
           <li>その文字列がハイライトの対象になる可能性が高い
 
@@ -285,18 +284,19 @@
 
 <slide>
   <hgroup>
-    <h2>GitHubで差分管理
+    <h2>^{title2 "github"}
   <article>
     <ul>
       <li>現在2,000ページ超のページがある
       <li>毎日全部更新するのは厳しい
       <li>更新があったファイルだけ更新させたい
+      <li>でも更新があるかを手動で調べるのは面倒
     <ul .build>
-      <li>そうだGitHubを使おう
+      <li .red>そうだGitHubを使おう
 
 <slide>
   <hgroup>
-    <h2>GitHubで差分管理
+    <h2>^{title2 "github"}
   <article>
     <ul>
       <li>サーバ内にcpprefjpのリポジトリをcloneしておく
@@ -308,7 +308,13 @@
 
 <slide>
   <hgroup>
-    <h2>GitHubで差分管理
+    <h2>^{title2 "github"}
+  <article>
+    <img .branch-image src=@{StaticR publication_img_cpprefjp_branch_001_png}>
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "github"}
   <article>
     <ul>
       <li><b class="master-branch">masterブランチ</b>と<b class="site-branch">siteブランチ</b>の違いを見れば更新ファイルが分かる
@@ -321,5 +327,118 @@
     <ul>
       <li>Google Sitesを更新したら<b class="master-branch">masterブランチ</b>を<b class="site-branch">siteブランチ</b>へマージ
 
+<slide>
+  <hgroup>
+    <h2>^{title2 "github"}
+  <article>
+    <img .branch-image src=@{StaticR publication_img_cpprefjp_branch_002_png}>
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "github"}
+  <article>
+    <img .branch-image src=@{StaticR publication_img_cpprefjp_branch_003_png}>
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "github"}
+  <article>
+    <img .branch-image src=@{StaticR publication_img_cpprefjp_branch_004_png}>
+
 ^{index2 (Just "html-to-google")}
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "html-to-google"}
+  <article>
+    <ul>
+      <li>Google SitesにHTMLをアップロードするためのスクリプト
+      <li>Google Sitesを更新するにはGoogle Apps Scriptを使わないといけない
+      <li>言語的にはJavaScript
+      <li .red>とてもつらかった
+
+^{index2 (Just "script")}
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "script"}
+  <article>
+    <ul .mini>
+      <li .red>制限１．実行時間は５分まで
+      <ul>
+        <li>１ファイルを更新するのに５秒ぐらい掛かる
+        <li>１回の実行で６０ファイルぐらいしか更新できない
+          <ul .build>
+            <li>→どこまで更新したかをストレージに保存
+            <li>→４分過ぎたら次のタイマーを仕掛けて終了
+            <li>→次の実行では中断したところから再開
+            <li>解決！
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "script"}
+  <article>
+    <ul .mini>
+      <li>そう思っていた時期が僕にもありました…
+    <span .build>
+      <ul .mini>
+        <li .red>制限２．ストレージの１つのキーは９キロバイトまで
+        <ul>
+          <li>実行時の情報（JSON文字列）を格納したら溢れた
+          <li>数千ファイルを更新する場合には数十キロは欲しい
+          <li><i># それぞれのファイルが更新済みかの情報が必要</i>
+            <ul .build>
+              <li>→JSON文字列を自動的にぶった切って複数のキーに格納
+              <li>→取り出す時は自動的に結合して取得
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "error"}
+  <article>
+    <ul>
+      <li>エラーを放置するのは良くない
+      <li>スクリプトのエラーはGitHubのIssueに自動的に登録される
+      <li>次の実行で変換エラーが無くなったら自動的に閉じられる
+      <li><a href="https://github.com/cpprefjp/site/issues/19">こんな感じ</a>
+
+<slide>
+  <hgroup>
+    <h2>^{title2 "error"}
+  <article>
+    <ul>
+      <li>一時的なエラーの可能性があるので失敗しても何度かリトライ
+      <li>エラーのあったファイルを変換サーバにPOST
+      <li>あとは変換サーバ側でいい感じにIssue登録してくれる
+
+<slide>
+  <hgroup>
+    <h2>まとめ
+  <article>
+    <ul>
+      <li>Google Sitesでリファレンスを書くのは大変だった
+      <li>cpprefjpの移行も大変だった
+      <li>おかげで運用は楽になった
+
+<slide>
+  <hgroup>
+    <h2>質問
+  <article>
+    <ul>
+      <li>時間が無い場合は以下の方法で
+        <ul>
+          <li>Twitterで質問する
+          <li>後で@cpp_akiraに聞く
+          <li>後で@melponnを問い詰める
+          <li>君が！泣くまで！問い詰めるのをやめないっ！
+
+<slide .thank-you-slide .segue>
+  <article .flexbox .vleft>
+    <h2>ありがとうございました！
+    <p>Important contact information goes here.
+  <p .config-contact>
+    <br>
+    <span>twitter</span><a href="http://twitter.com/cpp_akira">cpp_akira</a>, <a href="http://twitter.com/melponn">melponn</a>
+    <br>
+    <br>
+    <span>github</span><a href="http://github.com/cpp_akira">cpp_akira</a>, <a href="http://github.com/melpon">melpon</a>
 

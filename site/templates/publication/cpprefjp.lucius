@@ -26,6 +26,10 @@ slides > slide {
     line-height: 55px;
     margin-bottom: 0.8em;
   }
+  ul.mini li, p {
+    font-size: 35px;
+    line-height: 47px;
+  }
 }
 slide.index ul > li, p {
   font-size: 35px;
@@ -36,6 +40,10 @@ slide.index ul > li, p {
 img.large-image {
   width: 100%;
   height: 100%;
+}
+img.branch-image {
+  width: 90%;
+  height: 90%;
 }
 
 #highlight .pln {

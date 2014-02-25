@@ -3,7 +3,9 @@ module Handler.Publication.Slide
   ( Index(..)
   , Title(..)
   , indexToWidget
+  , indexToTitleOnlyWidget
   , getTitleWidget
+  , getTitleOnlyWidget
   , defaultLayout
   , withDefaultIO
   , toTakahashi
@@ -38,7 +40,7 @@ slide = BlazeInternal.Parent "slide" "<slide" "</slide>"
 
 indexToWidget :: Index -> Maybe String -> Widget
 indexToWidget index mKey = do
-    YWidget.toWidget $ indexToHtml index mKey
+    YWidget.toWidget $ indexToHtml getTitle index mKey
     YWidget.toWidget [lucius|
       .index .non-visible-text {
         color: rgba(121, 121, 121, 0.3);
@@ -48,13 +50,25 @@ indexToWidget index mKey = do
       }
       |]
 
-indexToHtml :: Index -> Maybe String -> Html5.Html
-indexToHtml index@(Index name titles) mKey =
+indexToTitleOnlyWidget :: Index -> Maybe String -> Widget
+indexToTitleOnlyWidget index mKey = do
+    YWidget.toWidget $ indexToHtml getTitleOnly index mKey
+    YWidget.toWidget [lucius|
+      .index .non-visible-text {
+        color: rgba(121, 121, 121, 0.3);
+      }
+      .index .visible-text {
+        color: rgba(121, 121, 121, 1.0);
+      }
+      |]
+
+indexToHtml :: (Index -> String -> String) -> Index -> Maybe String -> Html5.Html
+indexToHtml titleFunc index@(Index name titles) mKey =
   slide Html5.! Html5Attr.class_ "index" $
     Monoid.mconcat
       [ Html5.hgroup $
           Html5.h2 $
-            Html5.toHtml $ maybe name (getTitle index) mKey
+            Html5.toHtml $ maybe name (titleFunc index) mKey
       , Html5.article $
           snd $ makeUl titles
       ]
@@ -90,8 +104,17 @@ indexToHtml index@(Index name titles) mKey =
 getTitleWidget :: Index -> String -> Widget
 getTitleWidget index key = YWidget.toWidget $ Html5.toHtml $ getTitle index key
 
+getTitleOnlyWidget :: Index -> String -> Widget
+getTitleOnlyWidget index key = YWidget.toWidget $ Html5.toHtml $ getTitleOnly index key
+
 getTitle :: Index -> String -> String
-getTitle (Index _ titles) fkey = concat $ List.intersperse " - " $ concat $ map finds titles
+getTitle index fkey = concat $ List.intersperse " - " $ getTitleList index fkey
+
+getTitleOnly :: Index -> String -> String
+getTitleOnly index fkey = List.last $ getTitleList index fkey
+
+getTitleList :: Index -> String -> [String]
+getTitleList (Index _ titles) fkey = concat $ map finds titles
   where
     match key = key == fkey
     finds (TitleOnly (key, title))

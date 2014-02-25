@@ -22,3 +22,14 @@ slides h3 {
   font-size: 25px;
   line-height: 32px;
 }
+.config-contact span {
+  width: 115px;
+  display: inline-block;
+}
+.config-contact p {
+  color: white;
+}
+.config-contact a {
+  color: white;
+  border-bottom: none;
+}

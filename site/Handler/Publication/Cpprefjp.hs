@@ -15,8 +15,12 @@ import Settings.StaticFiles
   , publication_img_cpprefjp_comtg1_png
   , publication_img_cpprefjp_comtg2_png
   , publication_img_cpprefjp_comtg3_png
+  , publication_img_cpprefjp_branch_001_png
+  , publication_img_cpprefjp_branch_002_png
+  , publication_img_cpprefjp_branch_003_png
+  , publication_img_cpprefjp_branch_004_png
   )
-import Handler.Publication.Slide (getTitleWidget, indexToWidget, Index(..), Title(..), defaultLayout, withDefaultIO)
+import Handler.Publication.Slide (getTitleOnlyWidget, indexToTitleOnlyWidget, Index(..), Title(..), defaultLayout, withDefaultIO)
 
 indexData :: Index
 indexData = Index "目次"
@@ -29,20 +33,20 @@ indexData = Index "目次"
   ]
 
 index :: Maybe String -> Widget
-index = indexToWidget indexData
+index = indexToTitleOnlyWidget indexData
 
 title :: String -> Widget
-title = getTitleWidget indexData
+title = getTitleOnlyWidget indexData
 
 indexData2 :: Index
-indexData2 = Index "GitHubからGoogle Siteへ"
+indexData2 = Index "GitHubからGoogle Sitesへ"
   [ TitleOnly ("motivation", "動機")
   , Title ("create", "作ったもの")
-      [ Title ("md-to-html", "MarkdownからHTMLへ")
+      [ Title ("md-to-html", "変換サーバを支える技術")
           [ TitleOnly ("highlight", "シンタックスハイライト")
           , TitleOnly ("github", "GitHubの差分管理")
           ]
-      , Title ("html-to-google", "HTMLからGoogle Sitesへ")
+      , Title ("html-to-google", "アップロード用Google Apps Scriptを支える技術")
           [ TitleOnly ("script", "スクリプトの制限")
           , TitleOnly ("error", "エラー通知")
           ]
@@ -50,10 +54,10 @@ indexData2 = Index "GitHubからGoogle Siteへ"
   ]
 
 index2 :: Maybe String -> Widget
-index2 = indexToWidget indexData2
+index2 = indexToTitleOnlyWidget indexData2
 
 title2 :: String -> Widget
-title2 = getTitleWidget indexData2
+title2 = getTitleOnlyWidget indexData2
 
 getPCpprefjpR :: Handler Y.Html
 getPCpprefjpR = do
