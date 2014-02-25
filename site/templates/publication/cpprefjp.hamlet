@@ -391,6 +391,8 @@
               <li>→JSON文字列を自動的にぶった切って複数のキーに格納
               <li>→取り出す時は自動的に結合して取得
 
+^{index2 (Just "error")}
+
 <slide>
   <hgroup>
     <h2>^{title2 "error"}
