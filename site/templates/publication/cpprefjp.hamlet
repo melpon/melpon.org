@@ -108,6 +108,15 @@
       <li>完全には自動変換できなかったので、その後全部のリファレンスを手動で手直しした。
       <li>なのでこのツールは使い捨て。
 
+<slide>
+  <hgroup>
+    <h2>質問コーナー
+  <article>
+    <ul>
+      <li>ここまでで何か質問ありますか？
+      <li>Twitter上での質問とか誰か拾って下さい
+      <li>この先は@melponnに変わります
+
 ^{index (Just "2nd")}
 
 ^{index2 Nothing}
@@ -345,6 +354,15 @@
   <article>
     <img .branch-image src=@{StaticR publication_img_cpprefjp_branch_004_png}>
 
+<slide>
+  <hgroup>
+    <h2>質問コーナー
+  <article>
+    <ul>
+      <li>ここまでで何か質問ありますか？
+      <li>Twitter上での質問とか誰か拾って下さい
+      <li>もう少しで終わります
+
 ^{index2 (Just "html-to-google")}
 
 <slide>
@@ -423,7 +441,16 @@
 
 <slide>
   <hgroup>
-    <h2>質問
+    <h2>質問コーナー
+  <article>
+    <ul>
+      <li>ここまでで何か質問ありますか？
+      <li>Twitter上での質問とか誰か拾って下さい
+      <li>これが最後のチャンスですよ！
+
+<slide>
+  <hgroup>
+    <h2>質問コーナー
   <article>
     <ul>
       <li>時間が無い場合は以下の方法で
