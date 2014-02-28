@@ -28,3 +28,6 @@
 
       <li><a href=@{PKabukizaWandboxLtR}>Wandbox の紹介</a>
         （<a href="http://ch.nicovideo.jp/dwango-engineer/blomaga/ar393478">歌舞伎座.tech#2</a>）
+
+      <li><a href="@{PCpprefjpR}">cpprefjp を支える技術</a>
+        （<a href="https://sites.google.com/site/boostjp/study_meeting/study14">Boost.勉強会 #14</a>）
