@@ -1,0 +1,128 @@
+<p>Cocos2d-x で JSON フォーマットを扱うためのライブラリを探すと、大抵最初に見つかるのは spine/Json.h です。
+
+<p>
+  Cocos2d-x に組み込まれているため、何かのライブラリを追加で入れる必要はありません。
+  使っている人も多いため、ちょっと検索すれば使い方も分かります。
+
+<p>
+  そんな便利な spine/Json.h。
+  しかし、spine/Json.h は決して<b>使うべきではありません</b>。
+  その理由は、以下の４つです。
+
+<ul>
+  <li>リンクリストかつ線形探索なのでクソ遅い
+  <li>型の間違いを無視する
+  <li>インターフェースが変わりやすい
+  <li>キーの大文字小文字を無視する
+
+<p>この４つについて詳細に説明します。
+
+<p>なお、ここではコミットID <a href="https://github.com/cocos2d/cocos2d-x/tree/625b9501f320a08e6d3aff2ee2ad4e04c6872cc0">625b9501f320a08e6d3aff2ee2ad4e04c6872cc0</a> 時点の <a href="https://github.com/cocos2d/cocos2d-x/blob/625b9501f320a08e6d3aff2ee2ad4e04c6872cc0/cocos/editor-support/spine/Json.h">spine/Json.h</a>、<a href="https://github.com/cocos2d/cocos2d-x/blob/625b9501f320a08e6d3aff2ee2ad4e04c6872cc0/cocos/editor-support/spine/Json.cpp">spine/Json.cpp</a> について書いています。
+
+<h2>リンクリストかつ線形探索なのでクソ遅い
+
+<p>
+  \<a href="https://github.com/cocos2d/cocos2d-x/blob/625b9501f320a08e6d3aff2ee2ad4e04c6872cc0/cocos/editor-support/spine/Json.cpp#L339">この辺</a>を見れば分かりますが、オブジェクトから要素を取ってくるために、<b>リンクリストを線形探索</b>しています。
+
+<p>
+  これは配列の探索も同様です。n 番目の要素を取ってくるために、リンクリストを先頭から順番に辿っていく実装になっています。
+
+<p>
+  これだけでもう、使うべきでないというのは確定です。
+  もちろん線形探索で問題のないケースというのも存在します。
+  しかし似たような選択肢が大量にある中、わざわざ遅い実装を使う理由なんてほぼありません。
+
+<p>
+  なお、Cocos2d-x内には、spine/Json.h以外にも、最近ならrapidjson、古いのならJsonCppが入っているようです。
+  追加でライブラリを入れるのが面倒なのであれば、これらを利用するのがいいでしょう。
+
+<h2>型の間違いを無視する
+
+<p>
+  <a href="https://github.com/cocos2d/cocos2d-x/blob/625b9501f320a08e6d3aff2ee2ad4e04c6872cc0/cocos/editor-support/spine/Json.cpp#L355">この辺</a>を見れば分かります。
+  \<code>Json_getItem</code>で<code>Json</code>型の値を取り出し、それを整数として解釈しています。
+
+<p>
+  これ自体は普通の処理です。
+  問題は、<b>型に対するエラー処理が何も無い</b>ことです。
+
+<p>
+  例えば、取り出した値の型が文字列だった場合には、何のエラーも出さず、単に 0 を返します。
+  null の場合も同様、何のエラーも出さずに、単に 0 を返します。
+  しかもこれは、引数の<code>defaultValue</code>とは無関係に 0 を返します。
+  \<code>defaultValue</code>を返すのは、オブジェクト型のデータから<code>name</code>の要素が見つからなかった場合だけです。
+
+<p>
+  <a href="https://github.com/cocos2d/cocos2d-x/blob/625b9501f320a08e6d3aff2ee2ad4e04c6872cc0/cocos/editor-support/spine/Json.cpp#L344">Json_getString</a>の場合も同様に、エラー処理が何もありません。
+  値が文字列以外だった場合、<code>nullptr</code>が返されます。
+
+<p>
+  Segmentation Faultで落ちないだけマシだと言えますが、最低でも<code>assert</code>ぐらいは入れておくべきです。
+  可能なら例外を投げるなどの処理を入れた方がいいでしょう。
+
+<p>
+  なお、spine/Json.hで型をちゃんと見た上で値を取り出すなら、以下のようになります。
+
+<pre .prettyprint .lang-cpp>
+  <code>
+    \Json* p;
+    \if (p->type != Json_Object)
+    \    throw "オブジェクト型じゃない";
+    \Json* q = Json_getItem(p, "hoge");
+    \if (q == nullptr)
+    \    throw "hogeが見つからなかった";
+    \if (q->type != Json_Number)
+    \    throw "hogeの値が数値型じゃない";
+    \
+    \// 無事目的の値を取得
+    \int result = q->valueInt;
+
+<h2>インターフェースが変わりやすい
+
+<p>
+  以前は<code>Json_getItemAt</code>や<code>Json_getSize</code>という関数がありましたが、今はもう<b><a href="https://github.com/cocos2d/cocos2d-x/commit/c3b84f1c9452287c7abbec418bcc7958202f3ab7#diff-0b1a44e6d24d7abf7f67ede934af2818L336">消されています</a></b>。
+
+<p>
+  つまり配列から要素を取得したり、サイズを取得するには、このような実装を書いてあげる必要があるということです。
+  また、<code>Json_getItemAt</code>を使っていた人は、新しいCocos2d-xのバージョンに乗り換えた際に、この部分を修正する必要があります。
+
+<p>
+  spine/Json.hはSpineのためのJSONライブラリなので、Spine側で使わない関数は消されるし、もしかしたらspine/Json.hが丸ごと消える可能性があります。
+  そのようなライブラリを使い続けるというのは、後のコストを考えるとかなり危険だと言えます。
+
+<h2>キーの大文字小文字を無視する
+
+<p>
+  <a href="https://github.com/cocos2d/cocos2d-x/blob/625b9501f320a08e6d3aff2ee2ad4e04c6872cc0/cocos/editor-support/spine/Json.cpp#L37">比較の処理</a>を見れば分かるように、<code>tolower</code>で<b>小文字に変換した上でキーを比較</b>しています。
+
+<p>
+  <code>tolower</code>の第２引数を省略した場合、グローバルなロケールが使われます。
+  そして、ロケールによって<code>tolower</code>の返す値は異なります。
+  ロケールによって結果が異なる例は<a href="http://en.cppreference.com/w/cpp/string/byte/tolower">cppreference.comのtolower</a>などを見るといいでしょう。
+
+<p>
+  このようなグローバルな値に依存するということはつまり、最初の検索で成功したのに、次の検索では失敗する可能性があるということです。
+  どこかのライブラリがふとした拍子に<code>std::setlocale</code>を呼び出しただけで、意図しない結果になることがあるのです。
+
+<p>
+  このような比較をしているspine/Json.hは使うべきではないでしょう。
+
+<h2>最後に
+
+<p>
+  spine/Json.h を使うべきではない理由を４つ説明しました。
+  しかし実際のところ、これは spine/Json.h が悪いわけではありません。
+
+<p>
+  そもそも spine/Json.h は、Spine で吐き出された JSON を読むために作られたライブラリです。
+  その JSON は、要素数が少ないため線形探索でも問題ありません。
+  自動で生成されたものを Spine の内部で読むだけだから、Spine を使うユーザにとっては型の間違いなんて関係ありません。
+  同様の理由で、大文字小文字を無視されても問題ありません。
+  配列のデータを取ってくる処理も必要ありません。
+
+<p>
+  つまり spine/Json.h は、目的に対して十分な機能を有しています。
+  しかし、決して汎用的なJSONライブラリではありません。
+
+<p>
+  spine/Json.hは利用せず、他のJSONライブラリを使うようにしましょう。

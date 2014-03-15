@@ -68,6 +68,12 @@ allBlogs =
       "haskell-import-qualified"
       "Haskellでのimportの使い方"
       "templates/blog/haskell-import-qualified.hamlet"
+  , Blog
+      (strptime' "2014-03-15 21:43:00")
+      ["C++", "Cocos2d-x"]
+      "cocos2dx-must-not-use-spine-json-h"
+      "spine/Json.hを使うべきでない４つの理由"
+      "templates/blog/cocos2dx-must-not-use-spine-json-h.hamlet"
   ]
 
 sortBlog :: [Blog] -> [Blog]
