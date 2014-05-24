@@ -123,7 +123,7 @@
 <slide>
   <article .flexbox .vcenter>
     <pre .large-font .prettyprint data-lang="c++">
-        \Hoge f();
+        \Fuga f();
         \...
         \auto h = f(); // エラーにならない！
         \h.foo();
@@ -132,7 +132,7 @@
 <slide>
   <article .flexbox .vcenter>
     <pre .large-font .prettyprint data-lang="c++">
-        \Hoge f();
+        \Fuga f();
         \...
         \auto h = f(); // 嬉しい！
         \h.foo();
@@ -151,6 +151,24 @@
     <h2><a href="http://togetter.com/li/668620">auto 使う派、使わない派 - Togetterまとめ</a>
 
 ^{toTakahashiI "マサカリ下さい"}
+
+<slide .thank-you-slide .segue>
+  <article .flexbox .vleft>
+    <h2>&lt;Thank You!&gt;
+    <p>Important contact information goes here.
+  <p data-config-contact>
+
+^{toTakahashi "勉強会後…"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <h2><a href="http://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">GotW #94 Solution: AAA Style (Almost Always Auto) | Sutter’s Mill</a>
+    <footer .source><a href="https://twitter.com/amedama41/status/470121322849124352">Twitter / amedama41: GotW からの進言です</a>
+
+<slide>
+  <article .flexbox .vcenter>
+    <h2><a href="http://ufcpp.net/study/csharp/sp3_var.html">[雑記] 型推論の是非 (C# によるプログラミング入門)</a>
+    <footer .source><a href="https://twitter.com/egtra/status/470121004123971584">Twitter / egtra: 参考にC#の場合：型推論の是非</a>
 
 <slide .thank-you-slide .segue>
   <article .flexbox .vleft>
