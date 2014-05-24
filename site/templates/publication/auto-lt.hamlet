@@ -37,7 +37,7 @@
 
 ^{toTakahashi "自明"}
 
-^{toTakahashiI "喧嘩が起きそうなケース"}
+^{toTakahashiI "ケンカが起きるケース"}
 
 <slide>
   <article .flexbox .vcenter>
@@ -70,18 +70,73 @@
 ^{toTakahashiI "関数は興味の分割のために使うべき"}
 
 ^{toTakahashi "auto使わない派"}
-^{toTakahashiI "どんな型を操作してるのか意識するべき"}
-^{toTakahashiI "我々は型に興味がある"}
-^{toTakahashi "auto使う派"}
-^{toTakahashiI "どんな振る舞いを持つのか意識するべき"}
-^{toTakahashiI "我々は振る舞いに興味がある"}
-
-^{toTakahashi "auto使わない派"}
 ^{toTakahashiI "１つの型のみについて考えたい"}
 ^{toTakahashiI "意識してない箇所で汎用的にしたくない"}
 ^{toTakahashi "auto使う派"}
 ^{toTakahashiI "適当に書いても汎用的になる"}
 ^{toTakahashiI "とても便利"}
+
+^{toTakahashi "auto使わない派"}
+^{toTakahashiI "どんな型を操作してるのか意識するべき"}
+^{toTakahashiI "我々は型に興味がある"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        \Hoge f();
+        \...
+        \Hoge h = f();
+        \h.foo();
+        \h.bar();
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        \Fuga f();
+        \...
+        \Hoge h = f(); // コンパイルエラー！
+        \h.foo();
+        \h.bar();
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        \Fuga f();
+        \...
+        \Hoge h = f(); // 嬉しい！
+        \h.foo();
+        \h.bar();
+
+^{toTakahashi "auto使う派"}
+^{toTakahashiI "どんな振る舞いを持つのか意識するべき"}
+^{toTakahashiI "我々は振る舞いに興味がある"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        \Hoge f();
+        \...
+        \auto h = f();
+        \h.foo();
+        \h.bar();
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        \Hoge f();
+        \...
+        \auto h = f(); // エラーにならない！
+        \h.foo();
+        \h.bar();
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        \Hoge f();
+        \...
+        \auto h = f(); // 嬉しい！
+        \h.foo();
+        \h.bar();
 
 ^{toTakahashiI "ケンカ"}
 ^{toTakahashiI "ダメ"}
