@@ -1,0 +1,104 @@
+<slide .title-slide .segue .nobackground>
+  <hgroup .auto-fadein>
+    <h1>auto論争
+    <p>melpon
+
+^{toTakahashi "auto論争"}
+^{toTakahashi "auto論争（脳内）"}
+^{toTakahashi "auto"}
+^{toTakahashi "使う派"}
+^{toTakahashi "使わない派"}
+^{toTakahashiI "どっち？"}
+
+^{toTakahashi "その前に"}
+
+^{toTakahashiI "誰でも納得するケース"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        auto f = [&n](int v) { v + n; };
+
+^{toTakahashi "ラムダ式"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        \auto s = str_p("Bo") >>
+        \           +ch_p('o') >>
+        \                  "st.Spirit";
+
+^{toTakahashi "とても長い型"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        auto h = new Hoge();
+
+^{toTakahashi "自明"}
+
+^{toTakahashiI "喧嘩が起きそうなケース"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        std::vector&lt;std::vector&lt;int&gt;&gt; v = f();
+        auto v = f();
+
+^{toTakahashiI "「auto使えよ」"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <pre .large-font .prettyprint data-lang="c++">
+        int v = f();
+        auto v = f();
+
+^{toTakahashiI "「auto使うなよ」"}
+
+^{toTakahashi "お互いの主張"}
+
+^{toTakahashi "auto使わない派"}
+^{toTakahashiI "型があった方が読みやすい"}
+^{toTakahashiI "タイプ数を増やすだけの価値がある"}
+^{toTakahashi "auto使う派"}
+^{toTakahashiI "型を書くのがめんどい"}
+^{toTakahashiI "タイプ数が増えてめんどい"}
+
+^{toTakahashi "auto使わない派"}
+^{toTakahashiI "auto使うならテンプレートに渡すし？"}
+^{toTakahashi "auto使う派"}
+^{toTakahashiI "関数は興味の分割のために使うべき"}
+
+^{toTakahashi "auto使わない派"}
+^{toTakahashiI "どんな型を操作してるのか意識するべき"}
+^{toTakahashiI "我々は型に興味がある"}
+^{toTakahashi "auto使う派"}
+^{toTakahashiI "どんな振る舞いを持つのか意識するべき"}
+^{toTakahashiI "我々は振る舞いに興味がある"}
+
+^{toTakahashi "auto使わない派"}
+^{toTakahashiI "１つの型のみについて考えたい"}
+^{toTakahashiI "意識してない箇所で汎用的にしたくない"}
+^{toTakahashi "auto使う派"}
+^{toTakahashiI "適当に書いても汎用的になる"}
+^{toTakahashiI "とても便利"}
+
+^{toTakahashiI "ケンカ"}
+^{toTakahashiI "ダメ"}
+^{toTakahashiI "ゼッタイ"}
+
+^{toTakahashi "なお"}
+^{toTakahashi "私は"}
+^{toTakahashiI "auto使う派です"}
+
+<slide>
+  <article .flexbox .vcenter>
+    <h2><a href="http://togetter.com/li/668620">auto 使う派、使わない派 - Togetterまとめ</a>
+
+^{toTakahashiI "マサカリ下さい"}
+
+<slide .thank-you-slide .segue>
+  <article .flexbox .vleft>
+    <h2>&lt;Thank You!&gt;
+    <p>Important contact information goes here.
+  <p data-config-contact>
