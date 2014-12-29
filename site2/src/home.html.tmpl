@@ -1,0 +1,49 @@
+<% c++ #include "home.h" %>
+<% skin melpon_org %>
+<% view home uses content::home extends root %>
+
+<% template page_content() %>
+<div class="container-fluid">
+  <div class="span12">
+    <div class="page-header">
+      <h1>Licensed by Meatware</h1>
+    <p><a href=@{AboutmeR}>めるぽん</a>の個人ページです。</p>
+
+    <div class="page-header">
+      <h1>公開しているサイト</h1>
+    </div>
+
+    <h3>
+      <a href="http://melpon.org/wandbox">Wandbox</a>
+      <small> ( <a href="https://github.com/melpon/wandbox">source</a> )</small>
+    </h3>
+    <div class="description">
+      <p>オンラインコンパイラみたいなやつ。C++ の充実度が高い。</p>
+      <p><a href="https://twitter.com/kikairoya">@kikairoya</a> と２人で作ってます。コントリビュート歓迎。</p>
+    </div>
+
+    <h3><a href="http://d.hatena.ne.jp/melpon">旧ブログ</a></h3>
+    <div class="description">
+      <p>旧ブログ。</p>
+    </div>
+
+    <h3>
+      <a href="http://melpon.org/mpidl">MessagePack IDL Code Generator</a>
+      <small> ( <a href="https://github.com/melpon/mpidl-web">source</a> )</small>
+    </h3>
+    <div class="description">
+      <p>MessagePack 用の IDL を作ってくれるサイト。</p>
+      <p>単に <a href="https://github.com/msgpack/msgpack-haskell/tree/master/msgpack-idl">msgpack-idl</a> をサイトに組み込んだだけ。</p>
+    </div>
+
+    <h3><a href="http://melpon.org/munin">Munin for melpon.org</a></h3>
+    <div class="description">
+      <p>melpon.org の負荷を確認するだけ。</p>
+    </div>
+  </div>
+</div>
+
+<% end template %>
+
+<% end view %>
+<% end skin %>
