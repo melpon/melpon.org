@@ -8,6 +8,8 @@
 namespace content {
     struct root : public cppcms::base_content {
         std::string title;
+        std::string content_skin;
+        std::string content_view;
         content::header header;
     };
 }

@@ -3,6 +3,9 @@
 #include <random>
 #include "libs.h"
 #include "templates/root.h"
+#include "templates/home.h"
+#include "templates/aboutme.h"
+#include "templates/publication/home.h"
 
 namespace cppcms {
     template<>
@@ -22,22 +25,28 @@ namespace cppcms {
 class yesodbookjp : public cppcms::application {
 public:
     yesodbookjp(cppcms::service &srv) : cppcms::application(srv) {
-        dispatcher().assign("/?", &yesodbookjp::root, this);
-        mapper().assign("root", "");
+        dispatcher().assign("/?", &yesodbookjp::home, this);
+        mapper().assign("home", "");
     }
 
-    void root() {
+    void home() {
     }
 };
 
 class publication : public cppcms::application {
 public:
     publication(cppcms::service &srv) : cppcms::application(srv) {
-        dispatcher().assign("/?", &publication::root, this);
-        mapper().assign("root", "");
+        dispatcher().assign("/?", &publication::home, this);
+        mapper().assign("home", "");
     }
 
-    void root() {
+    void home() {
+        content::publication::home c;
+        c.title = "公開資料";
+        c.content_skin = "melpon_org_publication";
+        c.content_view = "home";
+        c.header.header_name = "publication";
+        render("melpon_org", "root", c);
     }
 };
 
@@ -59,14 +68,30 @@ public:
         dispatcher().assign("/static/(js/jquery.url.(js))", &melpon_org::serve_file_for_debug, this, 1, 2);
         mapper().assign("static", "/static");
 
-        dispatcher().assign("/?", &melpon_org::root, this);
-        mapper().assign("root", "");
+        dispatcher().assign("/aboutme/?", &melpon_org::aboutme, this);
+        mapper().assign("aboutme", "/aboutme");
+
+        dispatcher().assign("/?", &melpon_org::home, this);
+        mapper().assign("home", "");
 
         mapper().root(srv.settings()["application"]["root"].str());
     }
 
-    void root() {
-        content::root c;
+    void home() {
+        content::home c;
+        c.title = "Home";
+        c.content_skin = "melpon_org";
+        c.content_view = "home";
+        c.header.header_name = "home";
+        render("root", c);
+    }
+
+    void aboutme() {
+        content::aboutme c;
+        c.title = "About Me";
+        c.content_skin = "melpon_org";
+        c.content_view = "aboutme";
+        c.header.header_name = "aboutme";
         render("root", c);
     }
 

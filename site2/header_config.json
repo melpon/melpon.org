@@ -1,0 +1,10 @@
+[ { "name": "home"
+  , "map": "home"
+  }
+, { "name": "aboutme"
+  , "map": "aboutme"
+  }
+, { "name": "publication"
+  , "map": "publication"
+  }
+]

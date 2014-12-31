@@ -1,10 +1,10 @@
 <% c++ #include "aboutme.h" %>
 <% skin melpon_org %>
-<% view aboutme uses content::aboutme extends root %>
+<% view aboutme uses content::aboutme %>
 
-<% template page_content() %>
-<div class="container-fluid">
-  <div class="span12">
+<% template render() %>
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10">
     <div class="page-header">
       <h1>About Me</h1>
     </div>
@@ -12,6 +12,7 @@
     <h2>GitHub</h2>
     <div class="description">
       <p><a href="https://github.com/melpon">melpon</a></p>
+    </div>
     <h2>Twitter</h2>
     <div class="description">
       <p><a href="https://twitter.com/melponn">@melponn</a></p>

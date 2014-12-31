@@ -3,6 +3,7 @@
     , "static_dir": "@staticdir@"
     , "scheme": "http"
     , "domain": "melpon.org"
+    , "header_config": "@sysconfdir@/header_config.json"
     , "root": ""
     }
 , "service" :

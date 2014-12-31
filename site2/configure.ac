@@ -147,5 +147,8 @@ AC_TRY_LINK(
    [AC_MSG_RESULT([yes])],
    [AC_MSG_RESULT([no]); AC_MSG_ERROR([mising gcrypt or OpenSSL library])])])
 
+SYSCONF_DIR="$sysconfdir"
+AC_SUBST(SYSCONF_DIR)
+
 AC_CONFIG_FILES([Makefile src/Makefile])
 AC_OUTPUT

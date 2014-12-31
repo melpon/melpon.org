@@ -1,5 +1,6 @@
 SUBDIRS = src
 dist_sysconf_DATA = config.json
+sysconfdir = @SYSCONF_DIR@
 staticdir = @STATIC_DIR@
 databasedir = @DATABASE_DIR@
 EXTRA_DIST = config.json.in

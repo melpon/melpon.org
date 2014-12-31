@@ -1,0 +1,19 @@
+{ "application" :
+    { "database": "sqlite3:db=/home/melpon/melpon.org/site2/install/var/lib/melpon.org/melpon.org.sqlite;@pool_size=10"
+    , "static_dir": "static"
+    , "scheme": "http"
+    , "domain": "melpon.org"
+    , "header_config": "header_config.json"
+    , "root": "/test"
+    }
+, "service" :
+    { "api" : "http"
+    , "port" : 7000
+    }
+, "gzip" :
+    { "enable": true
+    }
+, "cache" :
+    { "backend": "process_shared"
+    }
+}

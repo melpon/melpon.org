@@ -32,7 +32,7 @@
     <% render "header" with header %>
     <div id="main" role="main">
       <div class="container-fluid">
-        <% include page_content() %>
+        <% render content_skin, content_view %>
       </div>
     </div>
   </body>
@@ -53,15 +53,11 @@
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//platform.twitter.com/widgets.js"></script>
-<script src="<% url "static" %>/js/jquery.url.js"></script>
 
 <script>
 </script>
 
-<script src="<% url "static" %>/js/root.js"></script>
-<% end template %>
-
-<% template page_content() %>
+<!-- <script src="<% url "static" %>/js/root.js"></script> -->
 <% end template %>
 
 <% end view %>

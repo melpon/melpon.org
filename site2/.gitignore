@@ -2,6 +2,8 @@
 *.o
 *.a
 *.dll
+*.swp
+*.swo
 *.stackdump
 nohup.out
 .deps/
