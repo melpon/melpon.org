@@ -6,6 +6,7 @@
 #include "templates/home.h"
 #include "templates/aboutme.h"
 #include "templates/publication/home.h"
+#include "templates/publication/wandbox.h"
 
 namespace cppcms {
     template<>
@@ -38,6 +39,8 @@ public:
     publication(cppcms::service &srv) : cppcms::application(srv) {
         dispatcher().assign("/?", &publication::home, this);
         mapper().assign("home", "");
+        dispatcher().assign("/wandbox/?", &publication::wandbox, this);
+        mapper().assign("wandbox", "/wandbox");
     }
 
     void home() {
@@ -47,6 +50,11 @@ public:
         c.content_view = "home";
         c.header.header_name = "publication";
         render("melpon_org", "root", c);
+    }
+
+    void wandbox() {
+        content::publication::wandbox c;
+        render("melpon_org_publication", "wandbox", c);
     }
 };
 
@@ -63,9 +71,7 @@ public:
             "/publication(/(.*))?", 1);
 
         // static file is served by nginx on production server.
-        dispatcher().assign("/static/(([a-zA-Z0-9_\\-]+/)*+([a-zA-Z0-9_\\-]+)\\.(js|css|png|gif))", &melpon_org::serve_file_for_debug, this, 1, 4);
-        dispatcher().assign("/static/(js/jquery.cookie.(js))", &melpon_org::serve_file_for_debug, this, 1, 2);
-        dispatcher().assign("/static/(js/jquery.url.(js))", &melpon_org::serve_file_for_debug, this, 1, 2);
+        dispatcher().assign("/static/(.+)", &melpon_org::serve_file_for_debug, this, 1);
         mapper().assign("static", "/static");
 
         dispatcher().assign("/aboutme/?", &melpon_org::aboutme, this);
@@ -83,7 +89,7 @@ public:
         c.content_skin = "melpon_org";
         c.content_view = "home";
         c.header.header_name = "home";
-        render("root", c);
+        render("melpon_org", "root", c);
     }
 
     void aboutme() {
@@ -92,16 +98,26 @@ public:
         c.content_skin = "melpon_org";
         c.content_view = "aboutme";
         c.header.header_name = "aboutme";
-        render("root", c);
+        render("melpon_org", "root", c);
     }
 
-    void serve_file_for_debug(std::string file_name, std::string ext) {
+    std::string get_extension(std::string file_name) {
+        auto pos = file_name.find_last_of('/');
+        if (pos != std::string::npos)
+            file_name = file_name.substr(pos);
+        pos = file_name.find_last_of('.');
+        if (pos != std::string::npos)
+            return file_name.substr(pos + 1);
+        return "";
+    }
+    void serve_file_for_debug(std::string file_name) {
         auto static_dir = service().settings()["application"]["static_dir"].str();
         std::ifstream f((static_dir + "/" + file_name).c_str());
 
         if (!f) {
             response().status(404);
         } else {
+            std::string ext = get_extension(file_name);
             std::string content_type =
                 ext == "js" ? "text/javascript" :
                 ext == "css" ? "text/css" :

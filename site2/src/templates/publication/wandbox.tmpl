@@ -1,0 +1,1020 @@
+<% c++ #include "wandbox.h" %>
+<% skin melpon_org_publication %>
+<% view wandbox uses content::publication::wandbox %>
+
+<% template render() %>
+<html>
+  <head>
+    <title>Wandboxを支える技術</title>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"></meta>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+    <base target="_blank"> <!-- This amazingness opens all links in a new tab. --> </base>
+    <% include includes() %>
+  </head>
+  <body style="opacity: 0">
+    <slides class="layout-widescreen">
+      <% include wandbox_render() %>
+      <slide class="backdrop">
+      </slide>
+    </slides>
+  </body>
+</html>
+<% end template %>
+
+<% template includes() %>
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/css/wandbox.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/default.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/phone.css" media="only screen and (max-device-width: 480px)">
+<script src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/js/require-1.0.8.min.js" data-main="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/js/wandbox-slides"></script>
+<% end template %>
+
+<% template wandbox_render() %>
+<slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1 data-config-title>
+    </h1>
+    <h2 data-config-subtitle>
+    </h2>
+    <p data-config-presenter>
+    </p>
+  </hgroup>
+</slide>
+
+<% include wandbox_ui() %>
+
+<% include wandbox_internal() %>
+
+<% include wandbox_server() %>
+
+<slide>
+  <article class="takahashi flexbox vcenter">
+    <h1>質問</h1>
+  </article>
+</slide>
+
+<slide class="thank-you-slide segue">
+  <article class="flexbox vleft">
+    <h2>&lt;Thank You!&gt;</h2>
+    <p>Important contact information goes here.</p>
+  </article>
+  <p data-config-contact></p>
+</slide>
+<% end template %>
+
+<% template wandbox_ui() %>
+<slide class="segue dark">
+  <hgroup>
+    <h2>Wandbox とは
+    </h2>
+  </hgroup>
+</slide>
+<slide>
+  <hgroup>
+    <h2>普通の C++ 使いは日常的に仕様書を読んでいる
+    </h2>
+  </hgroup>
+  <article>
+    <h3>その際、実際にコンパイラを動かして試したくなる場合がある
+    </h3>
+    <h3>例:
+    </h3>
+    <ul>
+      <li>「ISO/IEC 14882:2011 における 3.4.2/2 が結果がどうなるのかよく分からないな」
+      </li>
+      <li>「現行の gcc/clang でどういう動作をするのか試してみたい」
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>普通の C++ 使いは日常的に paper を読んでいる
+    </h2>
+  </hgroup>
+  <article>
+    <h3>その際、実際にコンパイラを動かして試したくなる場合がある
+    </h3>
+    <h3>例:
+    </h3>
+    <ul>
+      <li>「<a href="http://isocpp.org/files/papers/N3648.html">N3648</a> が gcc で実装されたのか」
+      </li>
+      <li>「最新の gcc でどういう動作をするのか試したい」
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>普通の C++ 使いは日常的にコンパイラのバグを報告している
+    </h2>
+  </hgroup>
+  <article>
+    <h3>その際、実際にコンパイラを動かして試したくなる場合がある
+    </h3>
+    <h3>例:
+    </h3>
+    <ul>
+      <li>「<a href="http://gcc.gnu.org/bugzilla/show_bug.cgi?id=58302"><code>std::negative_binomial_distribution</code> がコンパイルエラーになるバグ</a>って直ったんだっけ？」
+      </li>
+      <li>「最新の gcc で直ってるかどうか試したい」
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <article class="takahashi flexbox vcenter">
+    <h1 class="red">そこで Wandbox
+    </h1>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>Wandbox とは
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li><a href="http://melpon.org/wandbox/">http://melpon.org/wandbox/</a>
+      </li>
+      <li>オンラインコンパイラ
+      </li>
+      <li>要するに <a href="http://ideone.com/">ideone</a> みたいなやつ
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>Wandbox とは
+    </h2>
+  </hgroup>
+  <article>
+    <h3>特徴
+    </h3>
+    <ul>
+      <li>C++ 対応がすごい
+        <ul>
+          <li>gcc, clang の様々なバージョン
+          </li>
+          <li>gcc HEAD, clang HEAD にも対応（毎日ビルド）
+          </li>
+          <li><a href="http://bolero-murakami.github.io/Sprout/">Boost</a>, <a href="http://www.boost.org/">Sprout</a> ライブラリに対応
+          </li>
+          <li>多彩なコンパイルオプション
+          </li>
+        </ul>
+      </li>
+      <li>他の言語にもいろいろ対応
+      </li>
+      <li>リアルタイム出力
+      </li>
+      <li>キーバインディング選択
+      </li>
+      <li>パーマネントリンクと Twitter への投稿
+      </li>
+      <li>シンタックスハイライト
+      </li>
+      <li class="red">はやい（確信）
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <article class="takahashi flexbox vcenter">
+    <h1><a href="http://melpon.org/wandbox/">デモ</a>
+    </h1>
+  </article>
+  <aside class="note">
+    <ul>
+      <li>前ページのそれぞれの機能について話す
+      </li>
+      <li>はやい（確信）について話す
+        <ul>
+          <li>ideone で何か実行して、clone してちょっと修正して再実行までに掛かる時間を測る
+          </li>
+          <li>Wandbox で何か実行して、ちょっと修正して再実行までに掛かる時間を測る
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+</slide>
+<slide>
+  <article class="takahashi flexbox vcenter">
+    <h1 class="red">【重要】普通の C++ 使い以外の方もお使い頂けます【必読】
+    </h1>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>C++/Python/Haskell/etc などの言語を勉強するとき
+    </h2>
+  </hgroup>
+  <article>
+    <h3>でもコンパイラとかの入れ方が分からない/入れるのがめんどい
+    </h3>
+    <h3 class="red">そこで Wandbox
+    </h3>
+    <ul>
+      <li>
+        <p>コード入力→実行のサイクルを繰り返しやすい
+        </p>
+        <p>→勉強に最適
+        </p>
+      </li>
+      <li>
+        <p>分からないことがあったら気軽に Twitter に投稿できる
+        </p>
+        <p>→きっと誰か答えてくれるはず
+        </p>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>誰かの質問にコードで答えるとき
+    </h2>
+  </hgroup>
+  <article>
+    <h3>例:
+    </h3>
+    <h3>Q.「vector には push_back して clear してもメモリが解放されないバグがある！C++ はクソだ！」
+    </h3>
+    <h3>A.「キャパシティの概念を理解しましょう。<a href="http://melpon.org/wandbox/permlink/Xm93gD3bsW2hPaet">こんな感じ</a> 」
+    </h3>
+  </article>
+</slide>
+<slide>
+  <article class="takahashi flexbox vcenter">
+    <h1 class="red">Wandbox を使おう！
+    </h1>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>要望やバグについて
+    </h2>
+  </hgroup>
+  <article>
+    <p><a href="https://github.com/melpon/wandbox/issues">issues</a> に登録するか <a href="https://twitter.com/melponn">@melponn</a> まで
+    </p>
+  </article>
+</slide>
+<% end template %>
+
+<% template wandbox_internal() %>
+<slide class="segue dark">
+  <hgroup>
+    <h2>Wandbox の中身
+    </h2>
+  </hgroup>
+</slide>
+
+<%= index_slide() | ext internal(0) %>
+
+<%= index_slide() | ext internal("relation") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("relation") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>Wandbox は、大きく２つのモジュールに分けられる
+    </h3>
+    <ul class="build">
+      <li>牛舎（<a href="https://github.com/melpon/wandbox/tree/master/cattleshed">cattleshed</a>）
+        <ul>
+          <li>ソースを与えるとコンパイルや実行をして結果を返してくれるモジュール
+          </li>
+          <li>Wandbox のコア
+          </li>
+          <li><a href="https://twitter.com/kikairoya">@kikairoya</a> 作
+          </li>
+          <li>C++ で書かれてる
+          </li>
+          <li>読めない
+          </li>
+        </ul>
+      </li>
+      <li>犬小屋（<a href="https://github.com/melpon/wandbox/tree/master/kennel">kennel</a>）
+        <ul>
+          <li>普通の Web サーバ
+          </li>
+          <li>Wandbox の UI
+          </li>
+          <li><a href="https://twitter.com/melponn">@melponn</a> 作
+          </li>
+          <li>Haskell で書かれてる
+          </li>
+          <li>読めない
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <article class="flexbox vcenter">
+    <img class="reflect" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/wandbox-actor.png" alt="牛舎と犬小屋の関係">
+    </img>
+  </article>
+</slide>
+
+<%= index_slide() | ext internal("cattleshed") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("cattleshed") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li class="red">よく分からない仕組みで動いてる
+      </li>
+      <li>基本的にはコンパイルして実行するだけ
+      </li>
+      <li>ほんとに何でもできてしまうと困るので、制限を掛けたりしている
+        <ul>
+          <li>chroot を使って環境を閉じ込める
+          </li>
+          <li>実行時間が長いなら kill
+          </li>
+          <li>リソース使用量が多いなら kill
+          </li>
+          <li>標準出力量が多いなら kill
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("cattleshed") %>
+    </h2>
+  </hgroup>
+  <article class="flexbox vcenter">
+    <h2>詳しいことは <a href="https://twitter.com/kikairoya">@kikairoya</a> を問い詰めよう
+    </h2>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("cattleshed") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>本人曰く
+    </h3>
+    <ul>
+      <li><a href="https://twitter.com/kikairoya/status/391142370080608256">Twitter / kikairoya: @melponn 自由でオープンなソフトウェアなので誰でも内部を理解し、応用することができます</a>
+      </li>
+    </ul>
+    <h3>誰か内部を理解して教えて下さい。
+    </h3>
+  </article>
+</slide>
+
+<%= index_slide() | ext internal("yesod") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("yesod") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3><a href="http://www.yesodweb.com/">Yesod</a> という Haskell の Web フレームワークで作ってる
+    </h3>
+    <div class="build">
+      <h3>なぜなら
+      </h3>
+      <ul>
+        <li class="build">あの頃はまだ純粋な Haskell 信者だった
+          <ul>
+            <li>型安全すごい
+            </li>
+            <li>関数合成楽しい
+            </li>
+            <li>モナドさん可愛い
+            </li>
+          </ul>
+        </li>
+        <li class="build">Haskell できますって言いたかった
+          <ul>
+            <li>Haskell できるとかっこ良さそう
+            </li>
+            <li>Haskell できると彼女できるという噂が
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("yesod") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3><a href="http://www.yesodweb.com/">Yesod</a> という Haskell の Web フレームワークで作ってる
+    </h3>
+    <h3>実際のところ
+    </h3>
+    <ul>
+      <li class="context">あの頃はまだ純粋な Haskell 信者だった
+      </li>
+      <li class="build">→副作用を知ってから Haskell はただの難しい言語
+        <ul>
+          <li>あの純粋な気持ちはどこへ
+          </li>
+          <li>とはいえ、やはりいろいろ便利な言語ではある
+          </li>
+        </ul>
+      </li>
+      <li class="context">Haskell できますって言いたかった
+      </li>
+      <li class="build">→この程度だと Haskell できますとか言えない
+        <ul>
+          <li>未だにモナドの作り方分からない
+          </li>
+          <li>未だに型の読み方が分からない
+          </li>
+          <li>それでもこんな Web アプリケーションぐらいなら書ける
+          </li>
+          <li>彼女はできませんでしたが嫁はできました
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide() | ext internal("templates") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("templates") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>HTML, CSS, JavaScript
+    </h3>
+    <ul>
+      <li>それぞれ hamlet, lucius, julius という Yesod のテンプレート言語がある
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("templates") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>hamlet
+    </h3>
+    <pre class="prettyprint lang-html" data-lang="hamlet"><%= source_hamlet_sample1() %></pre>
+    <ul>
+      <li>インデントベースの HTML
+      </li>
+      <li>class と id の省略表記
+      </li>
+      <li>直接書いても辛くない
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("templates") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>hamlet
+    </h3>
+    <pre class="prettyprint lang-html" data-lang="html"><%= source_hamlet_sample1_html() %></pre>
+    <ul>
+      <li>HTML はつらい
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("templates") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>hamlet
+    </h3>
+    <pre class="prettyprint lang-html" data-lang="hamlet"><%= source_hamlet_sample2() %></pre>
+    <ul>
+      <li>Haskell コードの埋め込み
+      </li>
+      <li>最低限の制御構文
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("templates") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>lucius
+    </h3>
+    <pre class="prettyprint lang-css" data-lang="lucius"><%= source_lucius_sample() %></pre>
+    <ul>
+      <li>大体ただの CSS
+      </li>
+      <li>CSS コピペでも動くレベル
+      </li>
+      <li>変数も宣言できる
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("templates") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>lucius
+    </h3>
+    <pre class="prettyprint lang-css" data-lang="css"><%= source_lucius_sample_css() %></pre>
+    <ul>
+      <li>こんなコードになる
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("templates") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>julius
+    </h3>
+    <pre class="prettyprint lang-javascript" data-lang="julius"><%= source_julius_sample() %></pre>
+    <ul>
+      <li>ほぼ JavaScript
+      </li>
+      <li>Haskell コードを埋め込める
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide() | ext internal("eventsource") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("eventsource") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>リアルタイム出力
+    </h3>
+    <pre class="prettyprint lang-haskell" data-lang="haskell"><%= source_loop_sample() %></pre>
+    <ul>
+      <li>コードの実行中に出力が表示される
+      </li>
+      <li>フィードバックが早いので手を止めずに済む
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("eventsource") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>リアルタイム出力の仕組み
+    </h3>
+    <ul>
+      <li><a href="http://www.w3.org/TR/eventsource/">EventSource</a> を使ってる
+      </li>
+      <li>要するに単なるロングポーリング
+        <ul>
+          <li>普通の HTTP はサーバがレスポンスを返したら終わり
+          </li>
+          <li>EventSource はレスポンスを最初は途中までしか返さない
+          </li>
+          <li>受信が終わってないのでクライアントはデータを待ち続ける
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("eventsource") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>普通のデータの受信
+    </h3>
+    <pre data-lang="request"><code>GET /wandbox HTTP/1.1</code></pre>
+    <pre data-lang="response" class="pre-normal">
+      <code>
+        HTTP/1.1 200 OK<br/>
+        <span class="red">Content-Type: application/json</span><br/>
+        <span class="red">Content-Length: 221<br/>
+        <br/>
+        {“hoge”: “fuga”, ...}</span>
+      </code></pre>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("eventsource") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>ロングポーリングによる受信
+    </h3>
+    <pre data-lang="request"><code>GET /wandbox/source HTTP/1.1</code></pre>
+    <pre data-lang="response" class="pre-normal">
+      <code class="build">
+        <span>
+          HTTP/1.1 200 OK<br/>
+          <span class="red">Content-Type: text/event-stream</span><br/>
+          <span class="red">Transfer-Encoding: chunked</span><br/>
+          <br/>
+        </span>
+        <span>
+          <span class="red">001A<br/>
+          data: hogefuga_hogefuga_ho</span><br/>
+        </span>
+        <span>
+          <span class="red">0018<br/>
+          gefuga_hogefuga<br/>
+          data: c</span><br/>
+        </span>
+        <span>
+          <span class="red">0010<br/>
+          constexpr</span><br/>
+        </span>
+        <span>
+          <span class="red">0</span>
+        </span>
+      </code>
+    </pre>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("eventsource") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>ロングポーリングによる受信
+    </h3>
+    <pre data-lang="request"><code>GET /wandbox/source HTTP/1.1</code></pre>
+    <pre data-lang="response-text" class="pre-normal">
+      <code>
+        data: hogefuga_hogefuga_hogefuga_hogefuga<br/>
+        data: constexpr
+      </code>
+    </pre>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("eventsource") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>Q. WebSocket 使わないの？
+    </h3>
+    <h3>A. この型の意味を理解できる者だけが WebSocket を使いなさい
+    </h3>
+    <pre class="prettyprint lang-haskell" data-lang="haskell"><code>
+        intercept :: Protocol p
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt; (Request -&gt; WebSockets p ())
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; Request
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; Maybe (Source (ResourceT IO) ByteString -&gt; Connection -&gt; ResourceT IO ())
+      </code></pre>
+    <footer class="source"><a href="http://hackage.haskell.org/package/wai-websockets/docs/Network-Wai-Handler-WebSockets.html">Network.Wai.Handler.WebSockets</a>
+    </footer>
+  </article>
+</slide>
+
+<%= index_slide() | ext internal("kurou") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext internal("kurou") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul class="build">
+      <li>Yesod に苦労した
+        <ul>
+          <li>#yesodinstallbattle
+          </li>
+          <li>バージョン変わりすぎ
+          </li>
+        </ul>
+      </li>
+      <li>HTML/CSS/JavaScript に苦労した
+        <ul>
+          <li>まともに触ったことが無いので大変
+          </li>
+          <li>どう組むのが一般的なのか分からなくて大変
+          </li>
+          <li>みんな適当にやってるっぽいと気がついたので適当に組んだ
+          </li>
+        </ul>
+      </li>
+      <li>ドキュメントが無くて苦労した
+        <ul>
+          <li><a href="https://twitter.com/melponn/status/134903468593913856">Twitter / melponn: Haskell では ...</a>
+          </li>
+          <li><a href="https://twitter.com/melponn/status/171922845226643456">Twitter / melponn: Haskellerのドキュメントは、型がドキュメントになると ...</a>
+          </li>
+          <li><a href="http://hackage.haskell.org/package/hamlet/docs/Text-Hamlet.html">Text.Hamlet</a>
+          </li>
+          <li><a href="http://hackage.haskell.org/package/yesod-auth-1.2.0.2/docs/Yesod-Auth.html#v:defaultMaybeAuthId">Yesod.Auth</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>まとめ
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Wandbox は牛舎と犬小屋が協調して動いてる
+      </li>
+      <li>牛舎は <a href="https://twitter.com/kikairoya">@kikairoya</a> を問い詰めよう
+      </li>
+      <li>犬小屋は普通の Web サーバ
+      </li>
+      <li>犬小屋を建てるのはなかなか大変だった
+      </li>
+    </ul>
+  </article>
+</slide>
+<% end template %>
+
+<% template wandbox_server() %>
+<slide class="segue dark">
+  <hgroup>
+    <h2>Wandbox のサーバ構成
+    </h2>
+  </hgroup>
+</slide>
+
+<%= index_slide() | ext server(0) %>
+
+<%= index_slide() | ext server("all") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("all") %>
+    </h2>
+  </hgroup>
+  <article class="build">
+    <h3>ユーザが Run すると…
+    </h3>
+    <ul>
+      <li>→<a href="http://mew.org/~kazu/proj/mighttpd/en/">Mighttpd</a>
+        <ul>
+          <li>→犬小屋
+            <ul>
+              <li>→牛舎
+                <ul>
+                  <li>→各種コンパイラ
+                  </li>
+                  <li>←各種コンパイラ
+                  </li>
+                </ul>
+              </li>
+              <li>←牛舎
+              </li>
+            </ul>
+          </li>
+          <li>←犬小屋
+          </li>
+        </ul>
+      </li>
+      <li>←Mighttpd
+      </li>
+    </ul>
+    <h3>Mighttpd って何？
+    </h3>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("mighttpd") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>HTTP サーバ
+      </li>
+      <li>Haskell 製の nginx みたいな感じ
+      </li>
+      <li>静的ファイルを高速転送したり
+      </li>
+      <li>リバースプロキシしたり
+        <ul>
+          <li class="red">これ目的で使ってる
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("mighttpd") %>
+    </h2>
+  </hgroup>
+  <article class="flexbox vcenter">
+    <img class="reflect" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/mighttpd.001.png" alt="<%= index_title() | ext server("mighttpd") %>">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("mighttpd") %>
+    </h2>
+  </hgroup>
+  <article class="flexbox vcenter">
+    <img class="reflect" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/mighttpd.002.png" alt="<%= index_title() | ext server("mighttpd") %>">
+    </img>
+  </article>
+</slide>
+
+<%= index_slide() | ext server("chef") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("chef") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>サーバの構成管理には <a href="http://www.opscode.com/chef/">Chef</a> を使ってる
+      </li>
+      <li>これを使って Mighttpd 入れたり Wandbox 入れたり各種コンパイラ入れてる
+      </li>
+      <li>理論的にはサーバが死んでも簡単に復元できるはず
+        <ul>
+          <li>※ただし SQLite のデータを除く
+          </li>
+          <li>（パーマネントリンクを作るためにコードや結果などを SQLite に入れてる）
+          </li>
+        </ul>
+      </li>
+      <li>melpon.org の Cookbook はここ: <a href="https://github.com/melpon/chef-melpon.org">melpon/chef-melpon.org</a>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("chef") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>Chef で入れているレシピの例
+    </h3>
+    <ul>
+      <li>スワップファイル
+      </li>
+      <li>Wandbox の実行環境
+        <ul>
+          <li>ユーザ作成
+          </li>
+          <li>github から取得
+          </li>
+          <li>ビルド
+          </li>
+          <li>デーモンとして起動（Upstart を使ってる）
+          </li>
+        </ul>
+      </li>
+      <li>各種コンパイラ
+        <ul>
+          <li>GCC, Clang, Python, Ruby
+            <ul>
+              <li>ソースからビルド
+              </li>
+            </ul>
+          </li>
+          <li>GCC-HEAD, Clang-HEAD, Erlang-HEAD
+            <ul>
+              <li>最新リポジトリから取ってきてビルド
+              </li>
+              <li>ビルドを毎日行うように cron を設定
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide() | ext server("deploy") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("deploy") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>GitHub の <a href="https://help.github.com/articles/post-receive-hooks">Post-Receive Hooks</a> を使ってる
+      </li>
+      <li>GitHub リポジトリへの push が発生したら指定した URL を叩いてくれる
+      </li>
+      <li>その URL を受ける口として <a href="https://github.com/melpon/ghwebhook">melpon/ghwebhook</a> というサーバを用意
+        <ul>
+          <li>Python 製
+          </li>
+        </ul>
+      </li>
+      <li>ghwebhook は melpon/wandbox の master ブランチに push されたら特定のスクリプトを実行する
+      </li>
+      <li>スクリプト内で wandbox を pull してビルドして再起動
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_title() | ext server("deploy") %>
+    </h2>
+  </hgroup>
+  <article>
+    <h3>デプロイを試してみる
+    </h3>
+    <ul>
+      <li>このセッション資料も ghwebhook で管理されている
+      </li>
+      <li>なので変更して push すると反映されるはず
+      </li>
+    </ul>
+    <ul>
+      <li>この辺のテキストを弄ってみたよーん
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>まとめ
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>melpon.org サーバのフロントには Mighttpd が居て、そこからリバースプロキシをしている
+      </li>
+      <li>サーバは Chef で管理されている
+        <ul>
+          <li>コンパイラも Chef を使って管理
+          </li>
+        </ul>
+      </li>
+      <li>デプロイには GitHub の Post-Receive Hooks を使っている
+      </li>
+    </ul>
+    <h3>感想
+    </h3>
+    <ul>
+      <li>サーバ管理が一番面倒だった
+      </li>
+      <li>正直 Wandbox 作るより時間が掛かったと思う
+      </li>
+      <li>が、手間を掛けただけあって大分楽になった
+      </li>
+    </ul>
+  </article>
+</slide>
+<% end template %>
+
+<% end view %>
+<% end skin %>

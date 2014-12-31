@@ -1,10 +1,10 @@
 [ { "name": "home"
-  , "map": "home"
+  , "title": "Home"
   }
 , { "name": "aboutme"
-  , "map": "aboutme"
+  , "title": "About Me"
   }
 , { "name": "publication"
-  , "map": "publication"
+  , "title": "Publication"
   }
 ]

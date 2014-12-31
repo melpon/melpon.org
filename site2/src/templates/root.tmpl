@@ -12,7 +12,7 @@
   <head>
     <meta charset="UTF-8">
 
-    <title><%= title %></title>
+    <title><%= title %> :: Licensed by Meatware</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -48,7 +48,7 @@
 
 <% template includes() %>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="<% url "static" %>/css/root.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/css/root.css">
 
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -57,7 +57,7 @@
 <script>
 </script>
 
-<!-- <script src="<% url "static" %>/js/root.js"></script> -->
+<!-- <script src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/js/root.js"></script> -->
 <% end template %>
 
 <% end view %>

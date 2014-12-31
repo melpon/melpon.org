@@ -10,7 +10,8 @@ SKIN_MELPON_ORG = \
 	templates/aboutme.tmpl
 
 SKIN_PUBLICATION = \
-	templates/publication/home.tmpl
+	templates/publication/home.tmpl \
+	templates/publication/wandbox.tmpl
 
 SKIN_MELPON_ORG_HEADER = $(SKIN_MELPON_ORG:%.tmpl=%.h)
 SKIN_PUBLICATION_HEADER = $(SKIN_PUBLICATION:%.tmpl=%.h)
