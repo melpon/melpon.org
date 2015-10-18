@@ -1,0 +1,863 @@
+<% c++ #include "cpprefjp.h" %>
+<% skin melpon_org_publication %>
+<% view cpprefjp uses content::publication::cpprefjp %>
+
+<% template render() %>
+<html>
+  <head>
+    <title>cpprefjpを支える技術</title>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"></meta>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+    <base target="_blank"> <!-- This amazingness opens all links in a new tab. --> </base>
+    <% include includes() %>
+  </head>
+  <body style="opacity: 0">
+    <slides class="layout-widescreen">
+      <% include cpprefjp_render() %>
+      <slide class="backdrop">
+      </slide>
+    </slides>
+  </body>
+</html>
+<% end template %>
+
+<% template includes() %>
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/default.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/phone.css" media="only screen and (max-device-width: 480px)">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/css/googleio.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/css/cpprefjp.css">
+<script src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/js/require-1.0.8.min.js" data-main="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/js/default"></script>
+<% end template %>
+
+<% template cpprefjp_render() %>
+
+<slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>cpprefjpを支える技術
+    </h1>
+    <p>@cpp_akira, @melponn
+    </p>
+  </hgroup>
+</slide>
+
+<%= index_slide_shorttitle() | ext index1(0) %>
+
+<%= index_slide_shorttitle() | ext index1("overview") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index1("overview") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>こんなページです
+      </li>
+    </ul>
+    <iframe data-src="https://sites.google.com/site/cpprefjp/" sandbox="allow-same-origin">
+    </iframe>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index1("overview") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>標準C++のリファレンスサイト
+      </li>
+      <li>Google Sitesを使ってる
+        <ul>
+          <li>Google製のWiki。
+          </li>
+        </ul>
+      </li>
+      <li>2014年3月現在で2,000ページ超。
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index1("overview") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>現在、ページを作成・編集するためにGoogle Sitesを直接叩いているわけではない。
+      </li>
+      <li>cpprefjpの裏側がどうなっているのかについて話します。
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index1("problem") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index1("problem") %>
+    </h2>
+  </hgroup>
+  <article>
+    <img src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-ui.png" alt="cpprefjpのUI">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index1("problem") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Google Sitesでリファレンスを書くのは、けっこう大変だった。
+        <ul>
+          <li>作業者が統一的な書き方をする上で、グラフィカルな操作が邪魔だった。
+          </li>
+          <li>マウスでポチポチ押してコードのフォントを直していくのがしんどかった。
+          </li>
+          <li>シンタックスハイライトがないため見づらかった。
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index1("do") %>
+
+<slide>
+  <hgroup>
+    <h2>作業環境をGitHubに移行した
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>プレーンテキストで書きたい！
+        <ul>
+          <li>記法を統一するため
+          </li>
+          <li>バージョン管理しやすくするため
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="build">
+      <li>→ MarkdownをGitHubリポジトリで管理することにした。
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>移行は作業環境のみ
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Google Sitesはそのままにした。
+        <ul>
+          <li>この時点で既に1200ページ以上あり、これらページを行方不明にするのは良くない。
+          </li>
+        </ul>
+      </li>
+      <li>GitHubで書いたMarkdownを、自動的にHTMLに変換してGoogle Sitesに同期する仕組みを作った。
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>移行ツール（初回のみ）
+    </h2>
+  </hgroup>
+  <article>
+    <img src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp_to_github.png" alt="cpprefjpからMarkdownへ変換">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>移行ツール（運用中）
+    </h2>
+  </hgroup>
+  <article>
+    <img src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/github_to_cpprefjp.png" alt="Markdownからcpprefjpへ変換">
+    </img>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index1("1st") %>
+
+<slide>
+  <hgroup>
+    <h2>Google SitesからHTMLをダウンロードする
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Google Apps ScriptというJavaScriptの方言を使った
+      </li>
+      <li>Google SitesのAPIは、1日に呼べる回数が決まっているので、何回かに分けてダウンロードした。
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>HTMLをMarkdownに変換
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Ruby 1.9を使って、HTMLを正規表現でがんばってMarkdownに変換した。
+      </li>
+      <li>完全には自動変換できなかったので、その後全部のリファレンスを手動で手直しした。
+      </li>
+      <li>なのでこのツールは使い捨て。
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>質問コーナー
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>ここまでで何か質問ありますか？
+      </li>
+      <li>Twitter上での質問とか誰か拾って下さい
+      </li>
+      <li>この先は@melponnに変わります
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index1("2nd") %>
+
+<%= index_slide_shorttitle() | ext index2(0) %>
+
+<%= index_slide_shorttitle() | ext index2("motivation") %>
+
+<slide>
+  <hgroup>
+    <h2>当時のめるぽんについて
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>GitHub移行プロジェクト、@cpp_akira がやってるのを見てるだけだった。
+      </li>
+      <li>GitHubからMarkdownファイルを取得してHTMLにして返すサーバを作るぐらいなら簡単そう。
+      </li>
+      <li>なので、一晩かけて軽い気持ちで簡単な変換サーバを書いてみた。
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>管理者になってしまった
+    </h2>
+  </hgroup>
+  <article>
+    <img class="large-image" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-comtg1.png">
+    </img>
+    <img class="large-image" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-comtg2.png">
+    </img>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index2("create") %>
+
+<slide>
+  <hgroup>
+    <h2>作ったもの
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>変換サーバ（<a href="https://github.com/cpprefjp/andare">andare</a>）
+        <ul>
+          <li>GitHubからMarkdownファイルを取得
+          </li>
+          <li>それをHTMLにして返す
+          </li>
+        </ul>
+      </li>
+      <li>アップロード用Google Apps Script
+        <ul>
+          <li>変換サーバにアクセスしてHTMLを取得
+          </li>
+          <li>Google Sitesに毎日アップロードする
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>移行ツール（運用中）
+    </h2>
+  </hgroup>
+  <article>
+    <img src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/github_to_cpprefjp.png" alt="Markdownからcpprefjpへ変換">
+    </img>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index2("md-to-html") %>
+
+<slide>
+  <hgroup>
+    <h2>変換サーバの特徴
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Python+Django製
+      </li>
+      <li><a href="https://pypi.python.org/pypi/Markdown">Markdown</a>というPythonのライブラリでHTMLに変換
+      </li>
+      <li>普通のRESTfulなサーバ
+        <ul>
+          <li><code>GET /contents</code>で更新するファイル一覧を返す
+          </li>
+          <li><code>GET /html/:paths</code>で:pathsのデータをHTMLで返す
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index2("highlight") %>
+
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライト
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>「PythonのMarkdownライブラリにシンタックスハイライトあったから入れてみました！」
+      </li>
+    </ul>
+    <img class="large-image" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-comtg3.png">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライト
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>シンタックスハイライトとは別でリンクや色を付けれるようにした
+      </li>
+    </ul>
+    <iframe data-src="https://sites.google.com/site/cpprefjp/article/at_thread_exit" sandbox="allow-same-origin">
+    </iframe>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>PythonのMarkdownライブラリはコードを渡したら適当にHTMLに変換してくれる仕組み
+      </li>
+      <li>つまり特定の文字を色付けとかできない
+      </li>
+      <li class="red">そこで考えた
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li class="red">そうだ力づくで解決しよう（考えてない）
+      </li>
+      <ol>
+        <li>コードから修飾したい文字列を探してランダムな文字列を埋め込む
+        </li>
+        <li>HTMLに変換する
+        </li>
+        <li>最初に使ったランダムな文字列を検索して適当なタグに置き換える
+        </li>
+      </ol>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>シンタックスハイライト前のコード
+      </li>
+    </ul>
+    <pre class="pre-normal">
+      <code class="medium-font">
+        int main() {<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;int&gt; v;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;v.<b>push_back</b>(10);<br/>
+        }
+               </b>
+      </code>
+    </pre>
+    <ul>
+      <li>このコードのpush_backを赤文字にしたい
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>push_backの前後にランダムな文字列を埋め込む
+      </li>
+    </ul>
+    <pre class="pre-normal">
+      <code class="medium-font">
+        int main() {<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;int&gt; v;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;v.<b>Yg88HuTPpush_backYg88HuTP</b>(10);<br/>
+        }
+               </b>
+      </code>
+    </pre>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>HTMLに変換する
+      </li>
+    </ul>
+    <pre class="pre-normal">
+      <code class="medium-font">
+        &lt;span ...&gt;int&lt;/span&gt; main() {<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&amp;lt;&lt;span ...&gt;int&lt;/span&gt;&amp;gt; v;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;v.<b>Yg88HuTPpush_backYg88HuTP</b>(&lt;span ...&gt;10&lt;/span&gt;);<br/>
+        }
+               </b>
+      </code>
+    </pre>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>ランダムな文字列を適切なタグにする
+      </li>
+    </ul>
+    <pre class="pre-normal">
+      <code class="medium-font">
+        &lt;span ...&gt;int&lt;/span&gt; main() {<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&amp;lt;&lt;span ...&gt;int&lt;/span&gt;&amp;gt; v;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;v.<b>&lt;span style="color:red"&gt;push_back&lt;/span&gt;</b>(&lt;span ...&gt;10&lt;/span&gt;);<br/>
+        }
+               </b>
+      </code>
+    </pre>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>シンタックスハイライトの仕組み
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>結果
+      </li>
+    </ul>
+    <pre class="pre-normal">
+      <code class="prettyprint medium-font">
+        int main() {<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;int&gt; v;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;v.<span id="highlight">push_back</span>(10);<br/>
+        }
+               </span>
+      </code>
+    </pre>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>なぜ〜という方法でやらないのか？
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>変換後のHTMLを置換するだけだと…
+        <ul>
+          <li>classやspanを強調表示するとHTMLがグチャグチャになる
+          </li>
+        </ul>
+      </li>
+      <li>ランダムでない文字列を埋め込むと…
+        <ul>
+          <li>その文字列がハイライトの対象になる可能性がある
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index2("github") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("github") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>現在2,000ページ超のページがある
+      </li>
+      <li>毎日全部更新するのは厳しい
+      </li>
+      <li>更新があったファイルだけ更新させたい
+      </li>
+      <li>でも更新があるかを手動で調べるのは面倒
+      </li>
+    </ul>
+    <ul class="build">
+      <li class="red">そうだGitHubを使おう
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("github") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>サーバ内にcpprefjpのリポジトリをcloneしておく
+      </li>
+      <li>cpprefjpリポジトリには２つローカルブランチを作っておく
+        <ul>
+          <li>cpprefjpの最新版を置いておく<b class="master-branch">masterブランチ</b>
+          </li>
+          <li>Google Sitesに上がっている最新版を置いておく<b class="site-branch">siteブランチ</b>
+          </li>
+          <li><b class="master-branch">masterブランチ</b>は常に<b class="site-branch">siteブランチ</b>と同じか進んでいる状態になる
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("github") %>
+    </h2>
+  </hgroup>
+  <article>
+    <img class="branch-image" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-branch.001.png">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("github") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li><b class="master-branch">masterブランチ</b>と<b class="site-branch">siteブランチ</b>の違いを見れば更新ファイルが分かる
+      </li>
+    </ul>
+    <pre class="prettyprint large-font pre-normal">
+      <code>
+        $ git diff --name-status site master<br/>
+        M	implementation.md<br/>
+        A	reference/vector.md<br/>
+        D	reference/memory.md
+      </code>
+    </pre>
+    <ul>
+      <li>Google Sitesを更新したら<b class="master-branch">masterブランチ</b>を<b class="site-branch">siteブランチ</b>へマージ
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("github") %>
+    </h2>
+  </hgroup>
+  <article>
+    <img class="branch-image" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-branch.002.png">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("github") %>
+    </h2>
+  </hgroup>
+  <article>
+    <img class="branch-image" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-branch.003.png">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("github") %>
+    </h2>
+  </hgroup>
+  <article>
+    <img class="branch-image" src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/img/cpprefjp-branch.004.png">
+    </img>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>質問コーナー
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>ここまでで何か質問ありますか？
+      </li>
+      <li>Twitter上での質問とか誰か拾って下さい
+      </li>
+      <li>もう少しで終わります
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index2("html-to-google") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("html-to-google") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Google SitesにHTMLをアップロードするためのスクリプト
+      </li>
+      <li>Google Sitesを更新するにはGoogle Apps Scriptを使わないといけない
+      </li>
+      <li>言語的にはJavaScript
+      </li>
+      <li class="red">とてもつらかった
+      </li>
+    </ul>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index2("script") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("script") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul class="mini">
+      <li class="red">制限１．実行時間は５分まで
+      </li>
+      <ul>
+        <li>１ファイルを更新するのに５秒ぐらい掛かる
+        </li>
+        <li>１回の実行で６０ファイルぐらいしか更新できない
+          <ul class="build">
+            <li>→どこまで更新したかをストレージに保存
+            </li>
+            <li>→４分過ぎたら次のタイマーを仕掛けて終了
+            </li>
+            <li>→次の実行では中断したところから再開
+            </li>
+            <li>解決！
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("script") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul class="mini">
+      <li>そう思っていた時期が僕にもありました…
+      </li>
+    </ul>
+    <span class="build">
+      <ul class="mini">
+        <li class="red">制限２．ストレージの１つのキーは９キロバイトまで
+        </li>
+        <ul>
+          <li>実行時の情報（JSON文字列）を格納したら溢れた
+          </li>
+          <li>数千ファイルを更新する場合には数十キロは欲しい
+          </li>
+          <li>それぞれのファイルが更新済みかの情報が必要
+            <ul class="build">
+              <li>→JSON文字列を自動的にぶった切って複数のキーに格納
+              </li>
+              <li>→取り出す時は自動的に結合して取得
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </ul>
+    </span>
+  </article>
+</slide>
+
+<%= index_slide_shorttitle() | ext index2("error") %>
+
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("error") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>エラーを放置するのは良くない
+      </li>
+      <li>スクリプトのエラーはGitHubのIssueに自動的に登録される
+      </li>
+      <li>次の実行で変換エラーが無くなったら自動的に閉じられる
+      </li>
+      <li><a href="https://github.com/cpprefjp/site/issues/19">こんな感じ</a>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2><%= index_shorttitle() | ext index2("error") %>
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>一時的なエラーの可能性があるので失敗しても何度かリトライ
+      </li>
+      <li>エラーのあったファイルを変換サーバにPOST
+      </li>
+      <li>あとは変換サーバ側でいい感じにIssue登録してくれる
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>まとめ
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>Google Sitesでリファレンスを書くのは大変だった
+      </li>
+      <li>cpprefjpの移行も大変だった
+      </li>
+      <li>おかげで運用は楽になった
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>質問コーナー
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>ここまでで何か質問ありますか？
+      </li>
+      <li>Twitter上での質問とか誰か拾って下さい
+      </li>
+      <li>これが最後のチャンスですよ！
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide>
+  <hgroup>
+    <h2>質問コーナー
+    </h2>
+  </hgroup>
+  <article>
+    <ul>
+      <li>時間がない場合は以下の方法で
+        <ul>
+          <li>Twitterで質問する
+          </li>
+          <li>後で@cpp_akiraに聞く
+          </li>
+          <li>後で@melponnを問い詰める
+          </li>
+          <li>君が！泣くまで！問い詰めるのをやめないっ！
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+</slide>
+<slide class="thank-you-slide segue">
+  <article class="flexbox vleft">
+    <h2>ありがとうございました！</h2>
+    <p>Important contact information goes here.</p>
+  </article>
+  <p class="config-contact">
+    <br>
+    <span>Twitter</span><a href="http://twitter.com/cpp_akira">cpp_akira</a>, <a href="http://twitter.com/melponn">melponn</a>
+    </span>
+    <br>
+    <br>
+    <span>GitHub</span><a href="http://github.com/faithandbrave">faithandbrave</a>, <a href="http://github.com/melpon">melpon</a>
+    </span>
+  </p>
+</slide>
+
+<% end template %>
+
+<% end view %>
+<% end skin %>

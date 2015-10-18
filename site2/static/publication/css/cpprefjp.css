@@ -1,0 +1,68 @@
+slides > slide {
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+
+}
+slides > slide .build > * {
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
+slides > slide ul > li, slides > slide p {
+  font-size: 40px;
+  line-height: 55px;
+  margin-bottom: 0.8em;
+}
+slides > slide ol {
+  list-style-type: decimal;
+  padding-top: 20px;
+  margin-left: 70px;
+}
+slides > slide ol > li, slides > slide p {
+  font-size: 40px;
+  line-height: 55px;
+  margin-bottom: 0.8em;
+}
+slides > slide ul.mini li, slides > slide p {
+  font-size: 35px;
+  line-height: 47px;
+}
+slide.index ul > li, slides > slide p {
+  font-size: 35px;
+  line-height: 45px;
+  margin-bottom: 0.7em;
+}
+
+slide img, slide iframe {
+  border-color: #333;
+  border-style: solid;
+  border-width: 2px;
+  padding: 5px;
+}
+
+img.large-image {
+  width: 100%;
+}
+img.branch-image {
+  width: 90%;
+}
+
+slide pre {
+  width: 109%;
+}
+
+#highlight .pln {
+  color: red;
+  font-weight: bold;
+}
+
+b.master-branch {
+  color: red;
+}
+b.site-branch {
+  color: blue;
+}

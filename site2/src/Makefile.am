@@ -11,10 +11,11 @@ SKIN_MELPON_ORG = \
 
 SKIN_PUBLICATION = \
 	templates/publication/home.tmpl \
-	templates/publication/wandbox.tmpl
+	templates/publication/wandbox.tmpl \
+	templates/publication/cpprefjp.tmpl
 
 SKIN_MELPON_ORG_HEADER = $(SKIN_MELPON_ORG:%.tmpl=%.h)
-SKIN_PUBLICATION_HEADER = $(SKIN_PUBLICATION:%.tmpl=%.h)
+SKIN_PUBLICATION_HEADER = $(SKIN_PUBLICATION:%.tmpl=%.h) templates/publication/googleio.h
 
 templates/skin_melpon_org.cpp: $(SKIN_MELPON_ORG) $(SKIN_MELPON_ORG_HEADER)
 	@CPPCMS_TMPL_CC@ $(SKIN_MELPON_ORG) -o $@

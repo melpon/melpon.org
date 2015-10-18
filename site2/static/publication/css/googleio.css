@@ -1,0 +1,40 @@
+.index .non-visible-text {
+  color: rgba(121, 121, 121, 0.3);
+}
+.index .visible-text {
+  color: rgba(121, 121, 121, 1.0);
+}
+.takahashi h1 {
+  font-size: 65px;
+}
+.takahashi.important h1 {
+  font-size: 80px;
+}
+slides > slide {
+  color: #515151;
+}
+slides h3 {
+  color: #515151;
+}
+.large-font {
+  font-size: 40px;
+  line-height:48px;
+}
+.medium-font {
+  font-size: 25px;
+  line-height:32px;
+}
+.config-contact span {
+  width: 115px;
+  display: inline-block;
+}
+.config-contact p {
+  color: white;
+}
+.config-contact a {
+  color: white;
+  border-bottom: none;
+}
+.pre-normal {
+  white-space: normal;
+}

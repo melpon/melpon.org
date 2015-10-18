@@ -5,7 +5,7 @@ echo $1
 
 if [ "$1" = "all" ]; then
   ./autogen.sh
-  ./configure --prefix=/home/melpon/melpon.org/site2/install --with-cppcms=/usr/local/cppcms --with-cppdb=/usr/local/cppdb
+  ./configure CXXFLAGS="-g3 -O0 -rdynamic" --prefix=/home/melpon/melpon.org/site2/install --with-cppcms=/usr/local/cppcms --with-cppdb=/usr/local/cppdb
 fi
 
 make

@@ -7,6 +7,7 @@
 #include "templates/aboutme.h"
 #include "templates/publication/home.h"
 #include "templates/publication/wandbox.h"
+#include "templates/publication/cpprefjp.h"
 
 namespace cppcms {
     template<>
@@ -41,6 +42,8 @@ public:
         mapper().assign("home", "");
         dispatcher().assign("/wandbox/?", &publication::wandbox, this);
         mapper().assign("wandbox", "/wandbox");
+        dispatcher().assign("/cpprefjp/?", &publication::cpprefjp, this);
+        mapper().assign("cpprefjp", "/cpprefjp");
     }
 
     void home() {
@@ -56,6 +59,11 @@ public:
         content::publication::wandbox c;
         render("melpon_org_publication", "wandbox", c);
     }
+
+    void cpprefjp() {
+        content::publication::cpprefjp c;
+        render("melpon_org_publication", "cpprefjp", c);
+    }
 };
 
 class melpon_org : public cppcms::application {
@@ -67,8 +75,8 @@ public:
             "/yesodbookjp(/(.*))?", 1);
         attach(
             new publication(srv),
-            "publication", "/publication{1}",
-            "/publication(/(.*))?", 1);
+            "publication", "/pub{1}",
+            "/pub(/(.*))?", 1);
 
         // static file is served by nginx on production server.
         dispatcher().assign("/static/(.+)", &melpon_org::serve_file_for_debug, this, 1);
