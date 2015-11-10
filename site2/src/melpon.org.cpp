@@ -9,6 +9,7 @@
 #include "templates/publication/wandbox.h"
 #include "templates/publication/cpprefjp.h"
 #include "templates/publication/kabukiza-wandbox-lt.h"
+#include "templates/publication/auto-lt.h"
 
 namespace cppcms {
     template<>
@@ -47,6 +48,8 @@ public:
         mapper().assign("cpprefjp", "/cpprefjp");
         dispatcher().assign("/kabukiza-wandbox-lt/?", &publication::kabukiza_wandbox_lt, this);
         mapper().assign("kabukiza-wandbox-lt", "/kabukiza-wandbox-lt");
+        dispatcher().assign("/auto-lt/?", &publication::auto_lt, this);
+        mapper().assign("auto-lt", "/auto-lt");
     }
 
     void home() {
@@ -71,6 +74,11 @@ public:
     void kabukiza_wandbox_lt() {
         content::publication::kabukiza_wandbox_lt c;
         render("melpon_org_publication", "kabukiza_wandbox_lt", c);
+    }
+
+    void auto_lt() {
+        content::publication::auto_lt c;
+        render("melpon_org_publication", "auto_lt", c);
     }
 };
 

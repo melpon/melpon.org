@@ -13,7 +13,8 @@ SKIN_PUBLICATION = \
 	templates/publication/home.tmpl \
 	templates/publication/wandbox.tmpl \
 	templates/publication/cpprefjp.tmpl \
-	templates/publication/kabukiza-wandbox-lt.tmpl
+	templates/publication/kabukiza-wandbox-lt.tmpl \
+	templates/publication/auto-lt.tmpl
 
 SKIN_MELPON_ORG_HEADER = $(SKIN_MELPON_ORG:%.tmpl=%.h)
 SKIN_PUBLICATION_HEADER = $(SKIN_PUBLICATION:%.tmpl=%.h) templates/publication/googleio.h

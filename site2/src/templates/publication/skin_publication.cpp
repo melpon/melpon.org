@@ -3003,31 +3003,534 @@ namespace melpon_org_publication {
 	}; // end of class kabukiza_wandbox_lt
 #line 171 "templates/publication/kabukiza-wandbox-lt.tmpl"
 } // end of namespace melpon_org_publication
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 1 "templates/publication/auto-lt.tmpl"
+#include "auto-lt.h" 
+#line 2 "templates/publication/auto-lt.tmpl"
+namespace melpon_org_publication {
+	#line 3 "templates/publication/auto-lt.tmpl"
+	struct auto_lt :public cppcms::base_view
+	#line 3 "templates/publication/auto-lt.tmpl"
+	{
+	#line 3 "templates/publication/auto-lt.tmpl"
+		content::publication::auto_lt &content;
+	#line 3 "templates/publication/auto-lt.tmpl"
+		auto_lt(std::ostream &_s,content::publication::auto_lt &_content): cppcms::base_view(_s),content(_content)
+	#line 3 "templates/publication/auto-lt.tmpl"
+		{
+	#line 3 "templates/publication/auto-lt.tmpl"
+		}
+		#line 5 "templates/publication/auto-lt.tmpl"
+		virtual void render() {
+			#line 17 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"<html>\n"
+				"  <head>\n"
+				"    <title>auto論争</title>\n"
+				"    <meta charset=\"utf-8\"></meta>\n"
+				"    <meta http-equiv=\"X-UA-Compatible\" content=\"chrome=1\"></meta>\n"
+				"    <!--<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\">-->\n"
+				"    <!--<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">-->\n"
+				"    <!--This one seems to work all the time, but really small on ipad-->\n"
+				"    <!--<meta name=\"viewport\" content=\"initial-scale=0.4\">-->\n"
+				"    <meta name=\"apple-mobile-web-app-capable\" content=\"yes\"></meta>\n"
+				"    <base target=\"_blank\"> <!-- This amazingness opens all links in a new tab. --> </base>\n"
+				"    ";
+			#line 17 "templates/publication/auto-lt.tmpl"
+			includes();
+			#line 21 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"  </head>\n"
+				"  <body style=\"opacity: 0\">\n"
+				"    <slides class=\"layout-widescreen\">\n"
+				"      ";
+			#line 21 "templates/publication/auto-lt.tmpl"
+			render_body();
+			#line 27 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"      <slide class=\"backdrop\">\n"
+				"      </slide>\n"
+				"    </slides>\n"
+				"  </body>\n"
+				"</html>\n"
+				"";
+		#line 27 "templates/publication/auto-lt.tmpl"
+		} // end of template render
+		#line 29 "templates/publication/auto-lt.tmpl"
+		virtual void includes() {
+			#line 30 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 30 "templates/publication/auto-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 31 "templates/publication/auto-lt.tmpl"
+			out()<<"/publication/io-2012-slides/theme/css/default.css\">\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 31 "templates/publication/auto-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 32 "templates/publication/auto-lt.tmpl"
+			out()<<"/publication/io-2012-slides/theme/css/phone.css\" media=\"only screen and (max-device-width: 480px)\">\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 32 "templates/publication/auto-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 33 "templates/publication/auto-lt.tmpl"
+			out()<<"/publication/css/googleio.css\">\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 33 "templates/publication/auto-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 34 "templates/publication/auto-lt.tmpl"
+			out()<<"/publication/css/cpprefjp.css\">\n"
+				"<script src=\"";
+			#line 34 "templates/publication/auto-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 34 "templates/publication/auto-lt.tmpl"
+			out()<<"/publication/io-2012-slides/js/require-1.0.8.min.js\" data-main=\"";
+			#line 34 "templates/publication/auto-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 35 "templates/publication/auto-lt.tmpl"
+			out()<<"/publication/js/default\"></script>\n"
+				"";
+		#line 35 "templates/publication/auto-lt.tmpl"
+		} // end of template includes
+		#line 37 "templates/publication/auto-lt.tmpl"
+		virtual void render_body() {
+			#line 46 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide class=\"title-slide segue nobackground\">\n"
+				"  <hgroup class=\"auto-fadein\">\n"
+				"    <h1>auto論争</h1>\n"
+				"    <p>melpon</p>\n"
+				"  </hgroup>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 46 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto論争"));
+			#line 47 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 47 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto論争（脳内）"));
+			#line 48 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 48 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto"));
+			#line 49 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 49 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("使う派"));
+			#line 50 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 50 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("使わない派"));
+			#line 51 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 51 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("どっち？"));
+			#line 53 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 53 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("その前に"));
+			#line 55 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 55 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("誰でも納得するケース"));
+			#line 65 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        auto f = [&amp;n](int v) { v + n; };\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 65 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("ラムダ式"));
+			#line 77 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        auto s = str_p(\"Bo\") &gt;&gt;<br/>\n"
+				"        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ch_p('o') &gt;&gt;<br/>\n"
+				"        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"st.Spirit\";\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 77 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("とても長い型"));
+			#line 87 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        auto h = new Hoge();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 87 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("自明"));
+			#line 89 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 89 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("ケンカが起きるケース"));
+			#line 100 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        std::vector&lt;std::vector&lt;int&gt;&gt; v = f();<br/>\n"
+				"        auto v = f();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 100 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("「auto使えよ」"));
+			#line 111 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        int v = f();<br/>\n"
+				"        auto v = f();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 111 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("「auto使うなよ」"));
+			#line 113 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 113 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("お互いの主張"));
+			#line 115 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 115 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使わない派"));
+			#line 116 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 116 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("型があった方が読みやすい"));
+			#line 117 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 117 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("タイプ数を増やすだけの価値がある"));
+			#line 118 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 118 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使う派"));
+			#line 119 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 119 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("型を書くのがめんどい"));
+			#line 120 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 120 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("タイプ数が増えてめんどい"));
+			#line 122 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 122 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使わない派"));
+			#line 123 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 123 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("auto使うならテンプレートに渡すし？"));
+			#line 124 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 124 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使う派"));
+			#line 125 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 125 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("関数は興味の分割のために使うべき"));
+			#line 127 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 127 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使わない派"));
+			#line 128 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 128 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("１つの型のみについて考えたい"));
+			#line 129 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 129 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("意識してない箇所で汎用的にしたくない"));
+			#line 130 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 130 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使う派"));
+			#line 131 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 131 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("適当に書いても汎用的になる"));
+			#line 132 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 132 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("とても便利"));
+			#line 134 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 134 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使わない派"));
+			#line 135 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 135 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("どんな型を操作してるのか意識するべき"));
+			#line 136 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 136 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("我々は型に興味がある"));
+			#line 174 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        Hoge f();<br/>\n"
+				"        ...<br/>\n"
+				"        Hoge h = f();<br/>\n"
+				"        h.foo();<br/>\n"
+				"        h.bar();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        Fuga f();<br/>\n"
+				"        ...<br/>\n"
+				"        Hoge h = f(); // コンパイルエラー！<br/>\n"
+				"        h.foo();<br/>\n"
+				"        h.bar();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        Fuga f();<br/>\n"
+				"        ...<br/>\n"
+				"        Hoge h = f(); // 嬉しい！<br/>\n"
+				"        h.foo();<br/>\n"
+				"        h.bar();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 174 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("auto使う派"));
+			#line 175 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 175 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("どんな振る舞いを持つのか意識するべき"));
+			#line 176 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 176 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("我々は振る舞いに興味がある"));
+			#line 214 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        Hoge f();<br/>\n"
+				"        ...<br/>\n"
+				"        auto h = f();<br/>\n"
+				"        h.foo();<br/>\n"
+				"        h.bar();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        Fuga f();<br/>\n"
+				"        ...<br/>\n"
+				"        auto h = f(); // エラーにならない！<br/>\n"
+				"        h.foo();<br/>\n"
+				"        h.bar();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <pre class=\"pre-normal large-font prettyprint\" data-lang=\"c++\">\n"
+				"        Fuga f();<br/>\n"
+				"        ...<br/>\n"
+				"        auto h = f(); // 嬉しい！<br/>\n"
+				"        h.foo();<br/>\n"
+				"        h.bar();\n"
+				"    </pre>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 214 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("ケンカ"));
+			#line 215 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 215 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("ダメ"));
+			#line 216 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 216 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("ゼッタイ"));
+			#line 218 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 218 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("なお"));
+			#line 219 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 219 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("私は"));
+			#line 220 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 220 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("auto使う派です"));
+			#line 228 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <h2><a href=\"http://togetter.com/li/668620\">auto 使う派、使わない派 - Togetterまとめ</a></h2>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 228 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("マサカリ下さい"));
+			#line 238 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide class=\"thank-you-slide segue\">\n"
+				"  <article class=\"flexbox vleft\">\n"
+				"    <h2>&lt;Thank You!&gt;</h2>\n"
+				"    <p>Important contact information goes here.</p>\n"
+				"  </article>\n"
+				"  <p data-config-contact></p>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 238 "templates/publication/auto-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("勉強会後…"));
+			#line 260 "templates/publication/auto-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <h2><a href=\"http://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/\">GotW #94 Solution: AAA Style (Almost Always Auto) | Sutter’s Mill</a></h2>\n"
+				"    <footer class=\"source\"><a href=\"https://twitter.com/amedama41/status/470121322849124352\">Twitter / amedama41: GotW からの進言です</a></footer>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"<slide>\n"
+				"  <article class=\"flexbox vcenter\">\n"
+				"    <h2><a href=\"http://ufcpp.net/study/csharp/sp3_var.html\">[雑記] 型推論の是非 (C# によるプログラミング入門)</a></h2>\n"
+				"    <footer class=\"source\"><a href=\"https://twitter.com/egtra/status/470121004123971584\">Twitter / egtra: 参考にC#の場合：型推論の是非</a></footer>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"<slide class=\"thank-you-slide segue\">\n"
+				"  <article class=\"flexbox vleft\">\n"
+				"    <h2>&lt;Thank You!&gt;</h2>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+		#line 260 "templates/publication/auto-lt.tmpl"
+		} // end of template render_body
+	#line 262 "templates/publication/auto-lt.tmpl"
+	}; // end of class auto_lt
+#line 263 "templates/publication/auto-lt.tmpl"
+} // end of namespace melpon_org_publication
+#line 264 "templates/publication/auto-lt.tmpl"
 namespace {
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
  cppcms::views::generator my_generator; 
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
  struct loader { 
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
   loader() { 
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
    my_generator.name("melpon_org_publication");
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
    my_generator.add_view<melpon_org_publication::home,content::publication::home>("home",true);
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
    my_generator.add_view<melpon_org_publication::wandbox,content::publication::wandbox>("wandbox",true);
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
    my_generator.add_view<melpon_org_publication::cpprefjp,content::publication::cpprefjp>("cpprefjp",true);
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
    my_generator.add_view<melpon_org_publication::kabukiza_wandbox_lt,content::publication::kabukiza_wandbox_lt>("kabukiza_wandbox_lt",true);
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
+   my_generator.add_view<melpon_org_publication::auto_lt,content::publication::auto_lt>("auto_lt",true);
+#line 264 "templates/publication/auto-lt.tmpl"
     cppcms::views::pool::instance().add(my_generator);
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
  }
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
  ~loader() {  cppcms::views::pool::instance().remove(my_generator); }
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
 } a_loader;
-#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#line 264 "templates/publication/auto-lt.tmpl"
 } // anon 

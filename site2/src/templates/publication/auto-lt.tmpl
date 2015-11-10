@@ -1,175 +1,263 @@
-<slide .title-slide .segue .nobackground>
-  <hgroup .auto-fadein>
-    <h1>auto論争
-    <p>melpon
+<% c++ #include "auto-lt.h" %>
+<% skin melpon_org_publication %>
+<% view auto_lt uses content::publication::auto_lt %>
 
-^{toTakahashi "auto論争"}
-^{toTakahashi "auto論争（脳内）"}
-^{toTakahashi "auto"}
-^{toTakahashi "使う派"}
-^{toTakahashi "使わない派"}
-^{toTakahashiI "どっち？"}
+<% template render() %>
+<html>
+  <head>
+    <title>auto論争</title>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"></meta>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+    <base target="_blank"> <!-- This amazingness opens all links in a new tab. --> </base>
+    <% include includes() %>
+  </head>
+  <body style="opacity: 0">
+    <slides class="layout-widescreen">
+      <% include render_body() %>
+      <slide class="backdrop">
+      </slide>
+    </slides>
+  </body>
+</html>
+<% end template %>
 
-^{toTakahashi "その前に"}
+<% template includes() %>
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/default.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/phone.css" media="only screen and (max-device-width: 480px)">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/css/googleio.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/css/cpprefjp.css">
+<script src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/js/require-1.0.8.min.js" data-main="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/js/default"></script>
+<% end template %>
 
-^{toTakahashiI "誰でも納得するケース"}
+<% template render_body() %>
+
+<slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>auto論争</h1>
+    <p>melpon</p>
+  </hgroup>
+</slide>
+
+<%= to_takahashi("auto論争") | raw %>
+<%= to_takahashi("auto論争（脳内）") | raw %>
+<%= to_takahashi("auto") | raw %>
+<%= to_takahashi("使う派") | raw %>
+<%= to_takahashi("使わない派") | raw %>
+<%= to_takahashi_i("どっち？") | raw %>
+
+<%= to_takahashi("その前に") | raw %>
+
+<%= to_takahashi_i("誰でも納得するケース") | raw %>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        auto f = [&n](int v) { v + n; };
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        auto f = [&amp;n](int v) { v + n; };
+    </pre>
+  </article>
+</slide>
 
-^{toTakahashi "ラムダ式"}
-
-<slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        \auto s = str_p("Bo") >>
-        \           +ch_p('o') >>
-        \                  "st.Spirit";
-
-^{toTakahashi "とても長い型"}
+<%= to_takahashi("ラムダ式") | raw %>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        auto s = str_p("Bo") &gt;&gt;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ch_p('o') &gt;&gt;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"st.Spirit";
+    </pre>
+  </article>
+</slide>
+
+<%= to_takahashi("とても長い型") | raw %>
+
+<slide>
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
         auto h = new Hoge();
+    </pre>
+  </article>
+</slide>
 
-^{toTakahashi "自明"}
+<%= to_takahashi("自明") | raw %>
 
-^{toTakahashiI "ケンカが起きるケース"}
+<%= to_takahashi_i("ケンカが起きるケース") | raw %>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        std::vector&lt;std::vector&lt;int&gt;&gt; v = f();
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        std::vector&lt;std::vector&lt;int&gt;&gt; v = f();<br/>
         auto v = f();
+    </pre>
+  </article>
+</slide>
 
-^{toTakahashiI "「auto使えよ」"}
+<%= to_takahashi_i("「auto使えよ」") | raw %>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        int v = f();
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        int v = f();<br/>
         auto v = f();
+    </pre>
+  </article>
+</slide>
 
-^{toTakahashiI "「auto使うなよ」"}
+<%= to_takahashi_i("「auto使うなよ」") | raw %>
 
-^{toTakahashi "お互いの主張"}
+<%= to_takahashi("お互いの主張") | raw %>
 
-^{toTakahashi "auto使わない派"}
-^{toTakahashiI "型があった方が読みやすい"}
-^{toTakahashiI "タイプ数を増やすだけの価値がある"}
-^{toTakahashi "auto使う派"}
-^{toTakahashiI "型を書くのがめんどい"}
-^{toTakahashiI "タイプ数が増えてめんどい"}
+<%= to_takahashi("auto使わない派") | raw %>
+<%= to_takahashi_i("型があった方が読みやすい") | raw %>
+<%= to_takahashi_i("タイプ数を増やすだけの価値がある") | raw %>
+<%= to_takahashi("auto使う派") | raw %>
+<%= to_takahashi_i("型を書くのがめんどい") | raw %>
+<%= to_takahashi_i("タイプ数が増えてめんどい") | raw %>
 
-^{toTakahashi "auto使わない派"}
-^{toTakahashiI "auto使うならテンプレートに渡すし？"}
-^{toTakahashi "auto使う派"}
-^{toTakahashiI "関数は興味の分割のために使うべき"}
+<%= to_takahashi("auto使わない派") | raw %>
+<%= to_takahashi_i("auto使うならテンプレートに渡すし？") | raw %>
+<%= to_takahashi("auto使う派") | raw %>
+<%= to_takahashi_i("関数は興味の分割のために使うべき") | raw %>
 
-^{toTakahashi "auto使わない派"}
-^{toTakahashiI "１つの型のみについて考えたい"}
-^{toTakahashiI "意識してない箇所で汎用的にしたくない"}
-^{toTakahashi "auto使う派"}
-^{toTakahashiI "適当に書いても汎用的になる"}
-^{toTakahashiI "とても便利"}
+<%= to_takahashi("auto使わない派") | raw %>
+<%= to_takahashi_i("１つの型のみについて考えたい") | raw %>
+<%= to_takahashi_i("意識してない箇所で汎用的にしたくない") | raw %>
+<%= to_takahashi("auto使う派") | raw %>
+<%= to_takahashi_i("適当に書いても汎用的になる") | raw %>
+<%= to_takahashi_i("とても便利") | raw %>
 
-^{toTakahashi "auto使わない派"}
-^{toTakahashiI "どんな型を操作してるのか意識するべき"}
-^{toTakahashiI "我々は型に興味がある"}
-
-<slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        \Hoge f();
-        \...
-        \Hoge h = f();
-        \h.foo();
-        \h.bar();
+<%= to_takahashi("auto使わない派") | raw %>
+<%= to_takahashi_i("どんな型を操作してるのか意識するべき") | raw %>
+<%= to_takahashi_i("我々は型に興味がある") | raw %>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        \Fuga f();
-        \...
-        \Hoge h = f(); // コンパイルエラー！
-        \h.foo();
-        \h.bar();
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        Hoge f();<br/>
+        ...<br/>
+        Hoge h = f();<br/>
+        h.foo();<br/>
+        h.bar();
+    </pre>
+  </article>
+</slide>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        \Fuga f();
-        \...
-        \Hoge h = f(); // 嬉しい！
-        \h.foo();
-        \h.bar();
-
-^{toTakahashi "auto使う派"}
-^{toTakahashiI "どんな振る舞いを持つのか意識するべき"}
-^{toTakahashiI "我々は振る舞いに興味がある"}
-
-<slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        \Hoge f();
-        \...
-        \auto h = f();
-        \h.foo();
-        \h.bar();
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        Fuga f();<br/>
+        ...<br/>
+        Hoge h = f(); // コンパイルエラー！<br/>
+        h.foo();<br/>
+        h.bar();
+    </pre>
+  </article>
+</slide>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        \Fuga f();
-        \...
-        \auto h = f(); // エラーにならない！
-        \h.foo();
-        \h.bar();
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        Fuga f();<br/>
+        ...<br/>
+        Hoge h = f(); // 嬉しい！<br/>
+        h.foo();<br/>
+        h.bar();
+    </pre>
+  </article>
+</slide>
+
+<%= to_takahashi("auto使う派") | raw %>
+<%= to_takahashi_i("どんな振る舞いを持つのか意識するべき") | raw %>
+<%= to_takahashi_i("我々は振る舞いに興味がある") | raw %>
 
 <slide>
-  <article .flexbox .vcenter>
-    <pre .large-font .prettyprint data-lang="c++">
-        \Fuga f();
-        \...
-        \auto h = f(); // 嬉しい！
-        \h.foo();
-        \h.bar();
-
-^{toTakahashiI "ケンカ"}
-^{toTakahashiI "ダメ"}
-^{toTakahashiI "ゼッタイ"}
-
-^{toTakahashi "なお"}
-^{toTakahashi "私は"}
-^{toTakahashiI "auto使う派です"}
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        Hoge f();<br/>
+        ...<br/>
+        auto h = f();<br/>
+        h.foo();<br/>
+        h.bar();
+    </pre>
+  </article>
+</slide>
 
 <slide>
-  <article .flexbox .vcenter>
-    <h2><a href="http://togetter.com/li/668620">auto 使う派、使わない派 - Togetterまとめ</a>
-
-^{toTakahashiI "マサカリ下さい"}
-
-<slide .thank-you-slide .segue>
-  <article .flexbox .vleft>
-    <h2>&lt;Thank You!&gt;
-    <p>Important contact information goes here.
-  <p data-config-contact>
-
-^{toTakahashi "勉強会後…"}
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        Fuga f();<br/>
+        ...<br/>
+        auto h = f(); // エラーにならない！<br/>
+        h.foo();<br/>
+        h.bar();
+    </pre>
+  </article>
+</slide>
 
 <slide>
-  <article .flexbox .vcenter>
-    <h2><a href="http://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">GotW #94 Solution: AAA Style (Almost Always Auto) | Sutter’s Mill</a>
-    <footer .source><a href="https://twitter.com/amedama41/status/470121322849124352">Twitter / amedama41: GotW からの進言です</a>
+  <article class="flexbox vcenter">
+    <pre class="pre-normal large-font prettyprint" data-lang="c++">
+        Fuga f();<br/>
+        ...<br/>
+        auto h = f(); // 嬉しい！<br/>
+        h.foo();<br/>
+        h.bar();
+    </pre>
+  </article>
+</slide>
+
+<%= to_takahashi_i("ケンカ") | raw %>
+<%= to_takahashi_i("ダメ") | raw %>
+<%= to_takahashi_i("ゼッタイ") | raw %>
+
+<%= to_takahashi("なお") | raw %>
+<%= to_takahashi("私は") | raw %>
+<%= to_takahashi_i("auto使う派です") | raw %>
 
 <slide>
-  <article .flexbox .vcenter>
-    <h2><a href="http://ufcpp.net/study/csharp/sp3_var.html">[雑記] 型推論の是非 (C# によるプログラミング入門)</a>
-    <footer .source><a href="https://twitter.com/egtra/status/470121004123971584">Twitter / egtra: 参考にC#の場合：型推論の是非</a>
+  <article class="flexbox vcenter">
+    <h2><a href="http://togetter.com/li/668620">auto 使う派、使わない派 - Togetterまとめ</a></h2>
+  </article>
+</slide>
 
-<slide .thank-you-slide .segue>
-  <article .flexbox .vleft>
-    <h2>&lt;Thank You!&gt;
+<%= to_takahashi_i("マサカリ下さい") | raw %>
+
+<slide class="thank-you-slide segue">
+  <article class="flexbox vleft">
+    <h2>&lt;Thank You!&gt;</h2>
+    <p>Important contact information goes here.</p>
+  </article>
+  <p data-config-contact></p>
+</slide>
+
+<%= to_takahashi("勉強会後…") | raw %>
+
+<slide>
+  <article class="flexbox vcenter">
+    <h2><a href="http://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">GotW #94 Solution: AAA Style (Almost Always Auto) | Sutter’s Mill</a></h2>
+    <footer class="source"><a href="https://twitter.com/amedama41/status/470121322849124352">Twitter / amedama41: GotW からの進言です</a></footer>
+  </article>
+</slide>
+
+<slide>
+  <article class="flexbox vcenter">
+    <h2><a href="http://ufcpp.net/study/csharp/sp3_var.html">[雑記] 型推論の是非 (C# によるプログラミング入門)</a></h2>
+    <footer class="source"><a href="https://twitter.com/egtra/status/470121004123971584">Twitter / egtra: 参考にC#の場合：型推論の是非</a></footer>
+  </article>
+</slide>
+
+<slide class="thank-you-slide segue">
+  <article class="flexbox vleft">
+    <h2>&lt;Thank You!&gt;</h2>
+  </article>
+</slide>
+
+<% end template %>
+
+<% end view %>
+<% end skin %>
