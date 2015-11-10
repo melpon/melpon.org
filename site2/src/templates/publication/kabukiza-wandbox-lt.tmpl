@@ -1,0 +1,171 @@
+<% c++ #include "kabukiza-wandbox-lt.h" %>
+<% skin melpon_org_publication %>
+<% view kabukiza_wandbox_lt uses content::publication::kabukiza_wandbox_lt %>
+
+<% template render() %>
+<html>
+  <head>
+    <title>Wandbox の紹介 at 歌舞伎座.tech#2</title>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"></meta>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+    <base target="_blank"> <!-- This amazingness opens all links in a new tab. --> </base>
+    <% include includes() %>
+  </head>
+  <body style="opacity: 0">
+    <slides class="layout-widescreen">
+      <% include render_body() %>
+      <slide class="backdrop">
+      </slide>
+    </slides>
+  </body>
+</html>
+<% end template %>
+
+<% template includes() %>
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/default.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/theme/css/phone.css" media="only screen and (max-device-width: 480px)">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/css/googleio.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/css/cpprefjp.css">
+<script src="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/io-2012-slides/js/require-1.0.8.min.js" data-main="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/publication/js/kabukiza-wandbox-lt-slides"></script>
+<% end template %>
+
+<% template render_body() %>
+
+<slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1 data-config-title></h1>
+    <h2 data-config-subtitle></h2>
+    <p data-config-presenter></p>
+  </hgroup>
+</slide>
+
+<%= to_takahashi("みなさん") | raw %>
+<%= to_takahashi("歌舞伎座.tech#2") | raw %>
+<%= to_takahashi_i("お疲れ様でした") | raw %>
+
+<%= to_takahashi("楽しいセッション") | raw %>
+<%= to_takahashi_i("沢山ありました") | raw %>
+
+<%= to_takahashi("「C++11 : variadic template のご紹介」") | raw %>
+<%= to_takahashi_i("Variadic Template 試したい") | raw %>
+
+<%= to_takahashi("「C++14の主要機能について」") | raw %>
+<%= to_takahashi_i("C++14 の機能を試したい") | raw %>
+
+<%= to_takahashi("「C++11でのWeb開発の実情」") | raw %>
+<%= to_takahashi_i("C++0x の機能を試したい") | raw %>
+
+<%= to_takahashi("「rvalue referenceについて」") | raw %>
+<%= to_takahashi_i("rvalue reference を試したい") | raw %>
+
+<%= to_takahashi("つまり") | raw %>
+<%= to_takahashi_i("C++11/C++14 を試したい") | raw %>
+
+<%= to_takahashi("しかも") | raw %>
+<%= to_takahashi_i("今すぐ！") | raw %>
+
+<%= to_takahashi("でも") | raw %>
+<%= to_takahashi("今すぐ") | raw %>
+<%= to_takahashi("コンパイラを") | raw %>
+<%= to_takahashi("用意するのは") | raw %>
+<%= to_takahashi_i("めんどい！！") | raw %>
+
+<%= to_takahashi("今すぐ") | raw %>
+<%= to_takahashi("C++11/C++14を") | raw %>
+<%= to_takahashi_i("試したい！！") | raw %>
+
+<%= to_takahashi("そんな方々のために") | raw %>
+<%= to_takahashi("作りました") | raw %>
+<%= to_takahashi_i("Wandbox") | raw %>
+
+<% include wandbox_url() %>
+
+<%= to_takahashi_i("今すぐアクセス！") | raw %>
+
+<%= to_takahashi("gcc") | raw %>
+<%= to_takahashi("4.3.6") | raw %>
+<%= to_takahashi("4.4.7") | raw %>
+<%= to_takahashi("4.5.4") | raw %>
+<%= to_takahashi("4.6.4") | raw %>
+<%= to_takahashi("4.7.3") | raw %>
+<%= to_takahashi("4.8.1") | raw %>
+<%= to_takahashi("4.8.2") | raw %>
+<%= to_takahashi("HEAD") | raw %>
+<%= to_takahashi_i("使えます") | raw %>
+
+<%= to_takahashi("clang") | raw %>
+<%= to_takahashi("3.0") | raw %>
+<%= to_takahashi("3.1") | raw %>
+<%= to_takahashi("3.2") | raw %>
+<%= to_takahashi("3.3") | raw %>
+<%= to_takahashi("HEAD") | raw %>
+<%= to_takahashi_i("使えます") | raw %>
+
+<%= to_takahashi("C++14") | raw %>
+<%= to_takahashi("C++11") | raw %>
+<%= to_takahashi("C++0x") | raw %>
+<%= to_takahashi_i("使えます") | raw %>
+
+<%= to_takahashi("Boost") | raw %>
+<%= to_takahashi_i("使えます") | raw %>
+
+<%= to_takahashi("キーバインド") | raw %>
+<%= to_takahashi("Vim") | raw %>
+<%= to_takahashi("Emacs") | raw %>
+<%= to_takahashi_i("使えます") | raw %>
+
+<%= to_takahashi("レスポンス") | raw %>
+<slide>
+  <article class="takahashi important flexbox vcenter">
+    <h1 class="red">爆速</h1>
+    <p>（脳内調べ）</p>
+  </article>
+</slide>
+
+<%= to_takahashi("他にも") | raw %>
+<%= to_takahashi("C") | raw %>
+<%= to_takahashi("D") | raw %>
+<%= to_takahashi("Haskell") | raw %>
+<%= to_takahashi("C#") | raw %>
+<%= to_takahashi("Perl") | raw %>
+<%= to_takahashi("Python") | raw %>
+<%= to_takahashi("Ruby") | raw %>
+<%= to_takahashi("Erlang") | raw %>
+<%= to_takahashi("Bash") | raw %>
+<%= to_takahashi("SQL") | raw %>
+<%= to_takahashi("Lua") | raw %>
+<slide>
+  <article class="takahashi important flexbox vcenter">
+    <h1 class="red">使えます</h1>
+    <p>（2013/11/14時点）</p>
+  </article>
+</slide>
+
+<% include wandbox_url() %>
+
+<%= to_takahashi_i("今すぐアクセス！！") | raw %>
+
+<slide class="thank-you-slide segue">
+  <article class="flexbox vleft">
+    <h2>ありがとうございました！</h2>
+  </article>
+  <p data-config-contact></p>
+</slide>
+
+<% end template %>
+
+<% template wandbox_url() %>
+<slide>
+  <article class="takahashi flexbox vcenter">
+    <h1><a href="http://melpon.org/wandbox">http://melpon.org/wandbox</a></h1>
+  </article>
+</slide>
+<% end template %>
+
+<% end view %>
+<% end skin %>

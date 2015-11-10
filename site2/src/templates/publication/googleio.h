@@ -149,6 +149,31 @@ namespace publication {
                 return title;
             };
         }
+
+        std::string to_takahashi(std::string message) {
+            return R"raw(
+              <slide>
+                <article class="takahashi flexbox vcenter">
+                  <h1>
+                    )raw" + message + R"raw(
+                  </h1>
+                </article>
+              </slide>
+            )raw";
+        }
+
+        // Important version
+        std::string to_takahashi_i(std::string message) {
+            return R"raw(
+              <slide>
+                <article class="takahashi important flexbox vcenter">
+                  <h1 class="red">
+                    )raw" + message + R"raw(
+                  </h1>
+                </article>
+              </slide>
+            )raw";
+        }
     };
 }}
 

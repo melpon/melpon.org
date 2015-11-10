@@ -2482,29 +2482,552 @@ namespace melpon_org_publication {
 	}; // end of class cpprefjp
 #line 863 "templates/publication/cpprefjp.tmpl"
 } // end of namespace melpon_org_publication
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 1 "templates/publication/kabukiza-wandbox-lt.tmpl"
+#include "kabukiza-wandbox-lt.h" 
+#line 2 "templates/publication/kabukiza-wandbox-lt.tmpl"
+namespace melpon_org_publication {
+	#line 3 "templates/publication/kabukiza-wandbox-lt.tmpl"
+	struct kabukiza_wandbox_lt :public cppcms::base_view
+	#line 3 "templates/publication/kabukiza-wandbox-lt.tmpl"
+	{
+	#line 3 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		content::publication::kabukiza_wandbox_lt &content;
+	#line 3 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		kabukiza_wandbox_lt(std::ostream &_s,content::publication::kabukiza_wandbox_lt &_content): cppcms::base_view(_s),content(_content)
+	#line 3 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		{
+	#line 3 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		}
+		#line 5 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		virtual void render() {
+			#line 17 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"<html>\n"
+				"  <head>\n"
+				"    <title>Wandbox の紹介 at 歌舞伎座.tech#2</title>\n"
+				"    <meta charset=\"utf-8\"></meta>\n"
+				"    <meta http-equiv=\"X-UA-Compatible\" content=\"chrome=1\"></meta>\n"
+				"    <!--<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\">-->\n"
+				"    <!--<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">-->\n"
+				"    <!--This one seems to work all the time, but really small on ipad-->\n"
+				"    <!--<meta name=\"viewport\" content=\"initial-scale=0.4\">-->\n"
+				"    <meta name=\"apple-mobile-web-app-capable\" content=\"yes\"></meta>\n"
+				"    <base target=\"_blank\"> <!-- This amazingness opens all links in a new tab. --> </base>\n"
+				"    ";
+			#line 17 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			includes();
+			#line 21 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"  </head>\n"
+				"  <body style=\"opacity: 0\">\n"
+				"    <slides class=\"layout-widescreen\">\n"
+				"      ";
+			#line 21 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			render_body();
+			#line 27 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"      <slide class=\"backdrop\">\n"
+				"      </slide>\n"
+				"    </slides>\n"
+				"  </body>\n"
+				"</html>\n"
+				"";
+		#line 27 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		} // end of template render
+		#line 29 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		virtual void includes() {
+			#line 30 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 30 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 31 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"/publication/io-2012-slides/theme/css/default.css\">\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 31 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 32 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"/publication/io-2012-slides/theme/css/phone.css\" media=\"only screen and (max-device-width: 480px)\">\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 32 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 33 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"/publication/css/googleio.css\">\n"
+				"<link rel=\"stylesheet\" href=\"";
+			#line 33 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 34 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"/publication/css/cpprefjp.css\">\n"
+				"<script src=\"";
+			#line 34 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 34 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"/publication/io-2012-slides/js/require-1.0.8.min.js\" data-main=\"";
+			#line 34 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			content.app().mapper().topmost().map(out(), "static"); 
+			#line 35 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"/publication/js/kabukiza-wandbox-lt-slides\"></script>\n"
+				"";
+		#line 35 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		} // end of template includes
+		#line 37 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		virtual void render_body() {
+			#line 47 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide class=\"title-slide segue nobackground\">\n"
+				"  <hgroup class=\"auto-fadein\">\n"
+				"    <h1 data-config-title></h1>\n"
+				"    <h2 data-config-subtitle></h2>\n"
+				"    <p data-config-presenter></p>\n"
+				"  </hgroup>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 47 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("みなさん"));
+			#line 48 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 48 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("歌舞伎座.tech#2"));
+			#line 49 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 49 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("お疲れ様でした"));
+			#line 51 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 51 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("楽しいセッション"));
+			#line 52 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 52 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("沢山ありました"));
+			#line 54 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 54 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("「C++11 : variadic template のご紹介」"));
+			#line 55 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 55 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("Variadic Template 試したい"));
+			#line 57 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 57 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("「C++14の主要機能について」"));
+			#line 58 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 58 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("C++14 の機能を試したい"));
+			#line 60 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 60 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("「C++11でのWeb開発の実情」"));
+			#line 61 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 61 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("C++0x の機能を試したい"));
+			#line 63 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 63 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("「rvalue referenceについて」"));
+			#line 64 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 64 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("rvalue reference を試したい"));
+			#line 66 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 66 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("つまり"));
+			#line 67 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 67 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("C++11/C++14 を試したい"));
+			#line 69 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 69 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("しかも"));
+			#line 70 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 70 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("今すぐ！"));
+			#line 72 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 72 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("でも"));
+			#line 73 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 73 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("今すぐ"));
+			#line 74 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 74 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("コンパイラを"));
+			#line 75 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 75 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("用意するのは"));
+			#line 76 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 76 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("めんどい！！"));
+			#line 78 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 78 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("今すぐ"));
+			#line 79 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 79 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("C++11/C++14を"));
+			#line 80 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 80 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("試したい！！"));
+			#line 82 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 82 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("そんな方々のために"));
+			#line 83 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 83 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("作りました"));
+			#line 84 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 84 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("Wandbox"));
+			#line 86 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 86 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			wandbox_url();
+			#line 88 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 88 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("今すぐアクセス！"));
+			#line 90 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 90 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("gcc"));
+			#line 91 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 91 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("4.3.6"));
+			#line 92 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 92 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("4.4.7"));
+			#line 93 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 93 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("4.5.4"));
+			#line 94 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 94 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("4.6.4"));
+			#line 95 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 95 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("4.7.3"));
+			#line 96 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 96 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("4.8.1"));
+			#line 97 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 97 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("4.8.2"));
+			#line 98 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 98 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("HEAD"));
+			#line 99 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 99 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("使えます"));
+			#line 101 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 101 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("clang"));
+			#line 102 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 102 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("3.0"));
+			#line 103 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 103 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("3.1"));
+			#line 104 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 104 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("3.2"));
+			#line 105 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 105 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("3.3"));
+			#line 106 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 106 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("HEAD"));
+			#line 107 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 107 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("使えます"));
+			#line 109 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 109 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("C++14"));
+			#line 110 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 110 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("C++11"));
+			#line 111 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 111 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("C++0x"));
+			#line 112 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 112 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("使えます"));
+			#line 114 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 114 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Boost"));
+			#line 115 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 115 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("使えます"));
+			#line 117 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 117 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("キーバインド"));
+			#line 118 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 118 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Vim"));
+			#line 119 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 119 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Emacs"));
+			#line 120 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 120 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("使えます"));
+			#line 122 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 122 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("レスポンス"));
+			#line 130 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"<slide>\n"
+				"  <article class=\"takahashi important flexbox vcenter\">\n"
+				"    <h1 class=\"red\">爆速</h1>\n"
+				"    <p>（脳内調べ）</p>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 130 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("他にも"));
+			#line 131 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 131 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("C"));
+			#line 132 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 132 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("D"));
+			#line 133 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 133 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Haskell"));
+			#line 134 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 134 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("C#"));
+			#line 135 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 135 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Perl"));
+			#line 136 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 136 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Python"));
+			#line 137 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 137 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Ruby"));
+			#line 138 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 138 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Erlang"));
+			#line 139 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 139 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Bash"));
+			#line 140 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 140 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("SQL"));
+			#line 141 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"";
+			#line 141 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi("Lua"));
+			#line 149 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"<slide>\n"
+				"  <article class=\"takahashi important flexbox vcenter\">\n"
+				"    <h1 class=\"red\">使えます</h1>\n"
+				"    <p>（2013/11/14時点）</p>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"\n"
+				"";
+			#line 149 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			wandbox_url();
+			#line 151 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"";
+			#line 151 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<cppcms::filters::raw(content.to_takahashi_i("今すぐアクセス！！"));
+			#line 160 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"\n"
+				"<slide class=\"thank-you-slide segue\">\n"
+				"  <article class=\"flexbox vleft\">\n"
+				"    <h2>ありがとうございました！</h2>\n"
+				"  </article>\n"
+				"  <p data-config-contact></p>\n"
+				"</slide>\n"
+				"\n"
+				"";
+		#line 160 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		} // end of template render_body
+		#line 162 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		virtual void wandbox_url() {
+			#line 168 "templates/publication/kabukiza-wandbox-lt.tmpl"
+			out()<<"\n"
+				"<slide>\n"
+				"  <article class=\"takahashi flexbox vcenter\">\n"
+				"    <h1><a href=\"http://melpon.org/wandbox\">http://melpon.org/wandbox</a></h1>\n"
+				"  </article>\n"
+				"</slide>\n"
+				"";
+		#line 168 "templates/publication/kabukiza-wandbox-lt.tmpl"
+		} // end of template wandbox_url
+	#line 170 "templates/publication/kabukiza-wandbox-lt.tmpl"
+	}; // end of class kabukiza_wandbox_lt
+#line 171 "templates/publication/kabukiza-wandbox-lt.tmpl"
+} // end of namespace melpon_org_publication
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
 namespace {
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
  cppcms::views::generator my_generator; 
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
  struct loader { 
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
   loader() { 
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
    my_generator.name("melpon_org_publication");
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
    my_generator.add_view<melpon_org_publication::home,content::publication::home>("home",true);
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
    my_generator.add_view<melpon_org_publication::wandbox,content::publication::wandbox>("wandbox",true);
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
    my_generator.add_view<melpon_org_publication::cpprefjp,content::publication::cpprefjp>("cpprefjp",true);
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
+   my_generator.add_view<melpon_org_publication::kabukiza_wandbox_lt,content::publication::kabukiza_wandbox_lt>("kabukiza_wandbox_lt",true);
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
     cppcms::views::pool::instance().add(my_generator);
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
  }
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
  ~loader() {  cppcms::views::pool::instance().remove(my_generator); }
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
 } a_loader;
-#line 864 "templates/publication/cpprefjp.tmpl"
+#line 172 "templates/publication/kabukiza-wandbox-lt.tmpl"
 } // anon 
