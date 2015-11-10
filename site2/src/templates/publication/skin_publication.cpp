@@ -58,29 +58,46 @@ namespace melpon_org_publication {
 				"        <a href=\"";
 			#line 43 "templates/publication/home.tmpl"
 			content.app().mapper().map(out(),"wandbox");
-			#line 59 "templates/publication/home.tmpl"
+			#line 48 "templates/publication/home.tmpl"
 			out()<<"\">Wandbox を支える技術</a>\n"
 				"        （<a href=\"https://sites.google.com/site/boostjp/study_meeting/study13\">Boost.勉強会 #13 仙台</a>）\n"
 				"      </li>\n"
 				"\n"
 				"      <li>\n"
-				"        <a href=@{PKabukizaWandboxLtR}>Wandbox の紹介</a>\n"
+				"        <a href=\"";
+			#line 48 "templates/publication/home.tmpl"
+			content.app().mapper().map(out(),"kabukiza-wandbox-lt");
+			#line 53 "templates/publication/home.tmpl"
+			out()<<"\">Wandbox の紹介</a>\n"
 				"        （<a href=\"http://ch.nicovideo.jp/dwango-engineer/blomaga/ar393478\">歌舞伎座.tech#2</a>）\n"
 				"      </li>\n"
 				"\n"
 				"      <li>\n"
-				"        <a href=\"@{PCpprefjpR}\">cpprefjp を支える技術</a>\n"
+				"        <a href=\"";
+			#line 53 "templates/publication/home.tmpl"
+			content.app().mapper().map(out(),"cpprefjp");
+			#line 58 "templates/publication/home.tmpl"
+			out()<<"\">cpprefjp を支える技術</a>\n"
 				"        （<a href=\"https://sites.google.com/site/boostjp/study_meeting/study14\">Boost.勉強会 #14</a>）\n"
+				"      </li>\n"
+				"\n"
+				"      <li>\n"
+				"        <a href=\"";
+			#line 58 "templates/publication/home.tmpl"
+			content.app().mapper().map(out(),"auto-lt");
+			#line 64 "templates/publication/home.tmpl"
+			out()<<"\">auto論争</a>\n"
+				"        （<a href=\"http://boostjp.github.io/study_meeting/study15.html\">Boost.勉強会 #15 札幌</a>）\n"
 				"      </li>\n"
 				"    </ul>\n"
 				"  </div>\n"
 				"</div>\n"
 				"";
-		#line 59 "templates/publication/home.tmpl"
+		#line 64 "templates/publication/home.tmpl"
 		} // end of template render
-	#line 61 "templates/publication/home.tmpl"
+	#line 66 "templates/publication/home.tmpl"
 	}; // end of class home
-#line 62 "templates/publication/home.tmpl"
+#line 67 "templates/publication/home.tmpl"
 } // end of namespace melpon_org_publication
 #line 1 "templates/publication/wandbox.tmpl"
 #include "wandbox.h" 

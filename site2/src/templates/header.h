@@ -23,7 +23,7 @@ namespace content {
 
         void map(std::ostream& out, cppcms::json::value& header) {
             auto name = header["name"].str();
-            if (name == "publication" || name == "yesodbookjp") {
+            if (name == "publication" || name == "blog") {
                 app().mapper().topmost().child(name).map(out, "home");
             } else {
                 app().mapper().topmost().map(out, name);

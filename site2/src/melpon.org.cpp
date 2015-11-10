@@ -26,10 +26,10 @@ namespace cppcms {
     };
 }
 
-class yesodbookjp : public cppcms::application {
+class blog : public cppcms::application {
 public:
-    yesodbookjp(cppcms::service &srv) : cppcms::application(srv) {
-        dispatcher().assign("/?", &yesodbookjp::home, this);
+    blog(cppcms::service &srv) : cppcms::application(srv) {
+        dispatcher().assign("/?", &blog::home, this);
         mapper().assign("home", "");
     }
 
@@ -86,13 +86,13 @@ class melpon_org : public cppcms::application {
 public:
     melpon_org(cppcms::service &srv) : cppcms::application(srv) {
         attach(
-            new yesodbookjp(srv),
-            "yesodbookjp", "/yesodbookjp{1}",
-            "/yesodbookjp(/(.*))?", 1);
-        attach(
             new publication(srv),
             "publication", "/pub{1}",
             "/pub(/(.*))?", 1);
+        attach(
+            new blog(srv),
+            "blog", "/blog{1}",
+            "/blog(/(.*))?", 1);
 
         // static file is served by nginx on production server.
         dispatcher().assign("/static/(.+)", &melpon_org::serve_file_for_debug, this, 1);
