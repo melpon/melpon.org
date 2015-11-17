@@ -42,7 +42,7 @@ public:
     void home() {
         content::blog::blog_content c;
         c.app(*this);
-        c.title = "公開資料";
+        c.title = "Blog :: Meatware";
         c.contents = c.recent_contents();
         c.tags = c.get_tags();
         c.blog_data = c.get_blog();
@@ -59,7 +59,7 @@ public:
     void tag(std::string tagname) {
         content::blog::blog_content c;
         c.app(*this);
-        c.title = "公開資料";
+        c.title = "tag:" + tagname + " - Blog :: Meatware";
         c.contents = c.tagged_contents(tagname);
         c.tags = c.get_tags();
         c.blog_data = c.get_blog();
@@ -71,7 +71,7 @@ public:
     void page(std::string pagename) {
         content::blog::blog_content c;
         c.app(*this);
-        c.title = "公開資料";
+        c.title = "Blog :: Meatware";
         c.contents = c.recent_contents(pagename);
         c.tags = c.get_tags();
         c.blog_data = c.get_blog();
@@ -88,8 +88,8 @@ public:
     void single(std::string pagename) {
         content::blog::blog_content c;
         c.app(*this);
-        c.title = "公開資料";
         c.contents = c.url_contents(pagename);
+        c.title = c.contents.front().title + " - Blog :: Meatware";
         c.tags = c.get_tags();
         c.blog_data = c.get_blog();
         content::header h;
