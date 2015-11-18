@@ -29,6 +29,8 @@ install-sh
 missing
 src/Makefile.in
 src/templates/*.cpp
+src/templates/publication/*.cpp
+src/templates/blog/*.cpp
 AUTHORS
 ChangeLog
 NEWS

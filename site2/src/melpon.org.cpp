@@ -31,9 +31,76 @@ public:
     blog(cppcms::service &srv) : cppcms::application(srv) {
         dispatcher().assign("/?", &blog::home, this);
         mapper().assign("home", "");
+        dispatcher().assign("/tag/(.+?)/?", &blog::tag, this, 1);
+        mapper().assign("tag", "/tag/{1}");
+        dispatcher().assign("/page/(.+?)/?", &blog::page, this, 1);
+        mapper().assign("page", "/page/{1}");
+        dispatcher().assign("/(.+?)/?", &blog::single, this, 1);
+        mapper().assign("single", "/{1}");
     }
 
     void home() {
+        content::blog::blog_content c;
+        c.app(*this);
+        c.title = "公開資料";
+        c.contents = c.recent_contents();
+        c.tags = c.get_tags();
+        c.blog_data = c.get_blog();
+        content::header h;
+        h.header_name = "blog";
+        c.header = h;
+        c.pager_type = "range";
+        c.prev_contents = c.get_prev_contents(c.contents);
+        c.next_contents = c.get_next_contents(c.contents);
+        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents[0].url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents[0].url;
+        render("melpon_org_blog", "blog", c);
+    }
+    void tag(std::string tagname) {
+        content::blog::blog_content c;
+        c.app(*this);
+        c.title = "公開資料";
+        c.contents = c.tagged_contents(tagname);
+        c.tags = c.get_tags();
+        c.blog_data = c.get_blog();
+        content::header h;
+        h.header_name = "blog";
+        c.header = h;
+        render("melpon_org_blog", "blog", c);
+    }
+    void page(std::string pagename) {
+        content::blog::blog_content c;
+        c.app(*this);
+        c.title = "公開資料";
+        c.contents = c.recent_contents(pagename);
+        c.tags = c.get_tags();
+        c.blog_data = c.get_blog();
+        content::header h;
+        h.header_name = "blog";
+        c.header = h;
+        c.pager_type = "range";
+        c.prev_contents = c.get_prev_contents(c.contents);
+        c.next_contents = c.get_next_contents(c.contents);
+        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents[0].url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents[0].url;
+        render("melpon_org_blog", "blog", c);
+    }
+    void single(std::string pagename) {
+        content::blog::blog_content c;
+        c.app(*this);
+        c.title = "公開資料";
+        c.contents = c.url_contents(pagename);
+        c.tags = c.get_tags();
+        c.blog_data = c.get_blog();
+        content::header h;
+        h.header_name = "blog";
+        c.header = h;
+        c.pager_type = "single";
+        c.prev_contents = c.get_prev_contents(c.contents);
+        c.next_contents = c.get_next_contents(c.contents);
+        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents[0].url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents[0].url;
+        render("melpon_org_blog", "blog", c);
     }
 };
 

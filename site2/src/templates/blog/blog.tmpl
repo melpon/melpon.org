@@ -1,0 +1,119 @@
+<% c++ #include "blog.h" %>
+<% skin melpon_org_blog %>
+<% view blog uses content::blog::blog_content %>
+
+<% template render() %>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8"></meta>
+    <% include includes() %>
+  </head>
+  <body>
+    <% include body() %>
+  </body>
+</html>
+<% end template %>
+
+<% template includes() %>
+<!-- <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href=@{BFeedR}> -->
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/css/blog.css">
+
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//platform.twitter.com/widgets.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/lang-hs.min.js"></script>
+<% end template %>
+
+<% template body() %>
+
+<% render "melpon_org", "header" with header %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <!-- sidebar -->
+      <ul class="nav nav-list">
+        <li class="nav-header"><i class="icon-tags"></i>Tags</li>
+        <% foreach tag in tags %>
+          <% item %>
+            <li><a href="<% url "tag" using tag %>"><%= tag %></a></li>
+          <% end item %>
+        <% end foreach %>
+        <li class="nav-header">RSS</li>
+        <li><a href="@{BFeedR}" class="feed">RSS購読</a></li>
+        <li class="nav-header">記事一覧</li>
+        <% foreach ct in blog_data.contents %>
+          <% item %>
+            <li><a href="<% url "single" using ct.url %>"><%= ct.title %></a></li>
+          <% end item %>
+        <% end foreach %>
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      <% include guide() %>
+      <% foreach ct in contents %>
+        <% item %>
+          <article class="article">
+            <div class="article-header">
+              <h1 class="title-header"><a href="<% url "single" using ct.url %>"><%= ct.title %></a></h1>
+              <div class="tags-header">
+                <ul class="tag-list">
+                  <% foreach tag in ct.tags %>
+                    <% item %>
+                      <li><a href="<% url "tag" using tag %>"><%= tag %></a></li>
+                    <% end item %>
+                  <% end foreach %>
+                </ul>
+              </div>
+              <div class="datetime-header"><%= ct.datetime %></div>
+              <div class="social-header">
+                <a href="http://b.hatena.ne.jp/entry/<% url "single" using ct.url %>" class="hatena-bookmark-button" data-hatena-bookmark-title="<%= ct.title %>" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></a>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="<% url "single" using ct.url %>" data-text="<%= ct.title %>" data-via="melponn">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              </div>
+            </div>
+            <div class="article-body">
+              <% render "melpon_org_blog", ct.template_name %>
+            </div>
+          </article>
+        <% end item %>
+      <% end foreach %>
+      <% include guide() %>
+    </div>
+  </div>
+</div>
+<% end template %>
+
+<% template guide() %>
+
+<ul class="pager">
+  <% if (!content.prev_contents.empty()) %>
+    <li class="next">
+      <% if (content.pager_type == "range") %>
+        <a href="<% url "page" using prev_content_url %>">前の<% c++ out() << content.prev_contents.size(); %>件 &rarr;</a>
+      <% elif (content.pager_type == "single") %>
+        <a href="<% url "single" using prev_content_url %>"><% c++ out() << content.prev_contents[0].title; %> &rarr;</a>
+      <% end elif %>
+    </li>
+  <% end if %>
+  <% if (!content.next_contents.empty()) %>
+    <li class="previous">
+      <% if (content.pager_type == "range") %>
+        <a href="<% url "page" using next_content_url %>">&larr; 次の<% c++ out() << content.next_contents.size(); %>件</a>
+      <% elif (content.pager_type == "single") %>
+        <a href="<% url "single" using next_content_url %>">&larr; <% c++ out() << content.next_contents[0].title; %></a>
+      <% end elif %>
+    </li>
+  <% end if %>
+</ul>
+
+<% end template %>
+
+<% end view %>
+<% end skin %>
