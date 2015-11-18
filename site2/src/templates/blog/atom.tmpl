@@ -1,0 +1,29 @@
+<% c++ #include "atom.h" %>
+<% skin melpon_org_blog %>
+<% view atom uses content::blog::atom_content %>
+<% template render() %><?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><%= feed.title %></title>
+  <link href="<%= feed.link %>" />
+  <updated><%= feed.updated %></updated>
+  <id><%= feed.id %></id>
+
+  <% foreach entry in feed.entries %>
+    <% item %>
+      <entry>
+        <title><%= entry.title %></title>
+        <link href="<%= entry.link %>"/>
+        <id><%= entry.id %></id>
+        <updated><%= entry.updated %></updated>
+        <content type="html"><%= entry.content %></content>
+        <author>
+          <name><%= entry.author_name %></name>
+          <email><%= entry.author_email %></email>
+        </author>
+      </entry>
+    <% end item %>
+  <% end foreach %>
+</feed>
+<% end template %>
+<% end view %>
+<% end skin %>

@@ -10,6 +10,8 @@
 #include "templates/publication/cpprefjp.h"
 #include "templates/publication/kabukiza-wandbox-lt.h"
 #include "templates/publication/auto-lt.h"
+#include "templates/blog/blog.h"
+#include "templates/blog/atom.h"
 
 namespace cppcms {
     template<>
@@ -31,6 +33,8 @@ public:
     blog(cppcms::service &srv) : cppcms::application(srv) {
         dispatcher().assign("/?", &blog::home, this);
         mapper().assign("home", "");
+        dispatcher().assign(".xml", &blog::rss, this);
+        mapper().assign("rss", ".xml");
         dispatcher().assign("/tag/(.+?)/?", &blog::tag, this, 1);
         mapper().assign("tag", "/tag/{1}");
         dispatcher().assign("/page/(.+?)/?", &blog::page, this, 1);
@@ -42,6 +46,7 @@ public:
     void home() {
         content::blog::blog_content c;
         c.app(*this);
+        c.domain = c.get_domain();
         c.title = "Blog :: Meatware";
         c.contents = c.recent_contents();
         c.tags = c.get_tags();
@@ -53,12 +58,13 @@ public:
         c.prev_contents = c.get_prev_contents(c.contents);
         c.next_contents = c.get_next_contents(c.contents);
         c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents.front().url;
-        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.back().url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.front().url;
         render("melpon_org_blog", "blog", c);
     }
     void tag(std::string tagname) {
         content::blog::blog_content c;
         c.app(*this);
+        c.domain = c.get_domain();
         c.title = "tag:" + tagname + " - Blog :: Meatware";
         c.contents = c.tagged_contents(tagname);
         c.tags = c.get_tags();
@@ -71,6 +77,7 @@ public:
     void page(std::string pagename) {
         content::blog::blog_content c;
         c.app(*this);
+        c.domain = c.get_domain();
         c.title = "Blog :: Meatware";
         c.contents = c.recent_contents(pagename);
         c.tags = c.get_tags();
@@ -82,12 +89,13 @@ public:
         c.prev_contents = c.get_prev_contents(c.contents);
         c.next_contents = c.get_next_contents(c.contents);
         c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents.front().url;
-        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.back().url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.front().url;
         render("melpon_org_blog", "blog", c);
     }
-    void single(std::string pagename) {
+    content::blog::blog_content make_single_content(std::string pagename) {
         content::blog::blog_content c;
         c.app(*this);
+        c.domain = c.get_domain();
         c.contents = c.url_contents(pagename);
         c.title = c.contents.front().title + " - Blog :: Meatware";
         c.tags = c.get_tags();
@@ -100,7 +108,19 @@ public:
         c.next_contents = c.get_next_contents(c.contents);
         c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents.front().url;
         c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.back().url;
+        return c;
+    }
+    void single(std::string pagename) {
+        content::blog::blog_content c = make_single_content(pagename);
         render("melpon_org_blog", "blog", c);
+    }
+
+    void rss() {
+        response().content_type("application/atom+xml");
+        content::blog::blog_content bc;
+        bc.app(*this);
+        auto c = content::blog::atom_content::make(*this, bc.get_blog(), [this](std::string pagename) { return make_single_content(pagename); });
+        render("melpon_org_blog", "atom", c);
     }
 };
 
@@ -159,7 +179,7 @@ public:
         attach(
             new blog(srv),
             "blog", "/blog{1}",
-            "/blog(/(.*))?", 1);
+            "/blog(.*)", 1);
 
         // static file is served by nginx on production server.
         dispatcher().assign("/static/(.+)", &melpon_org::serve_file_for_debug, this, 1);

@@ -41,6 +41,7 @@ namespace blog {
     };
 
     struct blog_content : public cppcms::base_content {
+        std::string domain;
         std::string title;
         std::vector<content> contents;
         std::vector<std::string> tags;
@@ -122,6 +123,7 @@ namespace blog {
             if (it == get_blog().contents.end()) return rs;
             if (it == get_blog().contents.end() - 1) return rs;
             std::copy(++it, get_blog().contents.end(), std::back_inserter(rs));
+            if (rs.size() > 5) rs.erase(rs.begin() + 5, rs.end());
             return rs;
         }
         std::vector<content> get_next_contents(const std::vector<content>& contents) {
@@ -131,9 +133,14 @@ namespace blog {
             if (it == get_blog().contents.end()) return rs;
             if (it == get_blog().contents.begin()) return rs;
             std::copy(get_blog().contents.begin(), it, std::back_inserter(rs));
+            if (rs.size() > 5) rs.erase(rs.begin(), rs.end() - 5);
             return rs;
         }
 
+        std::string get_domain() {
+            auto& settings = app().service().settings()["application"];
+            return settings["scheme"].str() + "://" + settings["domain"].str();
+        }
     private:
         blog load_blog() {
             cppcms::json::value blog_json;

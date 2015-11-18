@@ -18,6 +18,7 @@ SKIN_PUBLICATION = \
 
 SKIN_BLOG = \
 	templates/blog/blog.tmpl \
+	templates/blog/atom.tmpl \
 	templates/blog/new-blog.tmpl \
 	templates/blog/cocos2dx-vector-leak.tmpl \
 	templates/blog/cocos2dx-create-func.tmpl \
@@ -28,6 +29,7 @@ SKIN_BLOG = \
 
 SKIN_MELPON_ORG_HEADER = $(SKIN_MELPON_ORG:%.tmpl=%.h)
 SKIN_PUBLICATION_HEADER = $(SKIN_PUBLICATION:%.tmpl=%.h) templates/publication/googleio.h
+SKIN_BLOG_HEADER = templates/blog/blog.h templates/blog/atom.h
 
 templates/skin_melpon_org.cpp: $(SKIN_MELPON_ORG) $(SKIN_MELPON_ORG_HEADER)
 	@CPPCMS_TMPL_CC@ $(SKIN_MELPON_ORG) -o $@
