@@ -47,7 +47,7 @@ namespace blog {
             c.feed.link = make_abs_url(app, ss.str());
             auto& head = b.contents.front();
             c.feed.updated = head.datetime;
-            c.feed.id = "atom:" + head.datetime + "," + head.url;
+            c.feed.id = c.feed.link;
 
             for (auto& content: b.contents) {
                 atom_entry e;
