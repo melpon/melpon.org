@@ -16,6 +16,16 @@ SKIN_PUBLICATION = \
 	templates/publication/kabukiza-wandbox-lt.tmpl \
 	templates/publication/auto-lt.tmpl
 
+SKIN_BLOG = \
+	templates/blog/blog.tmpl \
+	templates/blog/new-blog.tmpl \
+	templates/blog/cocos2dx-vector-leak.tmpl \
+	templates/blog/cocos2dx-create-func.tmpl \
+	templates/blog/put-rss.tmpl \
+	templates/blog/ios-consumable-in-app-purchase.tmpl \
+	templates/blog/haskell-import-qualified.tmpl \
+	templates/blog/cocos2dx-must-not-use-spine-json-h.tmpl
+
 SKIN_MELPON_ORG_HEADER = $(SKIN_MELPON_ORG:%.tmpl=%.h)
 SKIN_PUBLICATION_HEADER = $(SKIN_PUBLICATION:%.tmpl=%.h) templates/publication/googleio.h
 

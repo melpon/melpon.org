@@ -1,0 +1,65 @@
+<% c++ #include "blog.h" %>
+<% skin melpon_org_blog %>
+<% view cocos2dx_vector_leak uses content::blog::blog_content %>
+
+<% template render() %>
+<p>Cocos2d-x 3.0 beta では <code>CCArray</code> に取って代わる <code><a href="http://www.cocos2d-x.org/docs/manual/framework/native/data-structure/v3/vector/en">Vector</a></code> というクラスが作られました。</p>
+<p>便利になって良いと思うのですが、不満な点が２つほどあります。</p>
+<ul>
+  <li><code>operator[]</code> が定義されていない</li>
+  <li>iterator 経由でアクセスするとリークする</li>
+</ul>
+<p>どちらも根は同じ問題です。つまり、<code>Object</code> を生のポインタのまま格納していることことが問題なのです。</p>
+<p>現在の<a href="https://github.com/cocos2d/cocos2d-x/blob/28812755bebb959561e4c91b3172c645da2a6d1c/cocos/base/CCVector.h">最新版のソース</a>では、以下のようになっています。</p>
+<pre class="prettyprint linenums"><code>template&lt;class T&gt;
+class Vector {
+...
+private:
+  std::vector&lt;T&gt; _data;
+};</code></pre>
+<pre class="prettyprint linenums"><code>Vector&lt;Sprite*&gt; v;
+v.pushBack(Sprite::create(...));
+</code></pre>
+<p><code>Sprite</code> は、<code>Object</code> を継承したクラスなので、メンバなどで保持する際には <code>retain</code>, <code>release</code> が必須です。</p>
+<p><code>Vector</code> クラスは <code>pushBack</code> する際に <code>retain</code> したり、デストラクタで <code>release</code> を呼び出したりと、結構頑張って参照カウントを狂わせないようにしています。</p>
+<p>しかし <code>std::vector&lt;Sprite*&gt;</code> という形でメンバに持っている以上、限界はあります。</p>
+<p>まず、以下のようなコードが書けません。</p>
+<pre class="prettyprint linenums"><code>template&lt;class T&gt;
+class Vector {
+public:
+  T&amp; operator[](size_t n) { return _data[n]; }
+private:
+  std::vector&lt;T&gt; _data;
+};</code></pre>
+<p>これは、以下のようなコードを書くと簡単にリークしてしまうからです。</p>
+<pre class="prettyprint linenums"><code>Vector&lt;Sprite*&gt; v;
+v.pushBack(Sprite::create(...));
+v[0] = Sprite::create(...); // v[0] の要素を release していないのでリークする
+                            // おまけに代入したオブジェクトを retain していないのでアクセス違反を起こす</code></pre>
+<p>もう一点、iterator に対して代入ができません。</p>
+<pre class="prettyprint linenums"><code>Vector&lt;Sprite*&gt; v;
+...
+v.erase(std::remove_if(v.begin(), v.end(), []() { ... }),
+        v.end());</code></pre>
+<p><code>Vector</code> が提供している iterator は <code>vector::iterator</code> の typedef であるため、<code>retain</code>, <code>release</code> を正しく呼び出さずにリーク、あるいはアクセス違反を起こします。</p>
+<p>これらの問題を解決する一番簡単な方法は、<code><a href="http://www.kmonos.net/alang/boost/classes/intrusive_ptr.html">intrusive_ptr</a></code> のようなクラスを使う（あるいは自作する）ことです。</p>
+<pre class="prettyprint linenums"><code>template&lt;class T&gt;
+class Vector {
+...
+private:
+  std::vector&lt;intrusive_ptr&lt;T&gt;&gt; _data;
+};</code></pre>
+<p>
+  これだけで上記の問題は解決します。<code>operator[]</code> では <code>intrusive_ptr&lt;T&gt;&amp;</code> を返すため、代入してもリークしないし、iterator の各要素は intrusive_ptr&lt;T&gt; 型になるので、代入してもリークしません。
+</p>
+<p>
+  デメリットとしては、ユーザが <code>intrusive_ptr</code> に対する知識を知らないといけないということです。
+  しかし、<code>intrusive_ptr</code> を使わないというのは、そのデメリットを上回るだけのデメリットがあると考えられます。
+  手動での参照カウントのミスによってバグを埋め込み、修正に時間を掛けるよりは、最初に <code>intrusive_ptr</code> について調べておいて安全に使ったほうが、トータルに掛ける時間は少なくなると考えられます。
+  また、Objective-C が ARC (Auto Reference Counting) を導入し、参照カウントの手間を無くすという方向に進んでいる中で、手動参照カウントなんていう時代遅れなことをするのは、ちょっと最新のライブラリとしては残念過ぎるのではないかと思います。
+</p>
+<p>正直、なぜ Cocos2d-x が <code>intrusive_ptr</code> を使わないのかが不思議でなりません。これだけ利用者がいるなら、きっと誰か提案しているはずで、何か理由があって却下されたと思うのですが、コミュニティとかを探すだけの気力も無いので、大人しくオレオレ <code>intrusive_ptr</code> を自作して利用するのでした。</p>
+<% end template %>
+
+<% end view %>
+<% end skin %>

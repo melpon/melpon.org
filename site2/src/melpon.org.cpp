@@ -52,8 +52,8 @@ public:
         c.pager_type = "range";
         c.prev_contents = c.get_prev_contents(c.contents);
         c.next_contents = c.get_next_contents(c.contents);
-        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents[0].url;
-        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents[0].url;
+        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents.front().url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.back().url;
         render("melpon_org_blog", "blog", c);
     }
     void tag(std::string tagname) {
@@ -81,8 +81,8 @@ public:
         c.pager_type = "range";
         c.prev_contents = c.get_prev_contents(c.contents);
         c.next_contents = c.get_next_contents(c.contents);
-        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents[0].url;
-        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents[0].url;
+        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents.front().url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.back().url;
         render("melpon_org_blog", "blog", c);
     }
     void single(std::string pagename) {
@@ -98,8 +98,8 @@ public:
         c.pager_type = "single";
         c.prev_contents = c.get_prev_contents(c.contents);
         c.next_contents = c.get_next_contents(c.contents);
-        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents[0].url;
-        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents[0].url;
+        c.prev_content_url = c.prev_contents.empty() ? "" : c.prev_contents.front().url;
+        c.next_content_url = c.next_contents.empty() ? "" : c.next_contents.back().url;
         render("melpon_org_blog", "blog", c);
     }
 };

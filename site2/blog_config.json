@@ -1,0 +1,46 @@
+{ "template_prefix": "src/templates/blog/"
+, "contents":
+  [ { "datetime": "2014-01-25 03:28:00"
+    , "tags": ["Haskell", "Yesod"]
+    , "url": "new-blog"
+    , "title": "新しいブログ作りました"
+    , "template_name": "new_blog"
+    }
+  , { "datetime": "2014-01-26 11:21:00"
+    , "tags": ["C++", "Cocos2d-x"]
+    , "url": "cocos2dx-vector-leak"
+    , "title": "Cocos2d-x 3.0 beta の Vector がリークする"
+    , "template_name": "cocos2dx_vector_leak"
+    }
+  , { "datetime": "2014-01-28 14:13:00"
+    , "tags": ["C++", "Cocos2d-x"]
+    , "url": "cocos2dx-create-func"
+    , "title": "Cocos2d-x の CREATE_FUNC をマシな実装にした"
+    , "template_name": "cocos2dx_create_func"
+    }
+  , { "datetime": "2014-01-30 23:45:00"
+    , "tags": ["Haskell", "Yesod"]
+    , "url": "put-rss"
+    , "title": "RSS を配信しました"
+    , "template_name": "put_rss"
+    }
+  , { "datetime": "2014-02-02 04:42:00"
+    , "tags": ["iOS", "In-App Purchase"]
+    , "url": "ios-consumable-in-app-purchase"
+    , "title": "iOSで消費型プロダクトのアプリ内課金を実装する際の注意点"
+    , "template_name": "ios_consumable_in_app_purchase"
+    }
+  , { "datetime": "2014-02-10 18:56:00"
+    , "tags": ["Haskell", "Yesod"]
+    , "url": "haskell-import-qualified"
+    , "title": "Haskellでのimportの使い方"
+    , "template_name": "haskell_import_qualified"
+    }
+  , { "datetime": "2014-03-15 21:43:00"
+    , "tags": ["C++", "Cocos2d-x"]
+    , "url": "cocos2dx-must-not-use-spine-json-h"
+    , "title": "spine/Json.hを使うべきでない４つの理由"
+    , "template_name": "cocos2dx_must_not_use_spine_json_h"
+    }
+  ]
+}

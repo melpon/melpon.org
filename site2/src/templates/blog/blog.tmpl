@@ -19,7 +19,7 @@
 <!-- <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href=@{BFeedR}> -->
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"> -->
 <link rel="stylesheet" href="<% c++ content.app().mapper().topmost().map(out(), "static"); %>/css/blog.css">
 
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -28,6 +28,11 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/lang-hs.min.js"></script>
+<script>
+$(function() {
+  prettyPrint();
+});
+</script>
 <% end template %>
 
 <% template body() %>
@@ -98,7 +103,7 @@
       <% if (content.pager_type == "range") %>
         <a href="<% url "page" using prev_content_url %>">前の<% c++ out() << content.prev_contents.size(); %>件 &rarr;</a>
       <% elif (content.pager_type == "single") %>
-        <a href="<% url "single" using prev_content_url %>"><% c++ out() << content.prev_contents[0].title; %> &rarr;</a>
+        <a href="<% url "single" using prev_content_url %>"><% c++ out() << content.prev_contents.front().title; %> &rarr;</a>
       <% end elif %>
     </li>
   <% end if %>
@@ -107,7 +112,7 @@
       <% if (content.pager_type == "range") %>
         <a href="<% url "page" using next_content_url %>">&larr; 次の<% c++ out() << content.next_contents.size(); %>件</a>
       <% elif (content.pager_type == "single") %>
-        <a href="<% url "single" using next_content_url %>">&larr; <% c++ out() << content.next_contents[0].title; %></a>
+        <a href="<% url "single" using next_content_url %>">&larr; <% c++ out() << content.next_contents.back().title; %></a>
       <% end elif %>
     </li>
   <% end if %>
