@@ -1,6 +1,6 @@
 AM_CXXFLAGS = -std=c++0x -Wall -Wextra @CXXFLAGS@
 bin_PROGRAMS = melpon.org
-melpon_org_SOURCES = melpon.org.cpp templates/skin_melpon_org.cpp templates/publication/skin_publication.cpp
+melpon_org_SOURCES = melpon.org.cpp templates/skin_melpon_org.cpp templates/publication/skin_publication.cpp templates/blog/skin_blog.cpp
 # AM_CPPFLAGS = -DBINDIR=\"$(bindir)\" -DSYSCONFDIR=\"$(sysconfdir)\" -DBOOST_SPIRIT_USE_PHOENIX_V3=1 @CPPFLAGS@
 
 SKIN_MELPON_ORG = \
@@ -36,3 +36,6 @@ templates/skin_melpon_org.cpp: $(SKIN_MELPON_ORG) $(SKIN_MELPON_ORG_HEADER)
 
 templates/publication/skin_publication.cpp: $(SKIN_PUBLICATION) $(SKIN_PUBLICATION_HEADER)
 	@CPPCMS_TMPL_CC@ $(SKIN_PUBLICATION) -o $@
+
+templates/blog/skin_blog.cpp: $(SKIN_BLOG) $(SKIN_BLOG_HEADER)
+	@CPPCMS_TMPL_CC@ $(SKIN_BLOG) -o $@
