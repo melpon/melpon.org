@@ -188,10 +188,15 @@ public:
         dispatcher().assign("/aboutme/?", &melpon_org::aboutme, this);
         mapper().assign("aboutme", "/aboutme");
 
+        auto root = srv.settings()["application"]["root"].str();
         dispatcher().assign("/?", &melpon_org::home, this);
-        mapper().assign("home", "");
+        if (root.empty()) {
+            mapper().assign("home", "/");
+        } else {
+            mapper().assign("home", "");
+        }
 
-        mapper().root(srv.settings()["application"]["root"].str());
+        mapper().root(root);
     }
 
     void home() {
