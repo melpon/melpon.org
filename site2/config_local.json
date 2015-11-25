@@ -4,6 +4,7 @@
     , "scheme": "http"
     , "domain": "melpon.org"
     , "header_config": "header_config.json"
+    , "blog_config": "blog_config.json"
     , "root": "/test"
     }
 , "service" :

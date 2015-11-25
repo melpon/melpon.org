@@ -1,5 +1,5 @@
 SUBDIRS = src
-dist_sysconf_DATA = config.json
+dist_sysconf_DATA = config.json header_config.json blog_config.json
 sysconfdir = @SYSCONF_DIR@
 staticdir = @STATIC_DIR@
 databasedir = @DATABASE_DIR@
