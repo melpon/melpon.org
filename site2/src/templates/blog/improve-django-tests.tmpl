@@ -1,0 +1,194 @@
+<% c++ #include "blog.h" %>
+<% skin melpon_org_blog %>
+<% view improve_django_tests uses content::blog::blog_content %>
+
+<% template render() %>
+
+<p>Djangoでテストを実行するには、以下のコマンドを実行するだけです。</p>
+
+<pre class="prettyprint"><code>$ python manage.py test</code></pre>
+
+<p>これで<code>manage.py</code>の下にある<code>test*.py</code>のファイルに入っている<code>TestCase</code>を継承したクラスがテストに追加され、実行されます。</p>
+
+<pre><code>$ python manage.py test
+Creating test database for alias 'default'...
+Creating test database for alias 'shard0'...
+Creating test database for alias 'shard1'...
+......................................................................................
+----------------------------------------------------------------------
+Ran 86 tests in 51.495s
+
+OK
+Destroying test database for alias 'default'...
+Destroying test database for alias 'shard0'...
+Destroying test database for alias 'shard1'...
+</code></pre>
+
+<p>詳しくは<a href="https://docs.djangoproject.com/en/1.9/topics/testing/">Djangoのドキュメント</a>を参照して下さい。</p>
+
+<h2>自動的にテストが走るようにする</h2>
+
+<p>Djangoのテストは便利なのですが、開発をしていると、毎回テストを手で実行するのが面倒になってきます。
+なのでファイルが書き換わったら自動的にテストが走るようにしたいところです。</p>
+
+<p>こんなのきっと誰か開発してるだろうとPyPIを探したところ、<a href="https://pypi.python.org/pypi/tdaemon/0.1.1">tdaemon</a>というパッケージが見つかりました。</p>
+<p>これは以下のように書いておくと、そのフォルダ以下にあるどれかのファイルの変更があった際に自動的にテストを実行してくれます。</p>
+
+<pre class="prettyprint"><code>$ tdaemon -t django</code></pre>
+
+<p>これを別ウインドウでずっと実行したままにしておくことで、とりあえず自動的にテストが走るようになりました。</p>
+
+<p>しかしこのままだと、Vimでファイルを開くと、無駄にテストが走るという状況になります。
+これはVimが生成する.swpファイルをtdaemonが検知して、そのせいでテストが走るためです。</p>
+<p><a href="https://github.com/brunobord/tdaemon/blob/44fe24a78ca74038cfccc5c5ac10eeddfda160a9/tdaemon.py#L25">コードを見てみる</a>と、<code>IGNORE_EXTENSIONS</code>に拡張子を追加すれば.swpファイルの検知を無視してくれそうです。</p>
+<p>ということで以下のようなコードを書きました。</p>
+
+<pre class="prettyprint lang-py"><code>import os
+import sys
+
+import tdaemon
+
+
+def main():
+    tdaemon.IGNORE_EXTENSIONS += ('swp',)
+    tdaemon.main([sys.argv[0], '-t', 'django'])
+
+if __name__ == '__main__':
+    main()</code></pre>
+
+<p>これで無駄にテストが走ることが無くなりました。</p>
+
+<p>しかしまだ問題があります。
+tdaemonはなぜか、標準エラーは即座に出力するのに、標準出力は全てのテストが終わってから一気に出力します。
+これは<a href="https://github.com/brunobord/tdaemon/blob/eb3ecacb6bf6f39bcca21ef6cf89a6a98df98521/tdaemon.py#L191">コードを見れば</a>実際そのように書かれていて、大変残念な感じです（gitにある、リリースされていない最新バージョンなら直っている）。
+</p>
+<p>かなりイケてないので、これも適当にモンキーパッチを当てて直します。</p>
+
+<pre class="prettyprint lang-py"><code>
+def run_tests(self):
+    print(datetime.datetime.now())
+    result = subprocess.call(self.cmd, shell=True)
+    print('SUCCESS' if result == 0 else 'FAILED')
+
+def main():
+    tdaemon.Watcher.run_tests = run_tests
+    ...</code></pre>
+
+<p>これでようやく見やすい出力になりました。</p>
+
+<h2>Djangoのテストを高速化する</h2>
+
+<p>最初のテスト結果を見れば分かりますが、1回のテストに51秒掛かっています。</p>
+<p>ファイルを保存して、テストが通るかどうかを確認するために51秒も待つのは、さすがに辛いものがあります。</p>
+<p>開発者は通常、開発しようとしている機能のテストを通そうとしているはずです。
+そのため、通所はその機能のテストだけをやってくれていれば良くて、それ以外の機能は、開発しようとしている機能のテストが終わって、最後にやってくれればいいのです。
+</p>
+<p>しかし、手動で開発中の機能を指定するのは面倒なので、「前回失敗したテストを優先的にテストし、次回もそのテストが失敗したらその時点で中断する」という形にしました。
+つまり失敗するようなテストは開発中の機能に違いないので、それらのテストが通るまでは、ひたすらそのテストを回し続けよう、という方針です。</p>
+<p>
+テストの動きを変えるのは結構手間かなと思っていたのですが、<a href="https://github.com/django/django/blob/1.9.2/django/test/runner.py#L349">Djangoのテストランナー</a>を見ながら拡張すれば思ったより簡単にできました。以下のようになります。
+</p>
+<pre class="prettyprint lang-py"><code>class FastRunner(object):
+    def __init__(self, **kwargs):
+        self.kwargs = kwargs
+
+    def load_failtests(self):
+        try:
+            with open('.failtests') as f:
+                return set(f.readlines())
+        except Exception:
+            return None
+
+    def save_failtests(self, result):
+        lines = []
+        for testcase, traceback in result.errors:
+            lines.append(testcase.id())
+        for testcase, traceback in result.failures:
+            lines.append(testcase.id())
+        with open('.failtests', 'w') as f:
+            f.writelines(lines)
+
+    def teardown_with_keepdb(self, verbosity, old_config):
+        old_names, mirrors = old_config
+        for connection, old_name, destroy in old_names:
+            if destroy:
+                connection.creation.destroy_test_db(old_name, verbosity, True)
+
+    def run_tests(self, test_labels, extra_tests=None, **kwargs):
+        from django.test.runner import DiscoverRunner
+        from django.test.runner import setup_databases
+
+        # 全体テストじゃなければいつも通りの処理を行なう
+        if test_labels:
+            dr = DiscoverRunner(**self.kwargs)
+            return dr.run_tests(test_labels, extra_tests, **kwargs)
+
+        # 直前のテスト結果が成功でもいつも通りの処理を行なう
+        failtests = self.load_failtests()
+        if failtests is None:
+            dr = DiscoverRunner(**self.kwargs)
+            dr.setup_test_environment()
+            suite = dr.build_suite(test_labels, extra_tests)
+            old_config = dr.setup_databases()
+            result = dr.run_suite(suite)
+            if result.wasSuccessful():
+                # テストが成功だったら普通に後処理
+                dr.teardown_databases(old_config)
+                dr.teardown_test_environment()
+            else:
+                # テストが失敗だったら失敗したテストを保存してDBをキープしておく
+                self.save_failtests(result)
+                self.teardown_with_keepdb(dr.verbosity, old_config)
+                dr.teardown_test_environment()
+            return dr.suite_result(suite, result)
+
+        else:
+            # 直前のテスト結果が失敗なら、キープしておいたDBを使って失敗したテストをもう一度実行
+            #   - そこで失敗したら失敗したテストを保存してDBをキープして終了
+            #   - 成功したら残りのテストを実行する
+            #     - そこで失敗したら同様に失敗したテストを保存してDBをキープして終了
+            #     - 成功したらDBを解体処理して終了
+            dr = DiscoverRunner(**self.kwargs)
+            dr.setup_test_environment()
+            first_suite = dr.test_suite()
+            second_suite = dr.test_suite()
+            suite = dr.build_suite(test_labels, extra_tests)
+            for testcase in suite:
+                if testcase.id() in failtests:
+                    first_suite.addTest(testcase)
+                else:
+                    second_suite.addTest(testcase)
+
+            old_config = setup_databases(dr.verbosity, dr.interactive, True, dr.debug_sql)
+
+            result = dr.run_suite(first_suite)
+            if not result.wasSuccessful():
+                self.save_failtests(result)
+                self.teardown_with_keepdb(dr.verbosity, old_config)
+                dr.teardown_test_environment()
+                return dr.suite_result(first_suite, result)
+
+            result = dr.run_suite(second_suite)
+            if not result.wasSuccessful():
+                self.save_failtests(result)
+                self.teardown_with_keepdb(dr.verbosity, old_config)
+                dr.teardown_test_environment()
+                return dr.suite_result(second_suite, result)
+
+            os.remove('.failtests')
+            dr.teardown_databases(old_config)
+            dr.teardown_test_environment()
+            return dr.suite_result(second_suite, result)</code></pre>
+
+<p>あとはこのランナーをテストで使うDjangoの設定ファイルの<code>TEST_RUNNER</code>に設定すればOKです。</p>
+<p>テストに失敗している間はDBを作り直したりもしないので、かなり高速（1秒未満）にテストできます。
+ただし失敗している間にDBの構造が変わった場合には、<code>.failtests</code>ファイルを削除して再度全体テストを回す必要があるので注意しましょう。
+</p>
+<p>あと嬉しい誤算として、テストに失敗していると<code>git status</code>時に<code>.failtests</code>ファイルが見えるため、このファイルがある間はコミットしてはいけないなというのがすぐに分かります。gitのコミットメッセージを書く時にはuntracked filesが見えるので、（ゴミファイルを常に置くようなことをしていなければ）結構気が付きます。</p>
+<p>これでかなり快適にDjangoアプリケーションのテストができるようになりました。
+テストを書くのはほんと面倒です。しかし変更の度にクライアントを使って手でやるよりははるかにマシだし、バグ発生数もかなり減るので、Djangoアプリケーションを書く場合には書ける部分は頑張ってテストを書きましょう。</p>
+
+<% end template %>
+
+<% end view %>
+<% end skin %>

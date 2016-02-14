@@ -25,7 +25,8 @@ SKIN_BLOG = \
 	templates/blog/put-rss.tmpl \
 	templates/blog/ios-consumable-in-app-purchase.tmpl \
 	templates/blog/haskell-import-qualified.tmpl \
-	templates/blog/cocos2dx-must-not-use-spine-json-h.tmpl
+	templates/blog/cocos2dx-must-not-use-spine-json-h.tmpl \
+	templates/blog/improve-django-tests.tmpl
 
 SKIN_MELPON_ORG_HEADER = $(SKIN_MELPON_ORG:%.tmpl=%.h)
 SKIN_PUBLICATION_HEADER = $(SKIN_PUBLICATION:%.tmpl=%.h) templates/publication/googleio.h

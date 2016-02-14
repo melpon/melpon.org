@@ -42,5 +42,11 @@
     , "title": "spine/Json.hを使うべきでない４つの理由"
     , "template_name": "cocos2dx_must_not_use_spine_json_h"
     }
+  , { "datetime": "2016-02-14 23:23:00"
+    , "tags": ["Python", "Django"]
+    , "url": "improve-django-tests"
+    , "title": "Djangoのテストを使いやすくする"
+    , "template_name": "improve_django_tests"
+    }
   ]
 }
