@@ -81,7 +81,7 @@ def main():
 <p>最初のテスト結果を見れば分かりますが、1回のテストに51秒掛かっています。</p>
 <p>ファイルを保存して、テストが通るかどうかを確認するために51秒も待つのは、さすがに辛いものがあります。</p>
 <p>開発者は通常、開発しようとしている機能のテストを通そうとしているはずです。
-そのため、通所はその機能のテストだけをやってくれていれば良くて、それ以外の機能は、開発しようとしている機能のテストが終わって、最後にやってくれればいいのです。
+そのため、通常ははその機能のテストだけをやってくれていれば良くて、それ以外の機能のテストは、開発しようとしている機能のテストが終わって、最後にやってくれればいいのです。
 </p>
 <p>しかし、手動で開発中の機能を指定するのは面倒なので、「前回失敗したテストを優先的にテストし、次回もそのテストが失敗したらその時点で中断する」という形にしました。
 つまり失敗するようなテストは開発中の機能に違いないので、それらのテストが通るまでは、ひたすらそのテストを回し続けよう、という方針です。</p>
@@ -95,7 +95,7 @@ def main():
     def load_failtests(self):
         try:
             with open('.failtests') as f:
-                return set(f.readlines())
+                return set(f.read().split(','))
         except Exception:
             return None
 
@@ -106,7 +106,7 @@ def main():
         for testcase, traceback in result.failures:
             lines.append(testcase.id())
         with open('.failtests', 'w') as f:
-            f.writelines(lines)
+            f.write(','.join(lines))
 
     def teardown_with_keepdb(self, verbosity, old_config):
         old_names, mirrors = old_config
