@@ -18,6 +18,6 @@ make
 '
 cd /home/melpon-org/melpon-org/site2
 make install
-systemctl stop kennel
+systemctl stop melpon-org
 sleep 1
-systemctl start kennel
+systemctl start melpon-org
